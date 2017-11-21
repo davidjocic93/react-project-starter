@@ -1,44 +1,33 @@
 import { BASE_URL, API_KEY, SESSION_ID } from "../constants";
 import axios from "axios";
 
-class CommunicationService {
+export default class CommunicationService {
     constructor() { }
 
-    // createHeaders() {
+    createHeaders() {
 
-    //     const requestHeaders = {
-    //         "Content-type": "application/json; charset=UTF-8",
-    //         "Key": API_KEY
-    //     };
+        let sessionId = sessionStorage.getItem(SESSION_ID);
 
-    //     const sessionId = sessionStorage.getItem({ SESSION_ID });
+        if (sessionId) {
+            return {
+                "Key": API_KEY,
+                "SessionId": sessionId
+            };
+        }
 
-
-    //     if (sessionId) {
-    //         const requestHeaders = {
-    //             "Content-type": "application/json; charset=UTF-8",
-    //             "Key": API_KEY,
-    //             "SessionID": sessionId
-    //         };
-    //         return requestHeaders;
-    //     }
-
-    //     return requestHeaders;
-    // }
+        return {
+            "Key": API_KEY
+        };
+    }
 
     getRequest(url, getDataHandler, errorHandler) {
 
         const requestUrl = `${BASE_URL}${url}`;
 
 
-        fetch(requestUrl, {
-            method: "get",
-            headers: {
-                "Content-type": "application/json; charset=UTF-8",
-                "Key": API_KEY,
-            }
+        axios.get(requestUrl, {
+            headers: this.createHeaders()
         })
-            .then(response => response.json())
             .then(response => getDataHandler(response))
             .catch((error) => errorHandler(error));
     }
@@ -47,19 +36,11 @@ class CommunicationService {
 
         const requestUrl = `${BASE_URL}${url}`;
 
-
         axios.post(requestUrl, postData, {
-            headers: {
-                // "Content-type": "application/json; charset=UTF-8",
-                "Key": API_KEY
-            }
+            headers: this.createHeaders()
         })
-            .then(response => response.json())
             .then(response => postDataHandler(response))
             .catch((error) => errorHandler(error));
 
     }
-
 }
-
-export default CommunicationService;

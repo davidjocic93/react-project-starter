@@ -15,18 +15,18 @@ class LoginPage extends React.Component {
             password: ""
         };
 
-        this.handleEmailChange = this.handleEmailChange.bind(this);
-        this.handlePasswordChange = this.handlePasswordChange.bind(this);
+        this.bindEventHandlers();
+    }
+
+    bindEventHandlers() {
+        this.handleChange = this.handleChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
     }
 
-    handleEmailChange(event) {
-        this.setState({ email: event.target.value });
-        console.log(event.target.value);
-      
-    }
-    handlePasswordChange(event) {
-        this.setState({ password: event.target.value });
+    handleChange(event) {
+        const value = event.target.value;
+        const name = event.target.name;
+        this.setState({ [name]: value });
         console.log(event.target.value);
     }
 
@@ -42,14 +42,18 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div>
-           
-                <form className="homePageForm">
-                    Email<input type="email" onChange={this.handleEmailChange} /><br />
-                    Password<input type="password" onChange={this.handlePasswordChange} /><br />
+            <div className="col-6 container">
+
+                <div className="row">
+                    <h3 className="col-6"><Link to="/loginPage">Login</Link></h3>
+                    <h3 className="col-6"><Link to="/registerPage">Register</Link></h3>
+                </div>
+
+                <form>
+                    Email<input type="email" name="email" onChange={this.handleChange} placeholder="Email" /><br />
+                    Password<input type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
                     <input type="button" onClick={this.handleLogin} value="Login" />
                 </form>
-               
 
             </div>
         );

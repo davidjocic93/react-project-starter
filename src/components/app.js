@@ -13,11 +13,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-              
                 <WelcomePage />
-                <Switch>
-                    <Redirect exact from="/" to="/loginPage" />
-                </Switch>
             </div>
         );
 

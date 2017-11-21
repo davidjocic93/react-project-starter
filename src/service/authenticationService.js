@@ -1,29 +1,45 @@
+import { SESSION_ID } from "../constants";
 import CommunicationService from "./communicationService";
+import RedirectionService from "./redirectionService";
 
-class AuthenticationService {
+export default class AuthenticationService {
     constructor() {
         this.communicationService = new CommunicationService();
+        this.redirectionService = new RedirectionService();
     }
 
-    // login(userData) {
-    //     this.communicationService.postRequest("/api/login", userData,
-    //         (data) => {
-    //             console.log(data);
-    //         }, (error) => {
-    //             console.log(error);
-    //         });
-    // }
+    isAuthenticated() {
+        const sessionId = sessionStorage.getItem(SESSION_ID);
+        return !!sessionId;
+    }
 
     login(userData) {
         this.communicationService.postRequest("/api/login", userData,
-            (data) => {
-                console.log(data);
+            (serverResponseData) => {
+                if (serverResponseData.status == "200") {
+                    console.log(serverResponseData);
+                    sessionStorage.setItem("sessionId", serverResponseData.data.sessionId);
+                    this.redirectionService.goTo("/");
+                }
             }, (error) => {
                 console.log(error);
             });
     }
 
+    logOut() {
+        sessionStorage.removeItem(SESSION_ID);
+        this.redirectionService.goTo("/");
+    }
 
+    register(registerData) {
+        this.communicationService.postRequest("/api/register", registerData,
+            (serverResponseData) => {
+                if (serverResponseData.status == "202") {
+                    console.log(serverResponseData);
+                    this.redirectionService.goTo("/");
+                }
+            }, (error) => {
+                console.log(error);
+            });
+    }
 }
-
-export default AuthenticationService;

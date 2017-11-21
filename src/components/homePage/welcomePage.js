@@ -13,20 +13,16 @@ class WelcomePage extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="row container ">
 
-
-                <h1>Welcome to BitBook</h1>
-                <div className="loginFormDiv">
-
-                    <ul className="nav nav-tabs">
-                        <li className="active"><Link to="/loginPage">Login</Link></li>
-                        <li><Link to="/registerPage">Register here</Link></li>
-                    </ul>
+                <div className="col-6">
+                    <h1 >Welcome to BitBook</h1>
+                    <p> Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </p>
                 </div>
-                <div>
+
+                <div className="row">
                     <Switch>
-                        
+                        <Route exact path="/" component={LoginPage} />
                         <Route path="/loginPage" component={LoginPage} />
                         <Route path="/registerPage" component={RegisterPage} />
                     </Switch>
