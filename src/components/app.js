@@ -1,5 +1,6 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
+
 
 import WelcomePage from "./homePage/welcomePage";
 
@@ -11,11 +12,9 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <WelcomePage />;
+                <WelcomePage />
                 <Switch>
-                    <Route path="registerPage" />
-
-
+                    <Redirect exact from="/" to="/loginPage" />
                 </Switch>
             </div>
         );

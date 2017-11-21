@@ -1,10 +1,11 @@
 import React from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import registerPage from "./registerPage";
 
 
 
 
-class LoginForm extends React.Component {
+class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -19,6 +20,7 @@ class LoginForm extends React.Component {
     handleEmailChange(event) {
         this.setState({ email: event.target.value });
         console.log(event.target.value);
+      
     }
     handlePasswordChange(event) {
         this.setState({ password: event.target.value });
@@ -36,17 +38,18 @@ class LoginForm extends React.Component {
 
     render() {
         return (
-            <div className="loginFormDiv">
+            <div>
+           
                 <form className="homePageForm">
                     Email<input type="email" onChange={this.handleEmailChange} /><br />
                     Password<input type="password" onChange={this.handlePasswordChange} /><br />
                     <input type="button" onClick={this.handleLogin} value="Login" />
                 </form>
-                <p><Link to="/registerPage">Register here</Link></p>
-              
+               
+
             </div>
         );
     }
 }
 
-export default LoginForm;
+export default LoginPage;
