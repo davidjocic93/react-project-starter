@@ -5,6 +5,8 @@ import "babel-polyfill";
 
 import App from "./components/app";
 
+
+
 ReactDOM.render(
     <HashRouter>
         <App />
