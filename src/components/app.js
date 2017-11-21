@@ -1,6 +1,8 @@
 import React from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
 
-import HelloWorld from "./helloWorld/helloWorld";
+
+import WelcomePage from "./homePage/welcomePage";
 
 class App extends React.Component {
     constructor(props) {
@@ -8,7 +10,15 @@ class App extends React.Component {
     }
 
     render() {
-        return <HelloWorld />;
+        return (
+            <div>
+                <WelcomePage />
+                <Switch>
+                    <Redirect exact from="/" to="/loginPage" />
+                </Switch>
+            </div>
+        );
+
     }
 }
 
