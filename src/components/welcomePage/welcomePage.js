@@ -4,14 +4,20 @@ import { Link } from "react-router-dom";
 
 import RegisterPage from "./registerPage";
 import LoginPage from "./loginPage";
+import AuthenticationService from "../../service/authenticationService";
+import MainPage from "../mainPage/mainPage";
 
 
 class WelcomePage extends React.Component {
     constructor(props) {
         super(props);
+        this.authService = new AuthenticationService();
     }
 
     render() {
+        if (this.authService.isAuthenticated()) {
+            return <MainPage />;
+        }
         return (
             <div className="row container ">
 
@@ -25,6 +31,7 @@ class WelcomePage extends React.Component {
                         <Route exact path="/" component={LoginPage} />
                         <Route path="/loginPage" component={LoginPage} />
                         <Route path="/registerPage" component={RegisterPage} />
+                        <Route path="/mainPage" component={MainPage} />
                     </Switch>
                 </div>
             </div>

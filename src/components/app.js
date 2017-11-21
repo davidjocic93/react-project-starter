@@ -3,7 +3,7 @@ import { Switch, Route, Redirect } from "react-router-dom";
 
 
 
-import WelcomePage from "./homePage/welcomePage";
+import WelcomePage from "./welcomePage/welcomePage";
 
 class App extends React.Component {
     constructor(props) {

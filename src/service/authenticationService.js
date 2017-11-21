@@ -19,7 +19,7 @@ export default class AuthenticationService {
                 if (serverResponseData.status == "200") {
                     console.log(serverResponseData);
                     sessionStorage.setItem("sessionId", serverResponseData.data.sessionId);
-                    this.redirectionService.goTo("/");
+                    this.redirectionService.goTo("/mainPage");
                 }
             }, (error) => {
                 console.log(error);
@@ -28,7 +28,7 @@ export default class AuthenticationService {
 
     logOut() {
         sessionStorage.removeItem(SESSION_ID);
-        this.redirectionService.goTo("/");
+        this.redirectionService.goTo("/loginPage");
     }
 
     register(registerData) {
