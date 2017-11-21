@@ -1,10 +1,17 @@
-import React from "react";
+
+
 
 class RedirectionService {
-    constructor() {
-        this.bindEventHandlers();
+ 
+
+    goTo(path) {
+
+
+        window.location.assign(`#/${path}`);
+
     }
 
-    
 
 }
+
+export default RedirectionService;
