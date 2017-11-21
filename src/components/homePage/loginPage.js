@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import registerPage from "./registerPage";
+import AuthenticationService from "../../service/authenticationService";
 
 
 
@@ -8,10 +9,12 @@ import registerPage from "./registerPage";
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
+        this.authService = new AuthenticationService();
         this.state = {
             email: "",
             password: ""
         };
+
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
         this.handleLogin = this.handleLogin.bind(this);
@@ -34,6 +37,7 @@ class LoginPage extends React.Component {
         };
         console.log(data);
         // this.props.onLogin(data);
+        this.authService.login(data);
     }
 
     render() {

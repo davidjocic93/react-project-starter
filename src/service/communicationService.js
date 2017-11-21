@@ -1,29 +1,20 @@
-import React from "react";
-import { BASE_URL, API_KEY } from "../constants";
+import { BASE_URL, API_KEY, SESSION_ID } from "../constants";
+import axios from "axios";
 
 class CommunicationService {
-    constructor() {
-        this.bindEventHandlers();
-    }
-
-    bindEventHandlers() {
-        this.getRequest = this.getRequest.bind(this);
-        this.postRequest = this.postRequest.bind(this);
-        this.createHeaders = this.createHeaders.bind(this);
-    }
-
+    constructor() { }
 
     createHeaders() {
-        
+
         const requestHeaders = {
             "Content-type": "application/json; charset=UTF-8",
             "Key": API_KEY
         };
 
-        const sessionId = sessionStorage.getItem(SESSION_ID);
+        const sessionId = sessionStorage.getItem({SESSION_ID});
 
 
-        if(sessionId) {
+        if (sessionId) {
             const requestHeaders = {
                 "Content-type": "application/json; charset=UTF-8",
                 "Key": API_KEY,
@@ -61,7 +52,7 @@ class CommunicationService {
         })
             .then(response => response.json())
             .then(response => postDataHandler(response))
-            .catch((error) =>  errorHandler(error));
+            .catch((error) => errorHandler(error));
 
     }
 
