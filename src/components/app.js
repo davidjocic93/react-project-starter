@@ -1,6 +1,7 @@
 import React from "react";
+import { Switch, Route } from "react-router-dom";
 
-import HelloWorld from "./helloWorld/helloWorld";
+import WelcomePage from "./homePage/welcomePage";
 
 class App extends React.Component {
     constructor(props) {
@@ -8,7 +9,17 @@ class App extends React.Component {
     }
 
     render() {
-        return <HelloWorld />;
+        return (
+            <div>
+                <WelcomePage />;
+                <Switch>
+                    <Route path="registerPage" />
+
+
+                </Switch>
+            </div>
+        );
+
     }
 }
 
