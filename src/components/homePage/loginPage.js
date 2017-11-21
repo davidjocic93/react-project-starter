@@ -32,7 +32,7 @@ class LoginPage extends React.Component {
 
     handleLogin(event) {
         let data = {
-            email: this.state.email,
+            username: this.state.email,
             password: this.state.password
         };
         console.log(data);

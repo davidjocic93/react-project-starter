@@ -4,36 +4,39 @@ import axios from "axios";
 class CommunicationService {
     constructor() { }
 
-    createHeaders() {
+    // createHeaders() {
 
-        const requestHeaders = {
-            "Content-type": "application/json; charset=UTF-8",
-            "Key": API_KEY
-        };
+    //     const requestHeaders = {
+    //         "Content-type": "application/json; charset=UTF-8",
+    //         "Key": API_KEY
+    //     };
 
-        const sessionId = sessionStorage.getItem({SESSION_ID});
+    //     const sessionId = sessionStorage.getItem({ SESSION_ID });
 
 
-        if (sessionId) {
-            const requestHeaders = {
-                "Content-type": "application/json; charset=UTF-8",
-                "Key": API_KEY,
-                "SessionID": sessionId
-            };
-            return requestHeaders;
-        }
+    //     if (sessionId) {
+    //         const requestHeaders = {
+    //             "Content-type": "application/json; charset=UTF-8",
+    //             "Key": API_KEY,
+    //             "SessionID": sessionId
+    //         };
+    //         return requestHeaders;
+    //     }
 
-        return requestHeaders;
-    }
+    //     return requestHeaders;
+    // }
 
     getRequest(url, getDataHandler, errorHandler) {
 
-        const requestUrl = `${BASE_URL}/${url}`;
+        const requestUrl = `${BASE_URL}${url}`;
 
 
         fetch(requestUrl, {
             method: "get",
-            headers: this.createHeaders()
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+                "Key": API_KEY,
+            }
         })
             .then(response => response.json())
             .then(response => getDataHandler(response))
@@ -42,13 +45,14 @@ class CommunicationService {
 
     postRequest(url, postData, postDataHandler, errorHandler) {
 
-        const requestUrl = `${BASE_URL}/${url}`;
+        const requestUrl = `${BASE_URL}${url}`;
 
 
-        fetch(requestUrl, {
-            method: "post",
-            body: JSON.stringify(postData),
-            headers: this.createHeaders()
+        axios.post(requestUrl, postData, {
+            headers: {
+                // "Content-type": "application/json; charset=UTF-8",
+                "Key": API_KEY
+            }
         })
             .then(response => response.json())
             .then(response => postDataHandler(response))
