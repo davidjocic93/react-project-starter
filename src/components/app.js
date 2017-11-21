@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, Redirect } from "react-router-dom";
 
 
+
 import WelcomePage from "./homePage/welcomePage";
 
 class App extends React.Component {
@@ -12,6 +13,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+              
                 <WelcomePage />
                 <Switch>
                     <Redirect exact from="/" to="/loginPage" />
