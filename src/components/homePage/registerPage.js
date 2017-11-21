@@ -2,6 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 
 
+
 class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
