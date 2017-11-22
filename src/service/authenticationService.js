@@ -19,7 +19,7 @@ export default class AuthenticationService {
                 if (serverResponseData.status == "200") {
                     console.log(serverResponseData);
                     sessionStorage.setItem("sessionId", serverResponseData.data.sessionId);
-                    this.redirectionService.goTo("/mainPage");
+                    this.redirectionService.goTo("/");
                 }
             }, (error) => {
                 console.log(error);
@@ -34,10 +34,10 @@ export default class AuthenticationService {
     register(registerData) {
         this.communicationService.postRequest("/api/register", registerData,
             (serverResponseData) => {
-                if (serverResponseData.status == "202") {
-                    console.log(serverResponseData);
-                    this.redirectionService.goTo("/");
-                }
+
+                console.log(serverResponseData);
+                this.redirectionService.goTo("/loginPage");
+
             }, (error) => {
                 console.log(error);
             });

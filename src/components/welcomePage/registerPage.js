@@ -44,7 +44,11 @@ class RegisterPage extends React.Component {
         };
         console.log(data);
         // this.props.onRegister(data);
-        this.authService.register(data);
+        if (data.username == "" || data.password == "" || data.email == "" || data.name == "" || data.surname == "") {
+            alert("Please fill all forms");
+        } else {
+            this.authService.register(data);
+        }
         
     }
 
@@ -59,12 +63,12 @@ class RegisterPage extends React.Component {
                 </div>
 
                 <form className="homePageForm">
-                    Username<input type="text" name="username" onChange={this.handleChange} placeholder="Username" value={event.target.value}/><br />
-                    Password<input type="password" name="password" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value}/><br />
-                    Email<input type="email" name="email" onChange={this.handleChange} placeholder="Email" value={event.target.value}/><br />
-                    Name<input type="text" name="name" onChange={this.handleChange} placeholder="Name" value={event.target.value}/><br />
-                    Surename<input type="text" name="surname" onChange={this.handleChange} placeholder="Surename" value={event.target.value}/><br />
-                    <input type="button" onClick={this.handleRegister} value="Register" />
+                    Username<input className="col-12" type="text" name="username" onChange={this.handleChange} placeholder="Username" value={event.target.value}/><br />
+                    Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value}/><br />
+                    Email<input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" value={event.target.value}/><br />
+                    Name<input className="col-12" type="text" name="name" onChange={this.handleChange} placeholder="Name" value={event.target.value}/><br />
+                    Surename<input className="col-12" type="text" name="surname" onChange={this.handleChange} placeholder="Surename" value={event.target.value}/><br />
+                    <input className="btn btn-primary" type="button" onClick={this.handleRegister} value="Register" />
                 </form>
 
 

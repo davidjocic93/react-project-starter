@@ -6,6 +6,7 @@ import RegisterPage from "./registerPage";
 import LoginPage from "./loginPage";
 import AuthenticationService from "../../service/authenticationService";
 import MainPage from "../mainPage/mainPage";
+import Welcome from "./welcome";
 
 
 class WelcomePage extends React.Component {
@@ -21,17 +22,12 @@ class WelcomePage extends React.Component {
         return (
             <div className="row container ">
 
-                <div className="col-6">
-                    <h1 >Welcome to BitBook</h1>
-                    <p> Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </p>
-                </div>
-
                 <div className="row">
+                    <Welcome />
                     <Switch>
                         <Route exact path="/" component={LoginPage} />
                         <Route path="/loginPage" component={LoginPage} />
                         <Route path="/registerPage" component={RegisterPage} />
-                        <Route path="/mainPage" component={MainPage} />
                     </Switch>
                 </div>
             </div>

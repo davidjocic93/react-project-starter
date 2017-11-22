@@ -37,8 +37,13 @@ class LoginPage extends React.Component {
         };
         console.log(data);
         // this.props.onLogin(data);
-        this.authService.login(data);
+        if (data.username == "" || data.password == "") {
+            alert("Please fill all forms");
+        } else {
+            this.authService.login(data);
+        }
     }
+
 
     render() {
         return (
@@ -50,9 +55,9 @@ class LoginPage extends React.Component {
                 </div>
 
                 <form>
-                    Email<input type="email" name="email" onChange={this.handleChange} placeholder="Email" /><br />
-                    Password<input type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
-                    <input type="button" onClick={this.handleLogin} value="Login" />
+                    Email<input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" /><br />
+                    Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
+                    <input className="btn btn-primary" type="button" onClick={this.handleLogin} value="Login" />
                 </form>
 
             </div>
