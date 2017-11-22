@@ -1,14 +1,18 @@
 import React from "react";
 import Header from "../common/header";
-import AuthenticationService from "../../service/authenticationService";
+import {authenticationService} from "../../service/authenticationService";
+import {dataService} from "../../service/dataService";
 
 
 class MainPage extends React.Component {
     constructor(props) {
         super(props);
-        this.authService = new AuthenticationService();
 
         this.bindEventHandlers();   
+    }
+
+    componentDidMount () {
+        dataService.getProfile();
     }
 
     bindEventHandlers() {
@@ -16,7 +20,7 @@ class MainPage extends React.Component {
     }
 
     handleLogout(event) {
-        this.authService.logOut();
+        authenticationService.logOut();
     }
 
     render() {

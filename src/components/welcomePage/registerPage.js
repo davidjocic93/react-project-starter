@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import AuthenticationService from "../../service/authenticationService";
+import {authenticationService} from "../../service/authenticationService";
 import Welcome from "./welcome";
 
 
@@ -9,7 +9,7 @@ import Welcome from "./welcome";
 class RegisterPage extends React.Component {
     constructor(props) {
         super(props);
-        this.authService = new AuthenticationService();
+
         this.state = {
             username: "",
             password: "",
@@ -60,7 +60,7 @@ class RegisterPage extends React.Component {
             $(".passwordsError").text("Passwords do not match");
             $(".emailError").text("");
         } else {
-            this.authService.register(data, (serverErrorObject) => {
+            authenticationService.register(data, (serverErrorObject) => {
                 $(".passwordsError").text("");
                 $(".fillFormsError").text("Server error. Contact your network administrator");
                 if (serverErrorObject.response.status == 400) {

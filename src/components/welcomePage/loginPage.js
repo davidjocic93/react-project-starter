@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import registerPage from "./registerPage";
-import AuthenticationService from "../../service/authenticationService";
+import {authenticationService} from "../../service/authenticationService";
 import Welcome from "./welcome";
 
 
@@ -10,7 +10,7 @@ import Welcome from "./welcome";
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
-        this.authService = new AuthenticationService();
+
         this.state = {
             username: "",
             password: ""
@@ -42,7 +42,7 @@ class LoginPage extends React.Component {
         if (data.username == "" || data.password == "") {
             $(".loginError").text("Please fill all fields");
         } else {
-            this.authService.login(data, (serverErrorObject) => {
+            authenticationService.login(data, (serverErrorObject) => {
                 console.log(serverErrorObject);
                 $(".loginError").text("Server error. Contact your network administrator");
                 if (serverErrorObject.response.status == 400) {
