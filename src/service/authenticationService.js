@@ -1,15 +1,17 @@
 import { SESSION_ID } from "../constants";
 import CommunicationService from "./communicationService";
 import RedirectionService from "./redirectionService";
+import SessionService from "./sessionService";
 
 export default class AuthenticationService {
     constructor() {
         this.communicationService = new CommunicationService();
         this.redirectionService = new RedirectionService();
+        this.sessionService = new SessionService();
     }
 
     isAuthenticated() {
-        const sessionId = sessionStorage.getItem(SESSION_ID);
+        const sessionId = this.sessionService.getItem(SESSION_ID);
         return !!sessionId;
     }
 
@@ -18,7 +20,7 @@ export default class AuthenticationService {
             (serverResponseData) => {
                 if (serverResponseData.status == "200") {
                     console.log(serverResponseData);
-                    sessionStorage.setItem("sessionId", serverResponseData.data.sessionId);
+                    this.sessionService.setItem(SESSION_ID, serverResponseData.data.sessionId);
                     this.redirectionService.goTo("/");
                 }
             }, (serverErrorObject) => {
@@ -27,7 +29,7 @@ export default class AuthenticationService {
     }
 
     logOut() {
-        sessionStorage.removeItem(SESSION_ID);
+        this.sessionService.removeItem(SESSION_ID);
         this.redirectionService.goTo("/loginPage");
     }
 

@@ -32,6 +32,7 @@ class LoginPage extends React.Component {
     }
 
     handleLogin(event) {
+        event.preventDefault();
         let data = {
             username: this.state.username,
             password: this.state.password
@@ -67,8 +68,8 @@ class LoginPage extends React.Component {
                     </div>
 
 
-                     <form className="loginForm">
-                      Username<input className="col-12" type="username" name="username" onChange={this.handleChange} placeholder="Username" /><br />
+                    <form className="loginForm">
+                        Username<input className="col-12" type="username" name="username" onChange={this.handleChange} placeholder="Username" /><br />
                         <div className="emailError error"></div>
                         Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
                         <button className="btn btn-primary" onClick={this.handleLogin} >Login</button>

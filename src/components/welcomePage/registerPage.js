@@ -36,6 +36,7 @@ class RegisterPage extends React.Component {
 
 
     handleRegister(event) {
+        event.preventDefault();
         let data = {
             username: this.state.username,
             password: this.state.password,
@@ -51,7 +52,7 @@ class RegisterPage extends React.Component {
             $(".emailError").text("Email must contain @ character!");
             $(".fillFormsError").text("");
         } else if (data.password.length < 6) {
-            $(".passwordsError").text("");            
+            $(".passwordsError").text("");
             $(".passwordLengthError").text("Password must be at least 6 characters long!");
             $(".emailError").text("");
         } else if (data.password != data.repeat) {
@@ -96,7 +97,8 @@ class RegisterPage extends React.Component {
                         <div className="passwordLengthError error"></div>
                         Repeat password<input className="col-12" type="password" name="repeat" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value} /><br />
                         <div className="passwordsError error"></div>
-                       <button className="btn btn-primary" onClick={this.handleRegister}>Register</button>
+                        <button className="btn btn-primary" onClick={this.handleRegister}>Register</button>
+                        <button className="btn btn-primary" type="reset" value="Reset">Reset</button>
                         <div className="fillFormsError error"></div>
                     </form>
 
