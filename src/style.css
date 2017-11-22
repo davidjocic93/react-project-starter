@@ -48,3 +48,7 @@ body {
 .error {
     color: red;
 }
+
+.avatarPicture {
+    width: 300px;
+}

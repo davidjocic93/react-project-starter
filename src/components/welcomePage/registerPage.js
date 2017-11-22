@@ -15,8 +15,7 @@ class RegisterPage extends React.Component {
             password: "",
             repeat: "",
             email: "",
-            name: "",
-            surname: ""
+            name: ""
         };
 
         this.bindEventHandlers();
@@ -48,8 +47,8 @@ class RegisterPage extends React.Component {
         // this.props.onRegister(data);
         if (data.username == "" || data.password == "" || data.email == "" || data.name == "" || data.repeat == "") {
             $(".fillFormsError").text("Please fill all fields");
-        } else if (!data.email.includes("@")) {
-            $(".emailError").text("Email must contain @ character!");
+        } else if (!data.email.includes("@") || !data.email.includes(".com")) {
+            $(".emailError").text("Please provide proper email!");
             $(".fillFormsError").text("");
         } else if (data.password.length < 6) {
             $(".passwordsError").text("");
