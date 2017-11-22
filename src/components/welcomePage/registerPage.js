@@ -49,12 +49,15 @@ class RegisterPage extends React.Component {
             $(".fillFormsError").text("Please fill all fields");
         } else if (!data.email.includes("@")) {
             $(".emailError").text("Email must contain @ character!");
+            $(".fillFormsError").text("");
         } else if (data.password.length < 6) {
             $(".passwordsError").text("");            
             $(".passwordLengthError").text("Password must be at least 6 characters long!");
+            $(".emailError").text("");
         } else if (data.password != data.repeat) {
             $(".passwordLengthError").text("");
             $(".passwordsError").text("Passwords do not match");
+            $(".emailError").text("");
         } else {
             this.authService.register(data);
         }
@@ -78,15 +81,15 @@ class RegisterPage extends React.Component {
                     <form className="homePageForm">
                         Name<input className="col-12" type="text" name="name" onChange={this.handleChange} placeholder="Name" value={event.target.value} /><br />
                         Username<input className="col-12" type="text" name="username" onChange={this.handleChange} placeholder="Username" value={event.target.value} /><br />
-                        <div className="usernameError"></div>
+                        <div className="usernameError error"></div>
                         Email<input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" value={event.target.value} /><br />
-                        <div className="emailError"></div>
+                        <div className="emailError error"></div>
                         Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value} /><br />
-                        <div className="passwordLengthError"></div>
+                        <div className="passwordLengthError error"></div>
                         Repeat password<input className="col-12" type="password" name="repeat" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value} /><br />
-                        <div className="passwordsError"></div>
+                        <div className="passwordsError error"></div>
                         <input className="btn btn-primary" type="button" onClick={this.handleRegister} value="Register" />
-                        <div className="fillFormsError"></div>
+                        <div className="fillFormsError error"></div>
                     </form>
 
 
