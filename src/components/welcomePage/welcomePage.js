@@ -15,18 +15,23 @@ class WelcomePage extends React.Component {
         super(props);
         this.authService = new AuthenticationService();
     }
-  
+
 
     render() {
         if (this.authService.isAuthenticated()) {
-            return <MainPage />;
+            return (
+                <Switch>
+                    <Redirect from="/loginPage" exact to="/" />
+                    <Route path="/" component={MainPage} />
+                </Switch>
+            );
         }
         return (
             <div className="row container ">
 
                 <div className="row">
                     <Switch>
-                        <Redirect from="/" exact to="/loginPage"/>
+                        <Redirect from="/" exact to="/loginPage" />
                         <Route path="/loginPage" component={LoginPage} />
                         <Route path="/registerPage" component={RegisterPage} />
                     </Switch>
