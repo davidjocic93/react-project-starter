@@ -21,8 +21,14 @@ export default class AuthenticationService {
                     sessionStorage.setItem("sessionId", serverResponseData.data.sessionId);
                     this.redirectionService.goTo("/");
                 }
-            }, (error) => {
-                console.log(error);
+            }, (serverErrorObject) => {
+                console.log(serverErrorObject);
+                $(".loginError").text("Server error. Contact your network administrator");
+                if (serverErrorObject.response.status == 400) {
+                    $(".loginError").text(`${serverErrorObject.response.data.error.message}`);
+                    console.log(serverErrorObject.response);
+                }
+
             });
     }
 
@@ -38,8 +44,14 @@ export default class AuthenticationService {
                 console.log(serverResponseData);
                 this.redirectionService.goTo("/loginPage");
 
-            }, (error) => {
-                console.log(error);
+            }, (serverErrorObject) => {
+                $(".passwordsError").text("");
+                $(".fillFormsError").text("Server error. Contact your network administrator");
+                if (serverErrorObject.response.status == 400) {
+                    $(".fillFormsError").text("");
+                    $(".usernameError").text(`${serverErrorObject.response.data.error.message}`);
+                    console.log(serverErrorObject.response.data.error.message);
+                }
             });
     }
 }

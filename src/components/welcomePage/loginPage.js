@@ -39,7 +39,9 @@ class LoginPage extends React.Component {
         console.log(data);
         // this.props.onLogin(data);
         if (data.username == "" || data.password == "") {
-            alert("Please fill all forms");
+            $(".loginError").text("Please fill all fields");
+        } else if (!data.username.includes("@")) {
+            $(".emailError").text("Email must contain @ character!");
         } else {
             this.authService.login(data);
         }
@@ -61,8 +63,10 @@ class LoginPage extends React.Component {
 
                     <form>
                         Email<input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" /><br />
+                        <div className="emailError"></div>
                         Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
                         <input className="btn btn-primary" type="button" onClick={this.handleLogin} value="Login" />
+                        <div className="loginError"></div>
                     </form>
 
                 </div>
