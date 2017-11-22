@@ -56,26 +56,32 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div className="row">
+            <div className="container welcome">
+                <div className="row">
 
-                <Welcome />
+                    <Welcome />
 
-                <div className="col-6 container">
+                    <div className="col-sm-12 col-md-6 col-lg-6 container">
 
-                    <div className="row loginButtons">
-                        <button className="col-6"><Link to="/loginPage">Login</Link></button>
-                        <button className="col-6"><Link to="/registerPage">Register</Link></button>
+                        <div className="row loginButtons">
+                            <div className="col-md-6 form-group">
+                                <button className="btn btn-primary"><Link to="/loginPage">Login</Link></button>
+                            </div>
+                            <div className="col-md-6 form-group">
+                                <button className="btn btn-primary"><Link to="/registerPage">Register</Link></button>
+                            </div>
+                        </div>
+
+
+                        <form className="loginForm">
+                            <input className="col-12" type="username" name="username" onChange={this.handleChange} placeholder="Username" /><br />
+                            <div className="emailError text-danger"></div>
+                            <input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
+                            <button className="btn btn-primary" onClick={this.handleLogin} >Login</button>
+                            <div className="loginError text-danger"></div>
+                        </form>
+
                     </div>
-
-
-                    <form className="loginForm">
-                        Username<input className="col-12" type="username" name="username" onChange={this.handleChange} placeholder="Username" /><br />
-                        <div className="emailError error"></div>
-                        Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
-                        <button className="btn btn-primary" onClick={this.handleLogin} >Login</button>
-                        <div className="loginError error"></div>
-                    </form>
-
                 </div>
             </div>
         );

@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url("http://t4america.org/wp-content/uploads/2013/11/sky.png");
+}
+
+
+
+.welcome {
+    position: absolute;
+    top: 100px;
+}
+
+.welcomePage {
+    color: rgb(37, 37, 37);
+}
+
+.loginForm input {
+    padding: 10px;
+    border-radius: 5px 0 5px 0;
+}
+
+.loginForm {
+    color: white;
+    font-size: 18px;
+    font-weight: 700;
+    border: none;
+}
+
+.loginForm input {
+    border: 1px solid #cacaca;
+    margin-top: 20px;
+}
+
+.loginForm button {
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    font-weight: 800;
+    font-size: 18px;
+}
+
+.register {
+    margin-right: 10px;
+}
+
+.loginButtons button {
+    width: 210px;
+    padding: 10px;
+    font-weight: 700;
+    font-size: 20px;
+    border-radius: 5px;
+    border: none; 
+}
+
+.loginButtons button a {
+    text-decoration: none;
+    color: white;
+}
+
+
+input:focus {
+    box-shadow: 0px 0px 15px rgb(170, 170, 170);
+    outline: none;
+}
+
+input:hover {
+    cursor: pointer;
+}
+
+

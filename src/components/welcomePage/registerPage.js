@@ -77,32 +77,38 @@ class RegisterPage extends React.Component {
     render() {
         return (
 
-            <div className="row">
+            <div className="container welcome">
+                <div className="row">
 
-                <Welcome />
-                <div className="col-6 container">
+                    <Welcome />
+                    <div className="col-sm-12 col-md-6 col-lg-6">
 
-                    <div className="row loginButtons">
-                        <button className="col-6"><Link to="/loginPage">Login</Link></button>
-                        <button className="col-6"><Link to="/registerPage">Register</Link></button>
+                        <div className="row loginButtons">
+                            <div className="col-md-6 form-group">
+                                <button className="btn btn-primary"><Link to="/loginPage">Login</Link></button>
+                            </div>
+                            <div className="col-md-6 form-group">
+                                <button className="btn btn-primary"><Link to="/registerPage">Register</Link></button>
+                            </div>
+                        </div>
+
+                        <form className="homePageForm loginForm">
+                            <input className="col-12" type="text" name="name" onChange={this.handleChange} placeholder="Name" value={event.target.value} /><br />
+                            <input className="col-12" type="text" name="username" onChange={this.handleChange} placeholder="Username" value={event.target.value} /><br />
+                            <div className="usernameError text-danger"></div>
+                            <input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" value={event.target.value} /><br />
+                            <div className="emailError text-danger"></div>
+                            <input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value} /><br />
+                            <div className="passwordLengthError text-danger"></div>
+                            <input className="col-12" type="password" name="repeat" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value} /><br />
+                            <div className="passwordsError text-danger"></div>
+                            <button className="btn btn-primary register" onClick={this.handleRegister}>Register</button>
+                            <button className="btn btn-primary" type="reset" value="Reset">Reset</button>
+                            <div className="fillFormsError text-danger"></div>
+                        </form>
+
+
                     </div>
-
-                    <form className="homePageForm loginForm">
-                        Name<input className="col-12" type="text" name="name" onChange={this.handleChange} placeholder="Name" value={event.target.value} /><br />
-                        Username<input className="col-12" type="text" name="username" onChange={this.handleChange} placeholder="Username" value={event.target.value} /><br />
-                        <div className="usernameError error"></div>
-                        Email<input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" value={event.target.value} /><br />
-                        <div className="emailError error"></div>
-                        Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value} /><br />
-                        <div className="passwordLengthError error"></div>
-                        Repeat password<input className="col-12" type="password" name="repeat" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value} /><br />
-                        <div className="passwordsError error"></div>
-                        <button className="btn btn-primary" onClick={this.handleRegister}>Register</button>
-                        <button className="btn btn-primary" type="reset" value="Reset">Reset</button>
-                        <div className="fillFormsError error"></div>
-                    </form>
-
-
                 </div>
             </div>
         );
