@@ -54,15 +54,15 @@ class LoginPage extends React.Component {
 
                 <div className="col-6 container">
 
-                    <div className="row">
-                        <h3 className="col-6"><Link to="/loginPage">Login</Link></h3>
-                        <h3 className="col-6"><Link to="/registerPage">Register</Link></h3>
+                    <div className="row loginButtons">
+                        <button className="col-6"><Link to="/loginPage">Login</Link></button>
+                        <button className="col-6"><Link to="/registerPage">Register</Link></button>
                     </div>
 
-                    <form>
+                    <form className="loginForm">
                         Email<input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" /><br />
                         Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
-                        <input className="btn btn-primary" type="button" onClick={this.handleLogin} value="Login" />
+                        <button className="btn btn-primary" onClick={this.handleLogin} >Login</button>
                     </form>
 
                 </div>
