@@ -1,6 +1,7 @@
 .loginFormDiv {
     border: 1px solid black;
 }
+
 body {
     background-image: url("https://www.planwallpaper.com/static/images/518086-background-hd.jpg");
 }
@@ -44,4 +45,9 @@ body {
     border: 2px solid blue;
    
 
+}
+
+
+.error {
+    color: red;
 }

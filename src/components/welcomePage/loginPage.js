@@ -12,7 +12,7 @@ class LoginPage extends React.Component {
         super(props);
         this.authService = new AuthenticationService();
         this.state = {
-            email: "",
+            username: "",
             password: ""
         };
 
@@ -33,15 +33,22 @@ class LoginPage extends React.Component {
 
     handleLogin(event) {
         let data = {
-            username: this.state.email,
+            username: this.state.username,
             password: this.state.password
         };
         console.log(data);
         // this.props.onLogin(data);
         if (data.username == "" || data.password == "") {
-            alert("Please fill all forms");
+            $(".loginError").text("Please fill all fields");
         } else {
-            this.authService.login(data);
+            this.authService.login(data, (serverErrorObject) => {
+                console.log(serverErrorObject);
+                $(".loginError").text("Server error. Contact your network administrator");
+                if (serverErrorObject.response.status == 400) {
+                    $(".loginError").text(`${serverErrorObject.response.data.error.message}`);
+                    console.log(serverErrorObject.response);
+                }
+            });
         }
     }
 
@@ -59,10 +66,13 @@ class LoginPage extends React.Component {
                         <button className="col-6"><Link to="/registerPage">Register</Link></button>
                     </div>
 
-                    <form className="loginForm">
-                        Email<input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" /><br />
+
+                     <form className="loginForm">
+                      Username<input className="col-12" type="username" name="username" onChange={this.handleChange} placeholder="Username" /><br />
+                        <div className="emailError error"></div>
                         Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
                         <button className="btn btn-primary" onClick={this.handleLogin} >Login</button>
+                        <div className="loginError error"></div>
                     </form>
 
                 </div>

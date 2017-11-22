@@ -13,7 +13,7 @@ export default class AuthenticationService {
         return !!sessionId;
     }
 
-    login(userData) {
+    login(userData, errorHandler) {
         this.communicationService.postRequest("/api/login", userData,
             (serverResponseData) => {
                 if (serverResponseData.status == "200") {
@@ -21,8 +21,8 @@ export default class AuthenticationService {
                     sessionStorage.setItem("sessionId", serverResponseData.data.sessionId);
                     this.redirectionService.goTo("/");
                 }
-            }, (error) => {
-                console.log(error);
+            }, (serverErrorObject) => {
+                errorHandler(serverErrorObject);
             });
     }
 
@@ -31,15 +31,16 @@ export default class AuthenticationService {
         this.redirectionService.goTo("/loginPage");
     }
 
-    register(registerData) {
+    register(registerData, errorHandler) {
         this.communicationService.postRequest("/api/register", registerData,
             (serverResponseData) => {
 
                 console.log(serverResponseData);
                 this.redirectionService.goTo("/loginPage");
 
-            }, (error) => {
-                console.log(error);
+            }, (serverErrorObject) => {
+                errorHandler(serverErrorObject);
+
             });
     }
 }
