@@ -59,7 +59,15 @@ class RegisterPage extends React.Component {
             $(".passwordsError").text("Passwords do not match");
             $(".emailError").text("");
         } else {
-            this.authService.register(data);
+            this.authService.register(data, (serverErrorObject) => {
+                $(".passwordsError").text("");
+                $(".fillFormsError").text("Server error. Contact your network administrator");
+                if (serverErrorObject.response.status == 400) {
+                    $(".fillFormsError").text("");
+                    $(".usernameError").text(`${serverErrorObject.response.data.error.message}`);
+                    console.log(serverErrorObject.response.data.error.message);
+                }
+            });
         }
 
     }

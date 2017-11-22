@@ -41,7 +41,14 @@ class LoginPage extends React.Component {
         if (data.username == "" || data.password == "") {
             $(".loginError").text("Please fill all fields");
         } else {
-            this.authService.login(data);
+            this.authService.login(data, (serverErrorObject) => {
+                console.log(serverErrorObject);
+                $(".loginError").text("Server error. Contact your network administrator");
+                if (serverErrorObject.response.status == 400) {
+                    $(".loginError").text(`${serverErrorObject.response.data.error.message}`);
+                    console.log(serverErrorObject.response);
+                }
+            });
         }
     }
 

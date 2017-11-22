@@ -13,7 +13,7 @@ export default class AuthenticationService {
         return !!sessionId;
     }
 
-    login(userData) {
+    login(userData, errorHandler) {
         this.communicationService.postRequest("/api/login", userData,
             (serverResponseData) => {
                 if (serverResponseData.status == "200") {
@@ -22,13 +22,7 @@ export default class AuthenticationService {
                     this.redirectionService.goTo("/");
                 }
             }, (serverErrorObject) => {
-                console.log(serverErrorObject);
-                $(".loginError").text("Server error. Contact your network administrator");
-                if (serverErrorObject.response.status == 400) {
-                    $(".loginError").text(`${serverErrorObject.response.data.error.message}`);
-                    console.log(serverErrorObject.response);
-                }
-
+                errorHandler(serverErrorObject);
             });
     }
 
@@ -37,7 +31,7 @@ export default class AuthenticationService {
         this.redirectionService.goTo("/loginPage");
     }
 
-    register(registerData) {
+    register(registerData, errorHandler) {
         this.communicationService.postRequest("/api/register", registerData,
             (serverResponseData) => {
 
@@ -45,13 +39,8 @@ export default class AuthenticationService {
                 this.redirectionService.goTo("/loginPage");
 
             }, (serverErrorObject) => {
-                $(".passwordsError").text("");
-                $(".fillFormsError").text("Server error. Contact your network administrator");
-                if (serverErrorObject.response.status == 400) {
-                    $(".fillFormsError").text("");
-                    $(".usernameError").text(`${serverErrorObject.response.data.error.message}`);
-                    console.log(serverErrorObject.response.data.error.message);
-                }
+                errorHandler(serverErrorObject);
+
             });
     }
 }
