@@ -1,4 +1,4 @@
-export default class SessionService {
+class SessionService {
 
     setItem(key, value) {
         sessionStorage.setItem(key, value);
@@ -13,3 +13,5 @@ export default class SessionService {
     }
 
 }
+
+export const sessionService = new SessionService();

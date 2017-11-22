@@ -1,7 +1,7 @@
 import { BASE_URL, API_KEY, SESSION_ID } from "../constants";
 import axios from "axios";
 
-export default class CommunicationService {
+class CommunicationService {
     constructor() { }
 
     createHeaders() {
@@ -44,3 +44,5 @@ export default class CommunicationService {
 
     }
 }
+
+export const communicationService = new CommunicationService();

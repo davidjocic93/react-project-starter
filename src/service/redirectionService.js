@@ -1,4 +1,4 @@
-export default class  RedirectionService {
+class RedirectionService {
  
     goTo(path) {
 
@@ -6,3 +6,5 @@ export default class  RedirectionService {
 
     }
 }
+
+export const redirectionService = new RedirectionService();
