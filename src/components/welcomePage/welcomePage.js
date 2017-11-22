@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import RegisterPage from "./registerPage";
 import LoginPage from "./loginPage";
@@ -14,6 +15,7 @@ class WelcomePage extends React.Component {
         super(props);
         this.authService = new AuthenticationService();
     }
+  
 
     render() {
         if (this.authService.isAuthenticated()) {
@@ -23,9 +25,8 @@ class WelcomePage extends React.Component {
             <div className="row container ">
 
                 <div className="row">
-                    <Welcome />
                     <Switch>
-                        <Route exact path="/" component={LoginPage} />
+                        <Redirect from="/" exact to="/loginPage"/>
                         <Route path="/loginPage" component={LoginPage} />
                         <Route path="/registerPage" component={RegisterPage} />
                     </Switch>

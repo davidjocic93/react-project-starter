@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import registerPage from "./registerPage";
 import AuthenticationService from "../../service/authenticationService";
+import Welcome from "./welcome";
 
 
 
@@ -47,19 +48,24 @@ class LoginPage extends React.Component {
 
     render() {
         return (
-            <div className="col-6 container">
+            <div className="row">
 
-                <div className="row">
-                    <h3 className="col-6"><Link to="/loginPage">Login</Link></h3>
-                    <h3 className="col-6"><Link to="/registerPage">Register</Link></h3>
+                <Welcome />
+
+                <div className="col-6 container">
+
+                    <div className="row">
+                        <h3 className="col-6"><Link to="/loginPage">Login</Link></h3>
+                        <h3 className="col-6"><Link to="/registerPage">Register</Link></h3>
+                    </div>
+
+                    <form>
+                        Email<input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" /><br />
+                        Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
+                        <input className="btn btn-primary" type="button" onClick={this.handleLogin} value="Login" />
+                    </form>
+
                 </div>
-
-                <form>
-                    Email<input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" /><br />
-                    Password<input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
-                    <input className="btn btn-primary" type="button" onClick={this.handleLogin} value="Login" />
-                </form>
-
             </div>
         );
     }
