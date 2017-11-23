@@ -1,6 +1,7 @@
 import React from "react";
 import { authenticationService } from "../../service/authenticationService";
 import { dataService } from "../../service/dataService";
+import EditProfile from "./editprofile";
 
 class Profile extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class Profile extends React.Component {
             });
 
             if (!this.state.avatarUrl) {
-                this.setState ({
+                this.setState({
                     avatarUrl: "https://via.placeholder.com/200x200"
                 });
             }
@@ -55,15 +56,18 @@ class Profile extends React.Component {
                         <h1>{this.state.name}</h1>
                     </div>
                     <div className="col-12">
-                        <p>Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.Nori grape silver beet broccoli kombu beet greens fava bean potato quandong celery. Bunya nuts black-eyed pea prairie turnip leek lentil turnip greens parsnip. Sea lettuce lettuce water chestnut eggplant winter purslane fennel azuki bean earthnut pea sierra leone bologi leek soko chicory celtuce parsley jícama salsify.</p>
+                        <h3>About</h3>
+                        <p>{this.state.aboutShort}</p>
+                        <p>{this.state.about}</p>
                     </div>
                     <div className="col-12">
-                        <p className="count">Post count: <span>{this.state.postsCount}</span></p>
-                        <p className="count">Comment count: <span>{this.state.commentsCount}</span></p>
+                        <span className="count">Post count: {this.state.postsCount}</span>
+                        <span className="count">Comment count: {this.state.commentsCount}</span>
                     </div>
                 </div>
-                <input className="btn btn-outline-secondary editProfile" type="button" onClick value="Edit profile" />
+                <EditProfile />
             </div>
+
         );
     }
 };
