@@ -43,6 +43,20 @@ class CommunicationService {
             .catch((error) => errorHandler(error));
 
     }
+
+    putRequest(url, postData, dataHandler, errorHandler) {
+
+        const requestUrl = `${BASE_URL}${url}`;
+
+        axios.put(requestUrl, postData, {
+            headers: this.createHeaders()
+        })
+            .then(response => dataHandler(response))
+            .catch((error) => errorHandler(error));
+
+    }
+
+
 }
 
 export const communicationService = new CommunicationService();

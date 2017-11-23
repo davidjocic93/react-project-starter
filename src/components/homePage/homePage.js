@@ -3,7 +3,7 @@ import Header from "../common/header";
 import {authenticationService} from "../../service/authenticationService";
 import {dataService} from "../../service/dataService";
 import {Route, Switch} from "react-router-dom";
-import Profile from "./profile";
+import Profile from "../profile/profile";
 
 
 class HomePage extends React.Component {

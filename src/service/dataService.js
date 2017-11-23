@@ -1,5 +1,5 @@
 import { communicationService } from "./communicationService";
-import Profile from "../dto/profileDTO";
+import ProfileDTO from "../dto/profileDTO";
 
 class DataService {
     constructor() { }
@@ -12,15 +12,26 @@ class DataService {
                 const name = serverResponseData.data.name;
                 const avatarUrl = serverResponseData.data.avatarUrl;
                 const postsCount = serverResponseData.data.postsCount;
-                const commentsCount = serverResponseData.data.commentsCount; 
+                const commentsCount = serverResponseData.data.commentsCount;
+                const about = serverResponseData.data.about;
+                const aboutShort = serverResponseData.data.aboutShort;
 
-                const profile = new Profile(name, avatarUrl, postsCount, commentsCount);
+                const profile = new ProfileDTO(name, avatarUrl, postsCount, commentsCount, about, aboutShort);
+                
 
                 profileHandler(profile);
 
             }, (serverErrorObject) => {
                 console.log(serverErrorObject);
             });
+    }
+
+    updateProfile(updateProfileData) {
+        communicationService.putRequest("/api/Profiles", updateProfileData, (serverResponseData) => {
+            console.log(serverResponseData);
+        }, (serverErrorObject) => {
+            console.log(serverErrorObject);
+        });
     }
 }
 

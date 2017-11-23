@@ -3,9 +3,8 @@
 }
 
 body {
-    background-image: url("http://t4america.org/wp-content/uploads/2013/11/sky.png");
+    background: url("http://t4america.org/wp-content/uploads/2013/11/sky.png") repeat-x;
 }
-
 
 
 .welcome {
@@ -70,7 +69,70 @@ input:hover {
     cursor: pointer;
 }
 
+.avatarContainer {
+    width: 30%;
+    text-align: center;
+    border-radius: 50%;
+    background: #78C2AD;
+    margin: 30px auto; 
+    padding: 5%;
+}
+
 .avatarPicture {
-    width: 300px;
+   
+    width: 100%;
+}
+
+.profile {
+    text-align: center;
+}
+
+.count {
+    margin: 30px;
+    border: 2px solid rgb(248, 190, 190);
+    padding: 10px 0px 10px 15px;
+    border-radius: 30px;
+    margin-top: 20px;
+}
+
+.profile  {
+    padding: 40px;
+}
+
+.editProfile {
+    margin-top: 50px;
+    color: white;
+    background-color: #ef7479;
+}
+
+.editProfile:hover {
+    background-color: #da5760;
+}
+
+.navbar {
+    background-color: #78C2AD;
+    box-shadow: 0px 3px 20px rgb(158, 157, 157);
+}
+
+.navbar button {
+    color: white;
+    background-color: #ef7479;
+}
+
+.navbar a {
+    color: white;
+}
+
+.navbar a:hover {
+    color: rgb(30, 134, 101);
+}
+
+.navbar button:hover {
+    background-color: #da5760;
+}
+
+.count {
+    margin-left: 0px;
+    margin-right: 0px;
 }
 
