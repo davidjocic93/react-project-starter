@@ -64,10 +64,10 @@ class LoginPage extends React.Component {
                     <div className="col-sm-12 col-md-6 col-lg-6 container">
 
                         <div className="row loginButtons">
-                            <div className="col-md-6 form-group">
+                            <div className="col-sm-6 col-md-6 col-lg-6 form-group">
                                 <button className="btn btn-primary"><Link to="/loginPage">Login</Link></button>
                             </div>
-                            <div className="col-md-6 form-group">
+                            <div className="col-sm-6 col-md-6 col-lg-6 form-group">
                                 <button className="btn btn-primary"><Link to="/registerPage">Register</Link></button>
                             </div>
                         </div>

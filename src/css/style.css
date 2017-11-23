@@ -47,7 +47,7 @@ body {
 }
 
 .loginButtons button {
-    width: 210px;
+    width: 100%;
     padding: 10px;
     font-weight: 700;
     font-size: 20px;
