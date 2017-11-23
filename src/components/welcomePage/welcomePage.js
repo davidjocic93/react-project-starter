@@ -27,7 +27,7 @@ class WelcomePage extends React.Component {
             );
         }
         return (
-            <div className="row container ">
+            <div className="container">
 
                 <div className="row">
                     <Switch>
