@@ -20,7 +20,7 @@ class UsersPage extends React.Component {
             });
         });
 
-        console.log(this.state.users);
+        // console.log(this.state.users);
 
     }
 

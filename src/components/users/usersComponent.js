@@ -5,16 +5,16 @@ import PropTypes from "prop-types";
 
 const UsersComponent = (props) => {
     const { name, id, aboutShort, lastPostData, avatarUrl } = props.user;
-    console.log(props.user);
+    // console.log(props.user);
 
 
     return (
-        <div>
-            <h6>{name}</h6>
-            <h6>{id}</h6>
-            <h6>{aboutShort}</h6>
-            <h6>{lastPostData}</h6>
-            <img style={{width : "200px"}} src={avatarUrl}/>
+        <div className="userContainer row">
+            <p className="col-12">{name}</p>
+            <p className="col-12">{id}</p>
+            <p className="col-12">{aboutShort}</p>
+            <p className="col-12">{lastPostData}</p>
+            {/* <img className="col-12" src={avatarUrl}/> */}
         </div>
     );
 

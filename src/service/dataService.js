@@ -28,6 +28,31 @@ class DataService {
             });
     }
 
+    getUserProfile(id, userProfileHandler) {
+        communicationService.getRequest(`/api/users/${id}`,
+            (serverResponseData) => {
+                console.table(serverResponseData.data);
+
+                console.table(serverResponseData.data);
+
+                const name = serverResponseData.data.name;
+                const email = serverResponseData.data.email;
+                const avatarUrl = serverResponseData.data.avatarUrl;
+                const postsCount = serverResponseData.data.postsCount;
+                const commentsCount = serverResponseData.data.commentsCount;
+                const about = serverResponseData.data.about;
+                const aboutShort = serverResponseData.data.aboutShort;
+
+                const userProfile = new ProfileDTO(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort);
+
+
+                userProfileHandler(userProfile);
+
+            }, (serverErrorObject) => {
+                console.log(serverErrorObject);
+            });
+    }
+
     updateProfile(updateProfileData, errorHandler) {
         communicationService.putRequest("/api/Profiles", updateProfileData, (serverResponseData) => {
             if (serverResponseData.status >= 200 && serverResponseData.status < 300) {
@@ -63,6 +88,7 @@ class DataService {
                 console.log(serverErrorObject);
             });
     }
+
 }
 
 export const dataService = new DataService();

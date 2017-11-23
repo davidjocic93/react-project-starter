@@ -5,6 +5,7 @@ import {dataService} from "../../service/dataService";
 import {Route, Switch} from "react-router-dom";
 import Profile from "../profile/profile";
 import UsersPage from "../users/usersPage";
+import SingleUser from "../users/singleUser";
 
 
 class HomePage extends React.Component {
@@ -19,8 +20,8 @@ class HomePage extends React.Component {
                 <Switch>
                     {/* <Route exact path="/" component={NewsFeed}/> */}
                     <Route path="/profile" component={Profile}/>
-                    <Route path="/people" component={UsersPage}/>
-                    {/* <Route path="/people/:id" component={SingleUser}/> */}
+                    <Route exact path="/people" component={UsersPage}/>
+                    <Route path="/people/:id" component={SingleUser}/>
                 </Switch>
             </div>
         );

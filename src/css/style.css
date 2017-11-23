@@ -75,11 +75,11 @@ input:hover {
     border-radius: 50%;
     background: #78C2AD;
     margin: 30px auto; 
-    padding: 5%;
 }
 
 .avatarPicture {
     width: 100%;
+    border-radius: 50%;
 }
 
 .profile {
@@ -137,6 +137,22 @@ input:hover {
 
 .navbar button:hover {
     background-color: #da5760;
+}
+
+.userContainer {
+    display: inline-block;
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+    margin: 20px auto;
+    background-color: #78C2AD;
+    color: black;
+}
+
+.userContainer img {
+    margin: 0 auto;
+    width: 10%;
+    float: left;
 }
 
 
