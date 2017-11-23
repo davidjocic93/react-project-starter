@@ -23,8 +23,9 @@ const Header = () => {
                 <div className="collapse navbar-collapse" id="navbarColor01">
                     <ul className="navbar-nav mr-auto">
                     </ul>
-                    <Link className="nav-link my-2 my-sm-0" to="/profile">Profile</Link>
                     <Link className="nav-link  my-2 my-sm-0" to="/">Home</Link>
+                    <Link className="nav-link my-2 my-sm-0" to="/profile">Profile</Link>
+                    <Link className="nav-link  my-2 my-sm-0" to="/people">People</Link>
                     <button className="btn btn-outline-success my-2 my-sm-0" onClick={handleLogout}>Logout</button>
                 </div>
             </nav>

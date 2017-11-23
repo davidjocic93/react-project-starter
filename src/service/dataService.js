@@ -1,5 +1,6 @@
 import { communicationService } from "./communicationService";
 import ProfileDTO from "../dto/profileDTO";
+import UserDTO from "../dto/userDTO";
 
 class DataService {
     constructor() { }
@@ -10,14 +11,15 @@ class DataService {
                 console.table(serverResponseData.data);
 
                 const name = serverResponseData.data.name;
+                const email = serverResponseData.data.email;
                 const avatarUrl = serverResponseData.data.avatarUrl;
                 const postsCount = serverResponseData.data.postsCount;
                 const commentsCount = serverResponseData.data.commentsCount;
                 const about = serverResponseData.data.about;
                 const aboutShort = serverResponseData.data.aboutShort;
 
-                const profile = new ProfileDTO(name, avatarUrl, postsCount, commentsCount, about, aboutShort);
-                
+                const profile = new ProfileDTO(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort);
+
 
                 profileHandler(profile);
 
@@ -35,6 +37,31 @@ class DataService {
             console.log(serverErrorObject);
             errorHandler(serverErrorObject);
         });
+    }
+
+    getPeople(peopleHandler) {
+        let users = [];
+        communicationService.getRequest("/api/users",
+            (serverResponseData) => {
+                console.table(serverResponseData.data);
+
+                serverResponseData.data.forEach(element => {
+                    const name = element.name;
+                    const lastPostDate = element.lastPostDate;
+                    const avatarUrl = element.avatarUrl;
+                    const aboutShort = element.aboutShort;
+                    const id = element.id;
+
+                    const user = new UserDTO(name, avatarUrl, aboutShort, lastPostDate, id);
+
+                    users.push(user);
+                });
+
+                peopleHandler(users);
+
+            }, (serverErrorObject) => {
+                console.log(serverErrorObject);
+            });
     }
 }
 

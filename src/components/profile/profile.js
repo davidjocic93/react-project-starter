@@ -9,6 +9,7 @@ class Profile extends React.Component {
 
         this.state = {
             name: "",
+            email: "",
             avatarUrl: "",
             postsCount: "",
             commentsCount: "",
@@ -24,6 +25,7 @@ class Profile extends React.Component {
 
             this.setState({
                 name: profile.name,
+                email: profile.email,
                 avatarUrl: profile.avatarUrl,
                 postsCount: profile.postsCount,
                 commentsCount: profile.commentsCount,
@@ -54,6 +56,7 @@ class Profile extends React.Component {
                     </div>
                     <div className="col-12">
                         <h1>{this.state.name}</h1>
+                        <h5>Email: {this.state.email}</h5> <br />
                     </div>
                     <div className="col-12">
                         <h3>About</h3>
