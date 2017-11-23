@@ -26,11 +26,14 @@ class DataService {
             });
     }
 
-    updateProfile(updateProfileData) {
+    updateProfile(updateProfileData, errorHandler) {
         communicationService.putRequest("/api/Profiles", updateProfileData, (serverResponseData) => {
-            console.log(serverResponseData);
+            if (serverResponseData.status >= 200 && serverResponseData.status < 300) {
+                window.location.reload();
+            }
         }, (serverErrorObject) => {
             console.log(serverErrorObject);
+            errorHandler(serverErrorObject);
         });
     }
 }

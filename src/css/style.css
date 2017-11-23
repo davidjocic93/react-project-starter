@@ -70,7 +70,7 @@ input:hover {
 }
 
 .avatarContainer {
-    width: 30%;
+    width: 25%;
     text-align: center;
     border-radius: 50%;
     background: #78C2AD;
@@ -79,7 +79,6 @@ input:hover {
 }
 
 .avatarPicture {
-   
     width: 100%;
 }
 
@@ -88,15 +87,24 @@ input:hover {
 }
 
 .count {
-    margin: 30px;
+    margin: 20px;
     border: 2px solid rgb(248, 190, 190);
-    padding: 10px 0px 10px 15px;
-    border-radius: 30px;
-    margin-top: 20px;
+    padding: 10px;
+    border-radius: 20px;
 }
 
-.profile  {
-    padding: 40px;
+.profile h1 {
+    margin-bottom: 50px;
+}
+
+.profile p:last-of-type {
+    margin-bottom: 50px;
+}
+
+.profile p {
+    padding: 10px;
+    width: 50%;
+    margin: 0px auto;
 }
 
 .editProfile {
@@ -131,8 +139,4 @@ input:hover {
     background-color: #da5760;
 }
 
-.count {
-    margin-left: 0px;
-    margin-right: 0px;
-}
 
