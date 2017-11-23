@@ -5,24 +5,24 @@ import { Redirect } from "react-router-dom";
 
 import RegisterPage from "./registerPage";
 import LoginPage from "./loginPage";
-import AuthenticationService from "../../service/authenticationService";
-import MainPage from "../mainPage/mainPage";
+import {authenticationService} from "../../service/authenticationService";
+import HomePage from "../homePage/homePage";
 import Welcome from "./welcome";
 
 
 class WelcomePage extends React.Component {
     constructor(props) {
         super(props);
-        this.authService = new AuthenticationService();
+
     }
 
 
     render() {
-        if (this.authService.isAuthenticated()) {
+        if (authenticationService.isAuthenticated()) {
             return (
                 <Switch>
                     <Redirect from="/loginPage" exact to="/" />
-                    <Route path="/" component={MainPage} />
+                    <Route path="/" component={HomePage} />
                 </Switch>
             );
         }

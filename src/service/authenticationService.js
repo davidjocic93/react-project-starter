@@ -3,7 +3,7 @@ import {communicationService} from "./communicationService";
 import {redirectionService} from "./redirectionService";
 import {sessionService} from "./sessionService";
 
-export default class AuthenticationService {
+class AuthenticationService {
     constructor() {}
 
     isAuthenticated() {
@@ -42,3 +42,5 @@ export default class AuthenticationService {
             });
     }
 }
+
+export const authenticationService = new AuthenticationService();
