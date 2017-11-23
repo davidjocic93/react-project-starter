@@ -47,6 +47,9 @@ class RegisterPage extends React.Component {
         // this.props.onRegister(data);
         if (data.username == "" || data.password == "" || data.email == "" || data.name == "" || data.repeat == "") {
             $(".fillFormsError").text("Please fill all fields");
+            $(".emailError").text("");
+            $(".passwordLengthError").text("");
+            $(".passwordsError").text("");
         } else if (!data.email.includes("@") || !data.email.includes(".com")) {
             $(".emailError").text("Please provide proper email!");
             $(".fillFormsError").text("");
@@ -54,10 +57,12 @@ class RegisterPage extends React.Component {
             $(".passwordsError").text("");
             $(".passwordLengthError").text("Password must be at least 6 characters long!");
             $(".emailError").text("");
+            $(".fillFormsError").text("");
         } else if (data.password != data.repeat) {
             $(".passwordLengthError").text("");
             $(".passwordsError").text("Passwords do not match");
             $(".emailError").text("");
+            $(".fillFormsError").text("");            
         } else {
             authenticationService.register(data, (serverErrorObject) => {
                 $(".passwordsError").text("");

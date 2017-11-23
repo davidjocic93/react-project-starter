@@ -70,4 +70,7 @@ input:hover {
     cursor: pointer;
 }
 
+.avatarPicture {
+    width: 300px;
+}
 
