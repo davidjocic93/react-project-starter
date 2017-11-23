@@ -23,7 +23,7 @@ class MainPage extends React.Component {
         return (
             <div>
                 <Header />
-                <input type="button" onClick={this.handleLogout} value="Logout" />
+                <input type="button" className="btn btn-secondary" onClick={this.handleLogout} value="Logout" />
             </div>
         );
     }
