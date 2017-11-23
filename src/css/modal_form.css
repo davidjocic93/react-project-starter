@@ -1,0 +1,50 @@
+
+.modal-title {
+    color: #ef7479;
+}
+
+.editProfile img {
+    filter: invert(100%);
+    padding: 5px;
+}
+
+.editProfile {
+    width: 80px;
+    height: 80px;
+    border: none;
+    border-radius: 40px;
+    background-color: #ef7479;
+}
+
+.editProfile:hover {
+    box-shadow: -5px 5px 10px rgb(146, 146, 146);
+    cursor: pointer;
+}
+
+.editProfile:active {
+    outline: none;
+}
+
+.modal-body input {
+    border: none;
+    border-bottom: 1px solid rgb(153, 216, 197);
+    padding: 10px;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+
+.modal-body input:focus {
+    box-shadow: none;
+    outline: none;
+}
+
+.modal-body textarea {
+    border: 1px solid rgb(153, 216, 197);
+    border-radius: 10px;
+    margin-bottom: 10px;
+    margin-top: 2px;
+}
+
+.modal-body textarea:focus {
+    outline: none;
+}
