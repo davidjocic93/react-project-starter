@@ -10,18 +10,40 @@ const UsersComponent = (props) => {
     const date = new Date(lastPostDate);
     const dateString = date.toLocaleTimeString();
 
+
+
+    if (!avatarUrl) {
+        return (
+            <div className="userContainer">
+                <div className="row">
+                    <div className="col-4 userImage">
+                        <img style={{ width: "30%", borderRadius: "50%" }} src="https://via.placeholder.com/200x200" />
+                    </div>
+                    <div className="col-4 name">
+                        <h3>{name}</h3>
+                        <p>{aboutShort}</p>
+                    </div>
+                    <div className="col-4 time">
+                        <p>Last post at: <br /> {dateString}</p>
+                    </div>
+
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className="userContainer">
             <div className="row">
                 <div className="col-4 userImage">
-                    <img style={{width: "30%", borderRadius: "50%"}} src={avatarUrl} />
+                    <img style={{ width: "30%", borderRadius: "50%" }} src={avatarUrl} />
                 </div>
                 <div className="col-4 name">
                     <h3>{name}</h3>
                     <p>{aboutShort}</p>
                 </div>
                 <div className="col-4 time">
-                    <p>Last post at: <br/> {dateString}</p>
+                    <p>Last post at: <br /> {dateString}</p>
                 </div>
 
             </div>
