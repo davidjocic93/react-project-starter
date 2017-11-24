@@ -1,5 +1,5 @@
 class ProfileDTO {
-    constructor(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort ) {
+    constructor(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort, userId ) {
         this._name = name;
         this._email = email;
         this._avatarUrl = avatarUrl;
@@ -7,6 +7,7 @@ class ProfileDTO {
         this._commentsCount = commentsCount;
         this._about = about;
         this._aboutShort = aboutShort;
+        this._userId = userId;
     }
 
     get name(){
@@ -36,6 +37,10 @@ class ProfileDTO {
 
     get aboutShort(){
         return this._aboutShort;
+    }
+
+    get userId(){
+        return this._userId;
     }
 
 }

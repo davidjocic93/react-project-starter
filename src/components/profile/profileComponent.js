@@ -5,7 +5,7 @@ const ProfileComponent = (props) => {
     const {name, email, avatarUrl, about, aboutShort, postsCount, commentsCount} = props.profile;
 
     return (
-        <div className="container profile">
+        <div >
             <div className="row">
                 <div className="col-12">
                     <div className="avatarContainer">

@@ -75,13 +75,30 @@ input:hover {
     border-radius: 50%;
     background: #78C2AD;
     margin: 50px auto; 
-    padding: 5%;
 }
 
 .avatarPicture {
     width: 100%;
     border-radius: 50%;
 }
+
+
+/*SINGLE USER*/
+
+.singleUser {
+    text-align: center;
+}
+
+.singleUser p.count {
+    margin: 50px 20px 20px 20px;
+    border: 2px solid rgb(248, 190, 190);
+    padding: 10px;
+    border-radius: 20px;
+    width: 20%;
+    display: inline-block;
+}
+
+/*******/
 
 .profile {
     text-align: center;
@@ -107,6 +124,7 @@ input:hover {
 }
 
 .editProfile {
+    margin: 0 auto;
     margin-top: 50px;
     margin-bottom: 50px;
     color: white;
@@ -164,7 +182,7 @@ input:hover {
     background-color: #78C2AD;
     color: black;
     background-color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 5px 5px 10px rgb(170, 170, 170);
 
 }
@@ -186,4 +204,26 @@ input:hover {
 
 .userImage {
     text-align: center;
+}
+
+/*SEARCH*/
+
+.search {
+    margin-top: 30px;
+    background-color: #ef7479;
+    height: 60px;
+    border-radius: 10px;
+    color: white;
+    text-align: center;
+}
+
+.search input {
+    margin-top: 13px;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.search input:focus {
+    box-shadow: none;
 }

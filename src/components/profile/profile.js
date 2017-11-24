@@ -48,7 +48,7 @@ class Profile extends React.Component {
 
     render() {
         return (
-            <div>
+            <div className="container profile">
                 <ProfileComponent  profile={this.state} />
                 <EditProfile />
             </div>

@@ -17,8 +17,9 @@ class DataService {
                 const commentsCount = serverResponseData.data.commentsCount;
                 const about = serverResponseData.data.about;
                 const aboutShort = serverResponseData.data.aboutShort;
+                const userId = serverResponseData.data.userId;
 
-                const profile = new ProfileDTO(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort);
+                const profile = new ProfileDTO(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort, userId);
 
 
                 profileHandler(profile);
@@ -40,8 +41,9 @@ class DataService {
                 const commentsCount = serverResponseData.data.commentsCount;
                 const about = serverResponseData.data.about;
                 const aboutShort = serverResponseData.data.aboutShort;
+                const userId = serverResponseData.data.userId;
 
-                const profile = new ProfileDTO(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort);
+                const profile = new ProfileDTO(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort, userId);
 
 
                 profileHandler(profile);
