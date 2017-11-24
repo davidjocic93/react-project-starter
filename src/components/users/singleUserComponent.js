@@ -3,6 +3,7 @@ import { authenticationService } from "../../service/authenticationService";
 import { dataService } from "../../service/dataService";
 import PropTypes from "prop-types";
 import ProfileComponent from "../profile/profileComponent";
+import EditProfile from "../profile/editprofile";
 
 class SingleUserComponent extends React.Component {
     constructor(props) {
@@ -15,11 +16,22 @@ class SingleUserComponent extends React.Component {
             postsCount: "",
             commentsCount: "",
             about: "",
-            aboutShort: ""
+            aboutShort: "",
+            userId: "",
+            ownId: ""
         };
 
         this.loadData = this.loadData.bind(this);
+        this.loadOwnProfileData = this.loadOwnProfileData.bind(this);
 
+    }
+
+    loadOwnProfileData() {
+        dataService.getProfile((profileData) => {
+            this.setState({
+                ownId: profileData.userId
+            });
+        });
     }
 
 
@@ -32,34 +44,58 @@ class SingleUserComponent extends React.Component {
                 postsCount: profileData.postsCount,
                 commentsCount: profileData.commentsCount,
                 about: profileData.about,
-                aboutShort: profileData.aboutShort
+                aboutShort: profileData.aboutShort,
+                userId: profileData.userId
             });
+
+            if (!this.state.avatarUrl) {
+                this.setState({
+                    avatarUrl: "https://via.placeholder.com/200x200"
+                });
+
+            }
         });
     }
 
     componentDidMount() {
-        const userId = this.props.match.params.id;
-        this.loadData(userId);
+        const id = this.props.match.params.id;
+        this.loadData(id);
+        this.loadOwnProfileData();
     }
-
+    
     componentWillReceiveProps(nextProps) {
-        const userId = nextProps.match.params.id;
-        this.loadData(userId);
+        const id = nextProps.match.params.id;
+        this.loadData(id);
     }
-
-
-
+    
+    
+    
     render() {
+    
+        if (this.state.userId == this.state.ownId) {
+            return (
+                <div className="container singleUser">
+                    <ProfileComponent profile={this.state} />
+                    <EditProfile />
+                </div>
+            );
+        }
+
         return (
-            <ProfileComponent  profile={this.state} />
+            <div className="container singleUser">
+                <ProfileComponent profile={this.state} />
+            </div>
         );
+
+
+
     }
 }
 
 
 SingleUserComponent.propTypes = {
     match: PropTypes.object,
-   
+
 };
 
 export default SingleUserComponent;

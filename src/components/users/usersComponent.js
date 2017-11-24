@@ -9,7 +9,6 @@ const UsersComponent = (props) => {
 
     const date = new Date(lastPostDate);
     const dateString = date.toLocaleTimeString();
-    console.log(dateString);
 
     return (
         <div className="userContainer">
@@ -33,7 +32,6 @@ const UsersComponent = (props) => {
 
 UsersComponent.propTypes = {
     user: PropTypes.object,
-
 };
 
 export default UsersComponent;
