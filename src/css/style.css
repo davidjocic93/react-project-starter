@@ -80,6 +80,7 @@ input:hover {
 
 .avatarPicture {
     width: 100%;
+    border-radius: 50%;
 }
 
 .profile {
@@ -139,10 +140,25 @@ input:hover {
     background-color: #da5760;
 }
 
+.userContainer {
+    display: inline-block;
+    width: 90%;
+    padding: 10px;
+    text-align: center;
+    margin: 20px auto;
+    background-color: #78C2AD;
+    color: black;
+}
+
+.userContainer img {
+    margin: 0 auto;
+    width: 10%;
+    float: left;
+}
+
 #logo {
     font-size: 1.7em;
 }
 
-/*MODAL FORM STYLE*/
 
 

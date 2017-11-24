@@ -1,9 +1,10 @@
 import React from "react";
-import { authenticationService } from "../../service/authenticationService";
 import { dataService } from "../../service/dataService";
-import EditProfile from "./editprofile";
+import PropTypes from "prop-types";
 
-class Profile extends React.Component {
+
+
+class SingleUser extends React.Component {
     constructor(props) {
         super(props);
 
@@ -20,29 +21,33 @@ class Profile extends React.Component {
         this.bindEventHandlers();
     }
 
-    componentDidMount() {
-        dataService.getProfile((profile) => {
+    bindEventHandlers() {
+        this.loadData = this.loadData.bind(this);
+    }
+
+    loadData(id) {
+        dataService.getUserProfile(id, (userProfileData) => {
+            console.log(userProfileData);
 
             this.setState({
-                name: profile.name,
-                email: profile.email,
-                avatarUrl: profile.avatarUrl,
-                postsCount: profile.postsCount,
-                commentsCount: profile.commentsCount,
-                about: profile.about,
-                aboutShort: profile.aboutShort
+                name: userProfileData.name,
+                email: userProfileData.email,
+                avatarUrl: userProfileData.avatarUrl,
+                postsCount: userProfileData.postsCount,
+                commentsCount: userProfileData.commentsCount,
+                about: userProfileData.about,
+                aboutShort: userProfileData.aboutShort
             });
 
-            if (!this.state.avatarUrl) {
-                this.setState({
-                    avatarUrl: "https://via.placeholder.com/200x200"
-                });
-            }
         });
     }
 
-    bindEventHandlers() {
+    componentDidMount() {
+        this.loadData(this.props.match.params.id);
+    }
 
+    componentWillReceiveProps(nextProps) {
+        this.loadData(nextProps.match.params.id);
     }
 
     render() {
@@ -64,15 +69,20 @@ class Profile extends React.Component {
                         <p>{this.state.about}</p>
                     </div>
                     <div className="col-12">
-                        <p className="count">Post count: <span>{this.state.postsCount}</span></p>
-                        <p className="count">Comment count: <span>{this.state.commentsCount}</span></p>
+                        <span className="count">Post count: {this.state.postsCount}</span>
+                        <span className="count">Comment count: {this.state.commentsCount}</span>
                     </div>
                 </div>
-                <EditProfile />
             </div>
 
         );
     }
+
 };
 
-export default Profile;
+SingleUser.propTypes = {
+    match: PropTypes.object,
+
+};
+
+export default SingleUser;

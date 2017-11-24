@@ -34,6 +34,7 @@ class EditProfile extends React.Component {
 
             this.setState({
                 name: profile.name,
+                email: profile.email,
                 avatarUrl: profile.avatarUrl,
                 about: profile.about,
                 aboutShort: profile.aboutShort
@@ -121,7 +122,7 @@ class EditProfile extends React.Component {
                         <div className="modal-body">
                             Name: <input className="col-12" type="text" name="name" onChange={this.handleChange} value={this.state.name} /><br />
                             <div className="nameError text-danger"></div>
-                            Email: <input className="col-12" type="email" name="email" onChange={this.handleChange} value={event.target.value} /><br />
+                            Email: <input className="col-12" type="email" name="email" onChange={this.handleChange} value={this.state.email} /><br />
                             <div className="emailError text-danger"></div>
                             Short about: <textarea rows="2" cols="40" className="col-12" type="text" name="aboutShort" onChange={this.handleChange} value={this.state.aboutShort} /><br />
                             <div className="shortError text-danger"></div>

@@ -37,7 +37,7 @@ class RegisterPage extends React.Component {
     handleRegister(event) {
         event.preventDefault();
         let data = {
-            username: this.state.username,
+            username: this.state.email,
             password: this.state.password,
             repeat: this.state.repeat,
             email: this.state.email,
