@@ -104,8 +104,8 @@ class EditProfile extends React.Component {
     render() {
         return (
             <div>
-                <button type="button" className="btn btn-outline-secondary editProfile" onClick={this.activateModal}>
-                    Edit Profile
+                <button type="button" className="editProfile" onClick={this.activateModal}>
+                <img src="https://image.flaticon.com/icons/png/128/149/149307.png" width="50px"/>
                 </button>
 
                 <Modal
@@ -132,7 +132,7 @@ class EditProfile extends React.Component {
                             <div className="fieldsError text-danger"></div>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-default" onClick={this.closeModal}>Close</button>
+                            <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Close</button>
                             <button type="button" className="btn btn-primary" onClick={this.saveChanges}>Save changes</button>
                         </div>
                     </div>
