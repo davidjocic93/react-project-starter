@@ -64,8 +64,8 @@ class Profile extends React.Component {
                         <p>{this.state.about}</p>
                     </div>
                     <div className="col-12">
-                        <span className="count">Post count: {this.state.postsCount}</span>
-                        <span className="count">Comment count: {this.state.commentsCount}</span>
+                        <p className="count">Post count: <span>{this.state.postsCount}</span></p>
+                        <p className="count">Comment count: <span>{this.state.commentsCount}</span></p>
                     </div>
                 </div>
                 <EditProfile />
