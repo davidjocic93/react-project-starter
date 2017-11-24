@@ -28,11 +28,9 @@ class DataService {
             });
     }
 
-    getUserProfile(id, userProfileHandler) {
-        communicationService.getRequest(`/api/users/${id}`,
+    getUserProfile(id, profileHandler) {
+        communicationService.getRequest(`/api/users/${id}` ,
             (serverResponseData) => {
-                console.table(serverResponseData.data);
-
                 console.table(serverResponseData.data);
 
                 const name = serverResponseData.data.name;
@@ -43,10 +41,10 @@ class DataService {
                 const about = serverResponseData.data.about;
                 const aboutShort = serverResponseData.data.aboutShort;
 
-                const userProfile = new ProfileDTO(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort);
+                const profile = new ProfileDTO(name, email, avatarUrl, postsCount, commentsCount, about, aboutShort);
 
 
-                userProfileHandler(userProfile);
+                profileHandler(profile);
 
             }, (serverErrorObject) => {
                 console.log(serverErrorObject);
@@ -71,13 +69,13 @@ class DataService {
                 console.table(serverResponseData.data);
 
                 serverResponseData.data.forEach(element => {
-                    const name = element.name;
-                    const lastPostDate = element.lastPostDate;
-                    const avatarUrl = element.avatarUrl;
-                    const aboutShort = element.aboutShort;
                     const id = element.id;
+                    const name = element.name;
+                    const aboutShort = element.aboutShort;
+                    const avatarUrl = element.avatarUrl;
+                    const lastPostDate = element.lastPostDate;
 
-                    const user = new UserDTO(name, avatarUrl, aboutShort, lastPostDate, id);
+                    const user = new UserDTO(id, name, aboutShort, avatarUrl, lastPostDate);
 
                     users.push(user);
                 });

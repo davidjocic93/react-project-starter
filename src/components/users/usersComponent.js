@@ -4,17 +4,28 @@ import { dataService } from "../../service/dataService";
 import PropTypes from "prop-types";
 
 const UsersComponent = (props) => {
-    const { name, id, aboutShort, lastPostData, avatarUrl } = props.user;
+    const { id, name, aboutShort, lastPostDate, avatarUrl } = props.user;
     // console.log(props.user);
 
+    const date = new Date(lastPostDate);
+    const dateString = date.toLocaleTimeString();
+    console.log(dateString);
 
     return (
-        <div className="userContainer row">
-            <p className="col-12">{name}</p>
-            <p className="col-12">{id}</p>
-            <p className="col-12">{aboutShort}</p>
-            <p className="col-12">{lastPostData}</p>
-            {/* <img className="col-12" src={avatarUrl}/> */}
+        <div className="userContainer">
+            <div className="row">
+                <div className="col-4 userImage">
+                    <img style={{width: "30%", borderRadius: "50%"}} src={avatarUrl} />
+                </div>
+                <div className="col-4 name">
+                    <h3>{name}</h3>
+                    <p>{aboutShort}</p>
+                </div>
+                <div className="col-4 time">
+                    <p>Last post at: <br/> {dateString}</p>
+                </div>
+
+            </div>
         </div>
     );
 
@@ -22,7 +33,7 @@ const UsersComponent = (props) => {
 
 UsersComponent.propTypes = {
     user: PropTypes.object,
-   
+
 };
 
 export default UsersComponent;

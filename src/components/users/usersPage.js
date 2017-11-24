@@ -2,7 +2,7 @@ import React from "react";
 import { authenticationService } from "../../service/authenticationService";
 import { dataService } from "../../service/dataService";
 import UsersComponent from "./usersComponent";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class UsersPage extends React.Component {
     constructor(props) {
@@ -31,10 +31,15 @@ class UsersPage extends React.Component {
         const users = this.state.users;
 
         return (
-            <div>
-                {users.map((user) => {
-                    return <Link to={`/people/${user.id}`} key={user.id}> <UsersComponent user={user} key={user.id} /> </Link>;
-                })}
+            <div className="container">
+                <div className="row userList">
+                    {/* <Search /> */}
+                    <div className="col-12">
+                        {users.map((user) => {
+                            return <Link to={`/people/${user.id}`} key={user.id}> <UsersComponent user={user} key={user.id} /> </Link>;
+                        })}
+                    </div>
+                </div>
             </div>
         );
     }

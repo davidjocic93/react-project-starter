@@ -1,30 +1,30 @@
 class UserDTO {
-    constructor(name, avatarUrl, lastPostDate, aboutShort, id ) {
+    constructor(id, name, aboutShort, avatarUrl, lastPostDate) {
+        this._id = id;
         this._name = name;
         this._aboutShort = aboutShort;
-        this._lastPostDate = lastPostDate;
         this._avatarUrl = avatarUrl;
-        this._id = id;
+        this._lastPostDate = lastPostDate;
     }
 
-    get name(){
+    get id() {
+        return this._id;
+    }
+    get name() {
         return this._name;
     }
 
-    get aboutShort(){
+    get aboutShort() {
         return this._aboutShort;
     }
 
-    get lastPostDate(){
-        return this._lastPostDate;
-    }
-    
-    get avatarUrl(){
+    get avatarUrl() {
         return this._avatarUrl;
     }
 
-    get id(){
-        return this._id;
+
+    get lastPostDate() {
+        return this._lastPostDate;
     }
 
 

@@ -2,6 +2,7 @@ import React from "react";
 import { authenticationService } from "../../service/authenticationService";
 import { dataService } from "../../service/dataService";
 import EditProfile from "./editprofile";
+import ProfileComponent from "./profileComponent";
 
 class Profile extends React.Component {
     constructor(props) {
@@ -47,30 +48,10 @@ class Profile extends React.Component {
 
     render() {
         return (
-            <div className="container profile">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="avatarContainer">
-                            <img className="avatarPicture" src={this.state.avatarUrl} />
-                        </div>
-                    </div>
-                    <div className="col-12">
-                        <h1>{this.state.name}</h1>
-                        <h5>Email: {this.state.email}</h5> <br />
-                    </div>
-                    <div className="col-12">
-                        <h3>About</h3>
-                        <p>{this.state.aboutShort}</p>
-                        <p>{this.state.about}</p>
-                    </div>
-                    <div className="col-12">
-                        <p className="count">Post count: <span>{this.state.postsCount}</span></p>
-                        <p className="count">Comment count: <span>{this.state.commentsCount}</span></p>
-                    </div>
-                </div>
+            <div>
+                <ProfileComponent  profile={this.state} />
                 <EditProfile />
             </div>
-
         );
     }
 };

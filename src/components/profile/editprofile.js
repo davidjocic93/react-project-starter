@@ -92,7 +92,7 @@ class EditProfile extends React.Component {
             $(".fieldsError").text("");
         } else if (!data.avatarUrl.includes("https://")) {
             $(".avatarError").text("Please provide proper link for avatar!");
-            $(".fieldsError").text("");            
+            $(".fieldsError").text("");
         } else {
             dataService.updateProfile(data, (serverErrorObject) => {
                 this.closeModal();
@@ -106,7 +106,7 @@ class EditProfile extends React.Component {
         return (
             <div>
                 <button type="button" className="editProfile" onClick={this.activateModal}>
-                <img src="https://image.flaticon.com/icons/png/128/149/149307.png" width="50px"/>
+                    <img src="https://image.flaticon.com/icons/png/128/149/149307.png" width="50px" />
                 </button>
 
                 <Modal

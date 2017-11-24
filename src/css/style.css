@@ -140,14 +140,33 @@ input:hover {
     background-color: #da5760;
 }
 
+
+#logo {
+    font-size: 1.7em;
+}
+
+
+
+/*USER LIST*/
+
+.userList {
+    margin-right: 0;
+    margin-left: 0;
+}
+
 .userContainer {
+    text-align: center;
     display: inline-block;
-    width: 90%;
+    width: 100%;
     padding: 10px;
     text-align: center;
     margin: 20px auto;
     background-color: #78C2AD;
     color: black;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 5px 5px 10px rgb(170, 170, 170);
+
 }
 
 .userContainer img {
@@ -156,9 +175,15 @@ input:hover {
     float: left;
 }
 
-#logo {
-    font-size: 1.7em;
+.name {
+    margin-top: 15px;
+    text-align: left;
 }
 
+.time p {
+    margin-top: 15px;
+}
 
-
+.userImage {
+    text-align: center;
+}
