@@ -10,31 +10,12 @@ class NewsFeed extends React.Component {
         super(props);
 
         this.state = {
-            // dateCreated: "",
-            // id: "",
-            // text: "",
-            // type: "",
-            // userDisplayName: "",
-            // userId: ""
             posts: []
         };
 
         this.bindEventHandlers();
     }
 
-    // componentDidMount() {
-    //     dataService.getPosts((posts) => {
-    //         console.table(posts);
-    //         this.setState ({
-    //             dateCreated: posts.dateCreated,
-    //             id: posts.id,
-    //             text: posts.text,
-    //             type: posts.type,
-    //             userDisplayName: posts.userDisplayName,
-    //             userId: posts.userId
-    //         });
-    //     });
-    // }
 
     componentDidMount() {
         dataService.getPosts((posts) => {
@@ -49,11 +30,7 @@ class NewsFeed extends React.Component {
 
     }
 
-    // render() {
-    //     return (
 
-    //     );
-    // }
 
     render() {
 

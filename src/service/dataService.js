@@ -90,8 +90,16 @@ class DataService {
             });
     }
 
-    newTextPost (textPostData) {
-        communicationService.postRequest ("/api/TextPosts", textPostData, (serverResponseData) => {
+    // newTextPost (textPostData) {
+    //     communicationService.postRequest ("/api/TextPosts", textPostData, (serverResponseData) => {
+    //         console.log(serverResponseData);
+    //     }, (serverErrorObject) => {
+    //         console.log(serverErrorObject);
+    //     });
+    // }
+
+    newPost (type, postData) {
+        communicationService.postRequest (`/api/${type}Posts`, postData, (serverResponseData) => {
             console.log(serverResponseData);
         }, (serverErrorObject) => {
             console.log(serverErrorObject);
@@ -102,6 +110,7 @@ class DataService {
         let posts = [];
         communicationService.getRequest("/api/Posts",
             (serverResponseData) => {
+                console.log(serverResponseData);
 
                 serverResponseData.data.forEach(element => {
                     const dateCreated = element.dateCreated;
