@@ -1,6 +1,7 @@
 import { communicationService } from "./communicationService";
 import ProfileDTO from "../dto/profileDTO";
 import UserDTO from "../dto/userDTO";
+import PostDTO from "../dto/postDTO";
 
 class DataService {
     constructor() { }
@@ -30,7 +31,7 @@ class DataService {
     }
 
     getUserProfile(id, profileHandler) {
-        communicationService.getRequest(`/api/users/${id}` ,
+        communicationService.getRequest(`/api/users/${id}`,
             (serverResponseData) => {
                 console.table(serverResponseData.data);
 
@@ -83,6 +84,39 @@ class DataService {
                 });
 
                 peopleHandler(users);
+
+            }, (serverErrorObject) => {
+                console.log(serverErrorObject);
+            });
+    }
+
+    newTextPost (textPostData) {
+        communicationService.postRequest ("/api/TextPosts", textPostData, (serverResponseData) => {
+            console.log(serverResponseData);
+        }, (serverErrorObject) => {
+            console.log(serverErrorObject);
+        });
+    }
+
+    getPosts(postsHandler) {
+        let posts = [];
+        communicationService.getRequest("/api/Posts",
+            (serverResponseData) => {
+
+                serverResponseData.data.forEach(element => {
+                    const dateCreated = element.dateCreated;
+                    const id = element.id;
+                    const text = element.text;
+                    const type = element.type;
+                    const userDisplayName = element.userDisplayName;
+                    const userId = element.userId;
+
+                    const post = new PostDTO(dateCreated, id, text, type, userDisplayName, userId);
+
+                    posts.push(post);
+                });
+
+                postsHandler(posts);
 
             }, (serverErrorObject) => {
                 console.log(serverErrorObject);
