@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-modal";
 import { dataService } from "../../service/dataService";
+import { validationService } from "../../service/validationService";
 import { redirectionService } from "../../service/redirectionService";
 
 
@@ -80,26 +81,7 @@ class EditProfile extends React.Component {
             name: this.state.name
         };
         console.log(data);
-        if (data.about == "" || data.aboutShort == "" || data.email == "" || data.name == "" || data.avatarUrl == "") {
-            $(".fieldsError").text("Please fill all fields");
-            $(".nameError").text("");
-            $(".emailError").text("");
-            $(".shortError").text("");
-            $(".aboutError").text("");
-            $(".avatarError").text("");
-        } else if (!data.email.includes("@") || !data.email.includes(".com")) {
-            $(".emailError").text("Please provide proper email!");
-            $(".fieldsError").text("");
-        } else if (!data.avatarUrl.includes("https://")) {
-            $(".avatarError").text("Please provide proper link for avatar!");
-            $(".fieldsError").text("");
-        } else {
-            dataService.updateProfile(data, (serverErrorObject) => {
-                this.closeModal();
-                alert("Something went wrong!");
-            });
-            this.closeModal();
-        }
+        validationService.validateEditProfile(data);
     }
 
     render() {
