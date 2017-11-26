@@ -17,7 +17,7 @@ const UsersComponent = (props) => {
             <div className="userContainer">
                 <div className="row">
                     <div className="col-4 userImage">
-                        <img style={{ width: "30%", borderRadius: "50%" }} src="https://via.placeholder.com/200x200" />
+                        <img style={{borderRadius: "50%" }} src="https://via.placeholder.com/200x200" />
                     </div>
                     <div className="col-4 name">
                         <h3>{name}</h3>
@@ -36,7 +36,7 @@ const UsersComponent = (props) => {
         <div className="userContainer">
             <div className="row">
                 <div className="col-4 userImage">
-                    <img style={{ width: "30%", borderRadius: "50%" }} src={avatarUrl} />
+                    <img style={{borderRadius: "50%" }} src={avatarUrl} />
                 </div>
                 <div className="col-4 name">
                     <h3>{name}</h3>
