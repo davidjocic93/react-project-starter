@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {authenticationService} from "../../service/authenticationService";
 import Welcome from "./welcome";
-
+import {authenticationService} from "../../service/authenticationService";
+import {validationService} from "../../service/validationService";
 
 
 
@@ -45,35 +45,7 @@ class RegisterPage extends React.Component {
         };
         console.log(data);
         // this.props.onRegister(data);
-        if (data.username == "" || data.password == "" || data.email == "" || data.name == "" || data.repeat == "") {
-            $(".fillFormsError").text("Please fill all fields");
-            $(".emailError").text("");
-            $(".passwordLengthError").text("");
-            $(".passwordsError").text("");
-        } else if (!data.email.includes("@") || !data.email.includes(".com")) {
-            $(".emailError").text("Please provide proper email!");
-            $(".fillFormsError").text("");
-        } else if (data.password.length < 6) {
-            $(".passwordsError").text("");
-            $(".passwordLengthError").text("Password must be at least 6 characters long!");
-            $(".emailError").text("");
-            $(".fillFormsError").text("");
-        } else if (data.password != data.repeat) {
-            $(".passwordLengthError").text("");
-            $(".passwordsError").text("Passwords do not match");
-            $(".emailError").text("");
-            $(".fillFormsError").text("");            
-        } else {
-            authenticationService.register(data, (serverErrorObject) => {
-                $(".passwordsError").text("");
-                $(".fillFormsError").text("Server error. Contact your network administrator");
-                if (serverErrorObject.response.status == 400) {
-                    $(".fillFormsError").text("");
-                    $(".usernameError").text(`${serverErrorObject.response.data.error.message}`);
-                    console.log(serverErrorObject.response.data.error.message);
-                }
-            });
-        }
+        validationService.validateRegistration(data);
 
     }
 

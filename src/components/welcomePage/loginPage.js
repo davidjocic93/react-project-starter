@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import registerPage from "./registerPage";
 import {authenticationService} from "../../service/authenticationService";
 import Welcome from "./welcome";
+import {validationService} from "../../service/validationService";
 
 
 
@@ -39,18 +40,7 @@ class LoginPage extends React.Component {
         };
         console.log(data);
         // this.props.onLogin(data);
-        if (data.username == "" || data.password == "") {
-            $(".loginError").text("Please fill all fields");
-        } else {
-            authenticationService.login(data, (serverErrorObject) => {
-                console.log(serverErrorObject);
-                $(".loginError").text("Server error. Contact your network administrator");
-                if (serverErrorObject.response.status == 400) {
-                    $(".loginError").text(`${serverErrorObject.response.data.error.message}`);
-                    console.log(serverErrorObject.response);
-                }
-            });
-        }
+        validationService.validateLogin(data);
     }
 
 
