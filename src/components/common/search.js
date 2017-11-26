@@ -27,7 +27,7 @@ class Search extends React.Component {
     render() {
         return (
             <div>
-                Search <input type="text" onChange={this.handleChange} value={this.state.searchTerm} />
+                <img src="http://icons.iconarchive.com/icons/icons8/windows-8/512/Very-Basic-Search-icon.png"/><input type="text" onChange={this.handleChange} value={this.state.searchTerm} />
             </div>
         );
     }

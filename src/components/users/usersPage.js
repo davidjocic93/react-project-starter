@@ -56,10 +56,10 @@ class UsersPage extends React.Component {
         return (
             <div className="container">
                 <div className="row userList">
-                    <div className="col-12 search">
+                    <div className="col-12 col-md-10 offset-md-1 search">
                         <Search searchPeople={this.filterPeople} />
                     </div>
-                    <div className="col-12">
+                    <div className="col-md-10 offset-md-1 col-12">
                         {users.map((user) => {
                             return <Link to={`/people/${user.id}`} key={user.id}> <UsersComponent user={user} key={user.id} /> </Link>;
                         })}

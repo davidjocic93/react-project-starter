@@ -16,7 +16,7 @@ const ProfileComponent = (props) => {
                     <h1>{name}</h1>
                     <h5>Email: {email}</h5> <br />
                 </div>
-                <div className="col-12">
+                <div className="col-md-8 offset-md-2 col-12">
                     <h3>About</h3>
                     <p>{aboutShort}</p>
                     <p>{about}</p>

@@ -1,0 +1,69 @@
+.userList {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+.userContainer {
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    padding: 10px;
+    text-align: center;
+    margin: 20px auto;
+    background-color: #78C2AD;
+    color: black;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 1px 1px 4px rgb(146, 146, 146);
+
+}
+
+.userContainer img {
+    margin: 0 auto;
+    width: 100px;
+    float: left;
+}
+
+.name {
+    margin-top: 15px;
+    text-align: left;
+}
+
+.time p {
+    margin-top: 15px;
+}
+
+.userImage {
+    text-align: center;
+}
+
+/*SEARCH*/
+
+.search {
+    margin-top: 30px;
+    height: 80px;
+    border-radius: 5px;
+    color: rgb(48, 48, 48);
+    font-size: 1.2em;
+    text-align: center;
+}
+
+.search img {
+    width: 35px;
+    margin-right: 10px;
+    filter: invert(20%);
+}
+
+.search input {
+    width: 60%;
+    margin-top: 22px;
+    border: none;
+    padding: 5px;
+    background-color: transparent;
+    border-bottom: 2px solid #1c81a0;
+    color: rgb(51, 51, 51);
+}
+
+.search input:focus {
+    box-shadow: none;
+}
