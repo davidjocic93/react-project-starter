@@ -5,12 +5,13 @@ import {dataService} from "./dataService";
 class ValidationService {
 
     validateRegistration (data) {
+        let reg = /\S+@\S+\.\S+/;
         if (data.username == "" || data.password == "" || data.email == "" || data.name == "" || data.repeat == "") {
             $(".fillFormsError").text("Please fill all fields");
             $(".emailError").text("");
             $(".passwordLengthError").text("");
             $(".passwordsError").text("");
-        } else if (!data.email.includes("@") || !data.email.includes(".com")) {
+        } else if (!reg.test(data.email)) {
             $(".emailError").text("Please provide proper email!");
             $(".fillFormsError").text("");
         } else if (data.password.length < 6) {
@@ -52,6 +53,7 @@ class ValidationService {
     }
 
     validateEditProfile (data) {
+        let reg = /\S+@\S+\.\S+/;        
         if (data.about == "" || data.aboutShort == "" || data.email == "" || data.name == "" || data.avatarUrl == "") {
             $(".fieldsError").text("Please fill all fields");
             $(".nameError").text("");
@@ -59,7 +61,7 @@ class ValidationService {
             $(".shortError").text("");
             $(".aboutError").text("");
             $(".avatarError").text("");
-        } else if (!data.email.includes("@") || !data.email.includes(".com")) {
+        } else if (!reg.test(data.email)) {
             $(".emailError").text("Please provide proper email!");
             $(".fieldsError").text("");
         } else if (!data.avatarUrl.includes("https://")) {
