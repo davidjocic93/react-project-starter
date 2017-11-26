@@ -19,7 +19,7 @@ class Search extends React.Component {
             searchTerm: searchString
         });
 
-        this.props.searchPeople(searchString);
+        this.props.search(searchString);
     }
 
 
@@ -34,7 +34,7 @@ class Search extends React.Component {
 }
 
 Search.propTypes = {
-    searchPeople: PropTypes.function
+    search: PropTypes.function
 };
 
 export default Search;

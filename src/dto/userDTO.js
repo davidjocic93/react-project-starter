@@ -22,7 +22,6 @@ class UserDTO {
         return this._avatarUrl;
     }
 
-
     get lastPostDate() {
         return this._lastPostDate;
     }

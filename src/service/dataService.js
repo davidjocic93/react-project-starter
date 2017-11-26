@@ -80,6 +80,8 @@ class DataService {
 
                     const user = new UserDTO(id, name, aboutShort, avatarUrl, lastPostDate);
 
+                    // serverResponseData.data.map((data) => {
+                    //     const user = new UserDTO(data);
                     users.push(user);
                 });
 
@@ -130,7 +132,7 @@ class DataService {
         communicationService.getRequest(`/api/${url}`,
             (serverResponseData) => {
                 singlePostHandler(serverResponseData);
-            }, 
+            },
             (serverErrorObject) => {
                 console.log(serverErrorObject);
             });

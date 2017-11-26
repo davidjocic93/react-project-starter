@@ -25,7 +25,7 @@ class UsersPage extends React.Component {
             });
         });
 
-        // console.log(this.state.users);
+        console.log(this.state.users);
 
     }
 
@@ -52,12 +52,13 @@ class UsersPage extends React.Component {
     render() {
 
         const users = this.state.users;
+        console.log(users);
 
         return (
             <div className="container">
                 <div className="row userList">
                     <div className="col-12 search">
-                        <Search searchPeople={this.filterPeople} />
+                        <Search search={this.filterPeople} />
                     </div>
                     <div className="col-12">
                         {users.map((user) => {
