@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import PostsComponent from "./postsComponent";
 import NewPost from "./newPostComponent";
 
-class NewsFeed extends React.Component {
+class NewsFeedPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -40,7 +40,7 @@ class NewsFeed extends React.Component {
         return (
             <div>
                 {posts.map((post) => {
-                    return <Link to={`/${post.id}`} key={post.id}> <PostsComponent post={post} key={post.id} /> </Link>;
+                    return <PostsComponent post={post} key={post.id} />;
                 })}
                 <NewPost />
             </div>
@@ -48,4 +48,4 @@ class NewsFeed extends React.Component {
     }
 };
 
-export default NewsFeed;
+export default NewsFeedPage;

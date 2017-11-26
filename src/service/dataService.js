@@ -90,16 +90,10 @@ class DataService {
             });
     }
 
-    // newTextPost (textPostData) {
-    //     communicationService.postRequest ("/api/TextPosts", textPostData, (serverResponseData) => {
-    //         console.log(serverResponseData);
-    //     }, (serverErrorObject) => {
-    //         console.log(serverErrorObject);
-    //     });
-    // }
 
-    newPost (type, postData) {
-        communicationService.postRequest (`/api/${type}Posts`, postData, (serverResponseData) => {
+
+    newPost(type, postData) {
+        communicationService.postRequest(`/api/${type}Posts`, postData, (serverResponseData) => {
             console.log(serverResponseData);
         }, (serverErrorObject) => {
             console.log(serverErrorObject);
@@ -131,6 +125,16 @@ class DataService {
                 console.log(serverErrorObject);
             });
     }
+
+    getSinglePost(url, singlePostHandler) {
+        communicationService.getRequest(`/api/${url}`,
+            (serverResponseData) => {
+                singlePostHandler(serverResponseData);
+            }, 
+            (serverErrorObject) => {
+                console.log(serverErrorObject);
+            });
+    };
 
 }
 
