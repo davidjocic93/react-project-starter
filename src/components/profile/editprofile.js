@@ -3,6 +3,8 @@ import Modal from "react-modal";
 import { dataService } from "../../service/dataService";
 import { validationService } from "../../service/validationService";
 import { redirectionService } from "../../service/redirectionService";
+import PropTypes from "prop-types";
+
 
 
 
@@ -16,7 +18,13 @@ class EditProfile extends React.Component {
             aboutShort: "",
             avatarUrl: "",
             email: "",
-            name: ""
+            name: "",
+            errors: {
+                name: "",
+                email: "",
+                allFieldsError: "",
+                link: ""
+            }
         };
 
         this.bindEventHandlers();
@@ -28,6 +36,7 @@ class EditProfile extends React.Component {
         this.closeModal = this.closeModal.bind(this);
         this.saveChanges = this.saveChanges.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        // this.saveChangesHandler = this.saveChangesHandler.bind(this);
     }
 
     componentDidMount() {
@@ -80,9 +89,26 @@ class EditProfile extends React.Component {
             email: this.state.email,
             name: this.state.name
         };
-        console.log(data);
-        validationService.validateEditProfile(data);
+        // console.log(data);
+        validationService.isEditFormValid(data, (data) => {
+            this.makeRequest(data);            
+        }, (errors) => {
+            this.setState({
+                errors: errors
+            });
+        });
     }
+
+    makeRequest(data) {
+        dataService.updateProfile(data, (serverResponseData) => {
+            console.log("Sucess: ", serverResponseData);
+            this.closeModal();
+            this.props.reloadProfile();
+        }, (serverErrorObject) => {
+            console.log("Error: ", serverErrorObject);
+        });
+    }
+
 
     render() {
         return (
@@ -103,16 +129,14 @@ class EditProfile extends React.Component {
                         </div>
                         <div className="modal-body">
                             Name: <input className="col-12" type="text" name="name" onChange={this.handleChange} value={this.state.name} /><br />
-                            <div className="nameError text-danger"></div>
+                            <div className="nameError text-danger">{this.state.errors.name}</div>
                             Email: <input className="col-12" type="email" name="email" onChange={this.handleChange} value={this.state.email} /><br />
-                            <div className="emailError text-danger"></div>
+                            <div className="emailError text-danger">{this.state.errors.email}</div>
                             Short about: <textarea rows="2" cols="40" className="col-12" type="text" name="aboutShort" onChange={this.handleChange} value={this.state.aboutShort} /><br />
-                            <div className="shortError text-danger"></div>
                             About: <textarea rows="4" cols="40" className="col-12" type="text" name="about" onChange={this.handleChange} value={this.state.about} /><br />
-                            <div className="aboutError text-danger"></div>
                             AvatarURL: <textarea rows="2" cols="40" className="col-12" type="text" name="avatarUrl" onChange={this.handleChange} value={this.state.avatarUrl} /><br />
-                            <div className="avatarError text-danger"></div>
-                            <div className="fieldsError text-danger"></div>
+                            <div className="avatarError text-danger">{this.state.errors.link}</div>
+                            <div className="fieldsError text-danger">{this.state.errors.allFieldsError}</div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Close</button>
@@ -125,6 +149,10 @@ class EditProfile extends React.Component {
 
     };
 }
+
+EditProfile.propTypes = {
+    reloadProfile: PropTypes.function,
+};
 
 
 export default EditProfile;

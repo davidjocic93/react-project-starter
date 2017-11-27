@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import registerPage from "./registerPage";
-import {authenticationService} from "../../service/authenticationService";
-import {validationService} from "../../service/validationService";
+import { authenticationService } from "../../service/authenticationService";
+import { validationService } from "../../service/validationService";
+import { dataService } from "../../service/dataService";
 import Welcome from "./welcome";
 
 
@@ -14,7 +15,9 @@ class LoginPage extends React.Component {
 
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            errors: {
+                allFieldsError: ""            }
         };
 
         this.bindEventHandlers();
@@ -28,7 +31,11 @@ class LoginPage extends React.Component {
     handleChange(event) {
         const value = event.target.value;
         const name = event.target.name;
-        this.setState({ [name]: value });
+        this.setState({
+            [name]: value
+        });
+
+
         console.log(event.target.value);
     }
 
@@ -40,7 +47,32 @@ class LoginPage extends React.Component {
         };
         console.log(data);
         // this.props.onLogin(data);
-        validationService.validateLogin(data);
+        // if (validationService.isLoginFormValid(data)) {
+        //     authenticationService.login(data, (serverErrorObject) => {
+        //         console.log(serverErrorObject);
+        //     });
+        // } ;
+
+        validationService.isLoginFormValid(data, (data) => {
+            authenticationService.login(data, (serverErrorObject) => {
+                console.table(serverErrorObject);
+                if (serverErrorObject.response== undefined) {
+                    alert("SERVER UNREACHABLE!");
+                } else if (this.state.username != "" && this.state.password != "") {
+                    this.setState({
+                        errors: {
+                            allFieldsError: serverErrorObject.response.data.error.message
+                        }
+                    });
+                }
+            });
+        }, (error) => {
+            this.setState({
+                errors: {
+                    allFieldsError: error
+                }
+            });
+        });
     }
 
 
@@ -65,10 +97,9 @@ class LoginPage extends React.Component {
 
                         <form className="loginForm">
                             <input className="col-12" type="username" name="username" onChange={this.handleChange} placeholder="Username" /><br />
-                            <div className="emailError text-danger"></div>
                             <input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Password" /><br />
                             <button className="btn btn-primary" onClick={this.handleLogin} >Login</button>
-                            <div className="loginError text-danger"></div>
+                            <div className="text-danger">{this.state.errors.allFieldsError}</div>
                         </form>
 
                     </div>
