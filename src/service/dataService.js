@@ -114,18 +114,24 @@ class DataService {
             });
     }
 
-    newPost(postData, type) {
-        communicationService.postRequest(`api/${type}Posts`, postData,
+    newPost(type, postData) {
+        communicationService.postRequest(`/api/${type}Posts`, postData,
             (serverResponseData) => {
                 console.log(serverResponseData);
-            }, (errorHandler) => {
+            }, (serverErrorObject) => {
                 console.log(serverErrorObject);
             });
     }
 
-    // metoda() {
-    //     communicationService.postRequest("haskjdh/asdfads", postData,)
-    // }
+    getSinglePost (type, postId, successHandler) {
+        communicationService.getRequest(`/api/${type}Posts/${postId}`, (serverResponseData) => {
+            successHandler(serverResponseData);
+        }, (serverErrorObject) => {
+            console.log(serverErrorObject);
+        });
+    }
+
+
 
 }
 

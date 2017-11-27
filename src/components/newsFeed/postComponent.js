@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
 
 const PostComponent = (props) => {
     const { id, dateCreated, userId, userDisplayName, type, text } = props.post;
@@ -9,11 +11,8 @@ const PostComponent = (props) => {
 
     return (
         <div className="row postContainer">
-            <div className="col-12">
-                <h3>{userDisplayName}</h3>
-            </div>
             <div className="col-12 ">
-                <p>{text}</p>
+                <Link to={`/feed/${type.slice(0,1).toUpperCase()}${type.slice(1)}/${id}`}><h3>{text}</h3></Link>
             </div>
             <div className="col-6 ">
                 <p>{dateString}</p>

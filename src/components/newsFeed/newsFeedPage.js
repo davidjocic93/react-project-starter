@@ -1,6 +1,7 @@
 import React from "react";
 import { dataService } from "../../service/dataService";
 import PostComponent from "./postComponent";
+import NewPostComponent from "./newPostComponent";
 
 class NewsFeedPage extends React.Component {
     constructor(props){
@@ -9,15 +10,21 @@ class NewsFeedPage extends React.Component {
         this.state = {
             posts: []
         };
+
+        this.loadData = this.loadData.bind(this);
     }
 
-    componentDidMount() {
+    loadData() {
         dataService.getPosts((posts) => {
             console.table(posts);
             this.setState({
                 posts: posts
             });
         });   
+    }
+
+    componentDidMount() {
+        this.loadData();
     }
 
     render() {
@@ -29,6 +36,7 @@ class NewsFeedPage extends React.Component {
                 {posts.map(post => {
                     return <PostComponent post = {post} key={post.id} />;
                 })}
+                <NewPostComponent reloadFeed={this.loadData}/>
             </div>
         );
     }

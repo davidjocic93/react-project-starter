@@ -23,7 +23,6 @@ class PostDTO {
         return this._userDisplayName;
     }
 
-
     get type() {
         return this._type;
     }
