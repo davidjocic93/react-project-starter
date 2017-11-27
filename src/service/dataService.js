@@ -1,6 +1,7 @@
 import { communicationService } from "./communicationService";
 import ProfileDTO from "../dto/profileDTO";
 import UserDTO from "../dto/userDTO";
+import PostDTO from "../dto/postDTO";
 
 class DataService {
     constructor() { }
@@ -30,7 +31,7 @@ class DataService {
     }
 
     getUserProfile(id, profileHandler) {
-        communicationService.getRequest(`/api/users/${id}` ,
+        communicationService.getRequest(`/api/users/${id}`,
             (serverResponseData) => {
                 console.table(serverResponseData.data);
 
@@ -53,11 +54,9 @@ class DataService {
             });
     }
 
-    updateProfile(updateProfileData, errorHandler) {
+    updateProfile(updateProfileData, successHandler, errorHandler) {
         communicationService.putRequest("/api/Profiles", updateProfileData, (serverResponseData) => {
-            if (serverResponseData.status >= 200 && serverResponseData.status < 300) {
-                window.location.reload();
-            }
+            successHandler(serverResponseData);
         }, (serverErrorObject) => {
             console.log(serverErrorObject);
             errorHandler(serverErrorObject);
@@ -88,6 +87,45 @@ class DataService {
                 console.log(serverErrorObject);
             });
     }
+
+    getPosts(postsHandler) {
+        let posts = [];
+        communicationService.getRequest("/api/Posts",
+            (serverResponseData) => {
+                console.table(serverResponseData.data);
+
+                serverResponseData.data.forEach(element => {
+                    const id = element.id;
+                    const dateCreated = element.dateCreated;
+                    const userId = element.userId;
+                    const userDisplayName = element.userDisplayName;
+                    const type = element.type;
+                    const text = element.text;
+
+                    const post = new PostDTO(id, dateCreated, userId, userDisplayName, type, text);
+
+                    posts.push(post);
+                });
+
+                postsHandler(posts);
+
+            }, (serverErrorObject) => {
+                console.log(serverErrorObject);
+            });
+    }
+
+    newPost(postData, type) {
+        communicationService.postRequest(`api/${type}Posts`, postData,
+            (serverResponseData) => {
+                console.log(serverResponseData);
+            }, (errorHandler) => {
+                console.log(serverErrorObject);
+            });
+    }
+
+    // metoda() {
+    //     communicationService.postRequest("haskjdh/asdfads", postData,)
+    // }
 
 }
 

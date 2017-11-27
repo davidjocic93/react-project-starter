@@ -21,7 +21,6 @@ class CommunicationService {
     }
 
     getRequest(url, getDataHandler, errorHandler) {
-
         const requestUrl = `${BASE_URL}${url}`;
 
 

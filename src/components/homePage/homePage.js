@@ -6,6 +6,7 @@ import {Route, Switch} from "react-router-dom";
 import Profile from "../profile/profile";
 import UsersPage from "../users/usersPage";
 import SingleUserComponent from "../users/singleUserComponent";
+import NewsFeedPage from "../newsFeed/newsFeedPage";
 
 
 class HomePage extends React.Component {
@@ -18,7 +19,7 @@ class HomePage extends React.Component {
             <div>
                 <Header />
                 <Switch>
-                    {/* <Route exact path="/" component={NewsFeed}/> */}
+                    <Route exact path="/" component={NewsFeedPage}/>
                     <Route path="/profile" component={Profile}/>
                     <Route exact path="/people" component={UsersPage}/>
                     <Route path="/people/:id" component={SingleUserComponent}/>

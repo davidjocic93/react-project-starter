@@ -1,80 +1,158 @@
-import React from "react";
-import {authenticationService} from "./authenticationService";
-import {dataService} from "./dataService";
 
 class ValidationService {
 
-    validateRegistration (data) {
-        let reg = /\S+@\S+\.\S+/;
-        if (data.username == "" || data.password == "" || data.email == "" || data.name == "" || data.repeat == "") {
-            $(".fillFormsError").text("Please fill all fields");
-            $(".emailError").text("");
-            $(".passwordLengthError").text("");
-            $(".passwordsError").text("");
-        } else if (!reg.test(data.email)) {
-            $(".emailError").text("Please provide proper email!");
-            $(".fillFormsError").text("");
-        } else if (data.password.length < 6) {
-            $(".passwordsError").text("");
-            $(".passwordLengthError").text("Password must be at least 6 characters long!");
-            $(".emailError").text("");
-            $(".fillFormsError").text("");
-        } else if (data.password != data.repeat) {
-            $(".passwordLengthError").text("");
-            $(".passwordsError").text("Passwords do not match");
-            $(".emailError").text("");
-            $(".fillFormsError").text("");            
-        } else {
-            authenticationService.register(data, (serverErrorObject) => {
-                $(".passwordsError").text("");
-                $(".fillFormsError").text("Server error. Contact your network administrator");
-                if (serverErrorObject.response.status == 400) {
-                    $(".fillFormsError").text("");
-                    $(".usernameError").text(`${serverErrorObject.response.data.error.message}`);
-                    console.log(serverErrorObject.response.data.error.message);
-                }
-            });
+    isLoginFormValid(data, successCallback, failureCallback) {
+        if (!this.hasAllRequiredFields(data)) {
+            const error = "All fields must be filled out!";
+            failureCallback(error);
         }
+        successCallback(data);
     }
 
-    validateLogin (data) {
-        if (data.username == "" || data.password == "") {
-            $(".loginError").text("Please fill all fields");
-        } else {
-            authenticationService.login(data, (serverErrorObject) => {
-                console.log(serverErrorObject);
-                $(".loginError").text("Server error. Contact your network administrator");
-                if (serverErrorObject.response.status == 400) {
-                    $(".loginError").text(`${serverErrorObject.response.data.error.message}`);
-                    console.log(serverErrorObject.response);
-                }
-            });
+
+    isRegisterFormValid(data, successCallback, failureCallback) {
+
+        const errors = {};
+
+        if (!this.hasAllRequiredFields(data)) {
+            const error = "All fields must be filled out!";
+            errors.allFieldsError = error;
+            failureCallback(errors);
+            return false;
         }
+
+        if (!this.isNameValid(data)) {
+            const error = "Name must contain first and last name!";
+            errors.name = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        if (!this.isUsernameValid(data)) {
+            const error = "Username must be longer than 3 characters!";
+            errors.username = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        if (!this.isEmailValid(data)) {
+            const error = "Email is not in valid format!";
+            errors.email = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        if (!this.isPasswordValid(data)) {
+            const error = "Password must be longer than 6 characters!";
+            errors.password = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        if (!this.isPasswordConfirm(data)) {
+            const error = "Passwords must match!";
+            errors.repeat = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        successCallback(data);
+
     }
 
-    validateEditProfile (data) {
-        let reg = /\S+@\S+\.\S+/;        
-        if (data.about == "" || data.aboutShort == "" || data.email == "" || data.name == "" || data.avatarUrl == "") {
-            $(".fieldsError").text("Please fill all fields");
-            $(".nameError").text("");
-            $(".emailError").text("");
-            $(".shortError").text("");
-            $(".aboutError").text("");
-            $(".avatarError").text("");
-        } else if (!reg.test(data.email)) {
-            $(".emailError").text("Please provide proper email!");
-            $(".fieldsError").text("");
-        } else if (!data.avatarUrl.includes("https://")) {
-            $(".avatarError").text("Please provide proper link for avatar!");
-            $(".fieldsError").text("");
-        } else {
-            dataService.updateProfile(data, (serverErrorObject) => {
-                this.closeModal();
-                alert("Something went wrong!");
-            });
-            this.closeModal();
+    isEditFormValid(data, successCallback, failureCallback) {
+
+        const errors = {};
+
+        if (!this.hasAllRequiredFields(data)) {
+            const error = "All fields must be filled out!";
+            errors.allFieldsError = error;
+            failureCallback(errors);
+            return false;
         }
+
+        if (!this.isNameValid(data)) {
+            const error = "Name must contain first and last name!";
+            errors.name = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        if (!this.isEmailValid(data)) {
+            const error = "Email is not in valid format!";
+            errors.email = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        if (!this.isLinkValid(data)) {
+            const error = "Link is not in valid format!";
+            errors.link = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        successCallback(data);
+
     }
+
+    hasAllRequiredFields(data) {
+        for (let key in data) {
+            if (data[key] === "") {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    isPasswordValid(data) {
+        if (data.password.length < 6) {
+            console.log("Pass error!");
+            return false;
+        }
+        return true;
+    }
+
+    isPasswordConfirm(data) {
+        if (data.password != data.repeat) {
+            console.log("Passwords must match");
+            return false;
+        }
+        return true;
+    }
+
+    isUsernameValid(data) {
+        if (data.username.length < 3) {
+            console.log("Username error!");
+            return false;
+        }
+        return true;
+    }
+    isNameValid(data) {
+        const res = data.name.split(" ");
+        for (const key in res) {
+            if (res.length < 2 || res[key].length < 2) {
+                console.log("Name error!");
+                return false;
+            }
+        }
+        return true;
+    }
+    isEmailValid(data) {
+        const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        const isOK = re.test(data.email);
+        return isOK;
+    }
+
+    isLinkValid(data) {
+        const re = /^(ftp|http|https):\/\/[^ "]+$/;
+        const isOK = re.test(data.avatarUrl);
+        return isOK;
+    }
+
 }
 
+
+
 export const validationService = new ValidationService();
+

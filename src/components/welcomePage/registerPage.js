@@ -16,7 +16,15 @@ class RegisterPage extends React.Component {
             password: "",
             repeat: "",
             email: "",
-            name: ""
+            name: "",
+            errors: {
+                name: "",
+                username: "",
+                password: "",
+                repeat: "",
+                email: "",
+                allFieldsError: ""
+            }
         };
 
         this.bindEventHandlers();
@@ -45,37 +53,23 @@ class RegisterPage extends React.Component {
             email: this.state.email,
         };
         console.log(data);
-        // this.props.onRegister(data);
-        // if (data.username == "" || data.password == "" || data.email == "" || data.name == "" || data.repeat == "") {
-        //     $(".fillFormsError").text("Please fill all fields");
-        //     $(".emailError").text("");
-        //     $(".passwordLengthError").text("");
-        //     $(".passwordsError").text("");
-        // } else if (!data.email.includes("@") || !data.email.includes(".com")) {
-        //     $(".emailError").text("Please provide proper email!");
-        //     $(".fillFormsError").text("");
-        // } else if (data.password.length < 6) {
-        //     $(".passwordsError").text("");
-        //     $(".passwordLengthError").text("Password must be at least 6 characters long!");
-        //     $(".emailError").text("");
-        //     $(".fillFormsError").text("");
-        // } else if (data.password != data.repeat) {
-        //     $(".passwordLengthError").text("");
-        //     $(".passwordsError").text("Passwords do not match");
-        //     $(".emailError").text("");
-        //     $(".fillFormsError").text("");            
-        // } else {
-        //     authenticationService.register(data, (serverErrorObject) => {
-        //         $(".passwordsError").text("");
-        //         $(".fillFormsError").text("Server error. Contact your network administrator");
-        //         if (serverErrorObject.response.status == 400) {
-        //             $(".fillFormsError").text("");
-        //             $(".usernameError").text(`${serverErrorObject.response.data.error.message}`);
-        //             console.log(serverErrorObject.response.data.error.message);
-        //         }
-        //     });
-        // }
-        validationService.validateRegistration(data);
+
+        validationService.isRegisterFormValid(data,
+            (data) => {
+                authenticationService.register(data, (serverErrorObject) => {
+                    if (this.state.email != "") {
+                        this.setState({
+                            errors: {
+                                email: serverErrorObject.response.data.error.message
+                            }
+                        });
+                    }
+                });
+            }, (errors) => {
+                this.setState({
+                    errors: errors
+                });
+            });
     }
 
 
@@ -98,18 +92,18 @@ class RegisterPage extends React.Component {
                         </div>
 
                         <form className="homePageForm loginForm">
-                            <input className="col-12" type="text" name="name" onChange={this.handleChange} placeholder="Name" value={event.target.value} /><br />
-                            <input className="col-12" type="text" name="username" onChange={this.handleChange} placeholder="Username" value={event.target.value} /><br />
-                            <div className="usernameError text-danger"></div>
-                            <input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" value={event.target.value} /><br />
-                            <div className="emailError text-danger"></div>
-                            <input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value} /><br />
-                            <div className="passwordLengthError text-danger"></div>
-                            <input className="col-12" type="password" name="repeat" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={event.target.value} /><br />
-                            <div className="passwordsError text-danger"></div>
+                            <input className="col-12" type="text" name="name" onChange={this.handleChange} placeholder="Name" value={this.state.name} /><br />
+                            <div className="nameError text-danger">{this.state.errors.name}</div>
+                            <input className="col-12" type="text" name="username" onChange={this.handleChange} placeholder="Username" value={this.state.username} /><br />
+                            <div className="usernameError text-danger">{this.state.errors.username}</div>
+                            <input className="col-12" type="email" name="email" onChange={this.handleChange} placeholder="Email" value={this.state.email} /><br />
+                            <div className="emailError text-danger">{this.state.errors.email}</div>
+                            <input className="col-12" type="password" name="password" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={this.state.password} /><br />
+                            <div className="passwordLengthError text-danger">{this.state.errors.password}</div>
+                            <input className="col-12" type="password" name="repeat" onChange={this.handleChange} placeholder="Must be minimum 6 characters" value={this.state.repeat} /><br />
+                            <div className="passwordsError text-danger">{this.state.errors.repeat}</div>
                             <button className="btn btn-primary register" onClick={this.handleRegister}>Register</button>
-                            <button className="btn btn-primary" type="reset" value="Reset">Reset</button>
-                            <div className="fillFormsError text-danger"></div>
+                            <div className="fillFormsError text-danger">{this.state.errors.allFieldsError}</div>
                         </form>
 
 

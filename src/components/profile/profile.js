@@ -21,7 +21,7 @@ class Profile extends React.Component {
         this.bindEventHandlers();
     }
 
-    componentDidMount() {
+    loadData() {
         dataService.getProfile((profile) => {
 
             this.setState({
@@ -42,15 +42,21 @@ class Profile extends React.Component {
         });
     }
 
-    bindEventHandlers() {
+    componentDidMount() {
+        this.loadData();
+    }
 
+    
+
+    bindEventHandlers() {
+        this.loadData = this.loadData.bind(this);
     }
 
     render() {
         return (
             <div className="container profile">
-                <ProfileComponent  profile={this.state} />
-                <EditProfile />
+                <ProfileComponent profile={this.state} />
+                <EditProfile reloadProfile={this.loadData}/>
             </div>
         );
     }
