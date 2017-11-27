@@ -19,7 +19,11 @@ class NewPostComponent extends React.Component {
             text: "",
             imageUrl: "",
             videoUrl: "",
-            visibility: "hidden"
+            visibility: "hidden",
+            errors: {
+                allFields: "",
+                link: ""
+            }
         };
 
         this.bindEventHandlers();
@@ -31,7 +35,9 @@ class NewPostComponent extends React.Component {
         this.activateImageModal = this.activateImageModal.bind(this);
         this.activateVideoModal = this.activateVideoModal.bind(this);
         this.closeModal = this.closeModal.bind(this);
-        this.savePost = this.savePost.bind(this);
+        this.saveTextPost = this.saveTextPost.bind(this);
+        this.saveImagePost = this.saveImagePost.bind(this);
+        this.saveVideoPost = this.saveVideoPost.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.hideShowButtons = this.hideShowButtons.bind(this);
     }
@@ -71,7 +77,8 @@ class NewPostComponent extends React.Component {
             textModalOpen: false,
             imageModalOpen: false,
             videoModalOpen: false,
-            visibility: "hidden"
+            visibility: "hidden",
+            errors: {}
         });
     }
 
@@ -86,71 +93,99 @@ class NewPostComponent extends React.Component {
         }
     }
 
-    savePost() {
+    saveTextPost() {
         event.preventDefault();
 
         let text = {
             text: this.state.text
         };
-        console.log(text);
+
+        validationService.isTextPostValid(text,
+            (text) => {
+                dataService.newPost("Text", text);
+                this.closeModal();
+                this.setState({
+                    text: "",
+                    imageUrl: "",
+                    videoUrl: ""
+                });
+                this.props.reloadFeed();
+            },
+            (error) => {
+                this.setState({
+                    errors: {
+                        allFields: error
+                    }
+                });
+            });
+    }
+
+    saveImagePost() {
+        event.preventDefault();
 
         let imageUrl = {
             imageUrl: this.state.imageUrl
         };
 
+        validationService.isImagePostValid(imageUrl,
+            (imageUrl) => {
+                dataService.newPost("Image", imageUrl);
+                this.closeModal();
+                this.setState({
+                    text: "",
+                    imageUrl: "",
+                    videoUrl: ""
+                });
+                this.props.reloadFeed();
+            },
+            (errors) => {
+                this.setState({
+                    errors: errors
+                });
+            });
+    }
+
+    saveVideoPost() {
+        event.preventDefault();
+
         let videoUrl = {
             videoUrl: this.state.videoUrl
         };
 
-        if(this.state.text) {
-            dataService.newPost("Text", text );
-            this.closeModal();
-            this.setState({
-                text: "",
-                imageUrl: "",
-                videoUrl: ""
+        validationService.isVideoPostValid(videoUrl,
+            (videoUrl) => {
+                dataService.newPost("Video", videoUrl);
+                this.closeModal();
+                this.setState({
+                    text: "",
+                    imageUrl: "",
+                    videoUrl: ""
+                });
+                this.props.reloadFeed();
+            },
+            (errors) => {
+                this.setState({
+                    errors: errors
+                });
             });
-            this.props.reloadFeed();
-        }
-
-        if(this.state.imageUrl) {
-            dataService.newPost("Image", imageUrl );
-            this.closeModal();
-            this.setState({
-                text: "",
-                imageUrl: "",
-                videoUrl: ""
-            });
-            this.props.reloadFeed();
-        }
-
-        if(this.state.videoUrl) {
-            dataService.newPost("Video", videoUrl );
-            this.closeModal();
-            this.setState({
-                text: "",
-                imageUrl: "",
-                videoUrl: ""
-            });
-            this.props.reloadFeed();
-        }
     }
 
 
     render() {
+
         return (
             <div>
-                <button type="button" className="newPost" onClick={this.hideShowButtons}>
+                <button type="button" className="initialNewPost" onClick={this.hideShowButtons}>
                     New Post
                 </button>
-                <div style={{visibility: this.state.visibility}}>
-                    <button type="button" className="newPost" onClick={this.activateTextModal}>
+                <div style={{ visibility: this.state.visibility }}>
+                    <button type="button" className="newTextPost" onClick={this.activateTextModal}>
                         New Text Post
                     </button>
-                    <button type="button" className="newPost" onClick={this.activateImageModal}>
+                    <button type="button" className="newImagePost" onClick={this.activateImageModal}>
                         New Image Post
                     </button>
-                    <button type="button" className="newPost" onClick={this.activateVideoModal}>
+                    <button type="button" className="newVideoPost" onClick={this.activateVideoModal}>
                         New Video Post
                     </button>
                 </div>
@@ -167,12 +202,11 @@ class NewPostComponent extends React.Component {
                         </div>
                         <div className="modal-body">
                             Post content: <textarea cols="50" rows="5" className="col-12" type="text" name="text" onChange={this.handleChange} value={this.state.text} /><br />
-                            <div className="nameError text-danger"></div>
-                            <div className="fieldsError text-danger"></div>
+                            <div className="fieldsError text-danger">{this.state.errors.allFields}</div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Close</button>
-                            <button type="button" className="btn btn-primary" onClick={this.savePost}>Save post</button>
+                            <button type="button" className="btn btn-primary" onClick={this.saveTextPost}>Save post</button>
                         </div>
                     </div>
                 </Modal>
@@ -185,16 +219,16 @@ class NewPostComponent extends React.Component {
                 >
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h4 className="modal-title">New Text Post</h4>
+                            <h4 className="modal-title">New Image Post</h4>
                         </div>
                         <div className="modal-body">
                             Image URL: <textarea cols="10" rows="2" className="col-12" type="text" name="imageUrl" onChange={this.handleChange} value={this.state.imageUrl} /><br />
-                            <div className="nameError text-danger"></div>
-                            <div className="fieldsError text-danger"></div>
+                            <div className="nameError text-danger">{this.state.errors.allFields}</div>
+                            <div className="fieldsError text-danger">{this.state.errors.link}</div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Close</button>
-                            <button type="button" className="btn btn-primary" onClick={this.savePost}>Save post</button>
+                            <button type="button" className="btn btn-primary" onClick={this.saveImagePost}>Save post</button>
                         </div>
                     </div>
                 </Modal>
@@ -207,16 +241,16 @@ class NewPostComponent extends React.Component {
                 >
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h4 className="modal-title">New Text Post</h4>
+                            <h4 className="modal-title">New Video Post</h4>
                         </div>
                         <div className="modal-body">
                             Youtube video URL: <textarea cols="10" rows="2" className="col-12" type="text" name="videoUrl" onChange={this.handleChange} value={this.state.videoUrl} /><br />
-                            <div className="nameError text-danger"></div>
-                            <div className="fieldsError text-danger"></div>
+                            <div className="nameError text-danger">{this.state.errors.allFields}</div>
+                            <div className="fieldsError text-danger">{this.state.errors.link}</div>
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Close</button>
-                            <button type="button" className="btn btn-primary" onClick={this.savePost}>Save post</button>
+                            <button type="button" className="btn btn-primary" onClick={this.saveVideoPost}>Save post</button>
                         </div>
                     </div>
                 </Modal>

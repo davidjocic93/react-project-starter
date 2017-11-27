@@ -17,7 +17,8 @@ class LoginPage extends React.Component {
             username: "",
             password: "",
             errors: {
-                allFieldsError: ""            }
+                allFieldsError: ""
+            }
         };
 
         this.bindEventHandlers();
@@ -46,33 +47,29 @@ class LoginPage extends React.Component {
             password: this.state.password
         };
         console.log(data);
-        // this.props.onLogin(data);
-        // if (validationService.isLoginFormValid(data)) {
-        //     authenticationService.login(data, (serverErrorObject) => {
-        //         console.log(serverErrorObject);
-        //     });
-        // } ;
 
-        validationService.isLoginFormValid(data, (data) => {
-            authenticationService.login(data, (serverErrorObject) => {
-                console.table(serverErrorObject);
-                if (serverErrorObject.response== undefined) {
-                    alert("SERVER UNREACHABLE!");
-                } else if (this.state.username != "" && this.state.password != "") {
-                    this.setState({
-                        errors: {
-                            allFieldsError: serverErrorObject.response.data.error.message
+        validationService.isLoginFormValid(data,
+            (data) => {
+                authenticationService.login(data,
+                    (serverErrorObject) => {
+                        console.table(serverErrorObject);
+                        if (serverErrorObject.response == undefined) {
+                            alert("SERVER UNREACHABLE!");
+                        } else if (this.state.username != "" && this.state.password != "") {
+                            this.setState({
+                                errors: {
+                                    allFieldsError: serverErrorObject.response.data.error.message
+                                }
+                            });
                         }
                     });
-                }
+            }, (error) => {
+                this.setState({
+                    errors: {
+                        allFieldsError: error
+                    }
+                });
             });
-        }, (error) => {
-            this.setState({
-                errors: {
-                    allFieldsError: error
-                }
-            });
-        });
     }
 
 

@@ -9,7 +9,6 @@ class ValidationService {
         successCallback(data);
     }
 
-
     isRegisterFormValid(data, successCallback, failureCallback) {
 
         const errors = {};
@@ -55,9 +54,7 @@ class ValidationService {
             failureCallback(errors);
             return false;
         }
-
         successCallback(data);
-
     }
 
     isEditFormValid(data, successCallback, failureCallback) {
@@ -93,7 +90,57 @@ class ValidationService {
         }
 
         successCallback(data);
+    }
 
+    isTextPostValid(data, successCallback, failureCallback) {
+        if (!this.hasAllRequiredFields(data)) {
+            const error = "Post can't be empty!";
+            failureCallback(error);
+            return false;
+        }
+        successCallback(data);
+    }
+
+    isImagePostValid(data, successCallback, failureCallback) {
+
+        const errors = {};
+
+        if (!this.hasAllRequiredFields(data)) {
+            const error = "All fields must be filled out!";
+            errors.allFields = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        if (!this.isImageLinkValid(data)) {
+            const error = "Link is not in valid format!";
+            errors.link = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        successCallback(data);
+    }
+
+    isVideoPostValid(data, successCallback, failureCallback) {
+
+        const errors = {};
+
+        if (!this.hasAllRequiredFields(data)) {
+            const error = "All fields must be filled out!";
+            errors.allFields = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        if (!this.isYoutubeLinkValid(data)) {
+            const error = "Please enter YouTube video link!";
+            errors.link = error;
+            failureCallback(errors);
+            return false;
+        }
+
+        successCallback(data);
     }
 
     hasAllRequiredFields(data) {
@@ -147,6 +194,18 @@ class ValidationService {
     isLinkValid(data) {
         const re = /^(ftp|http|https):\/\/[^ "]+$/;
         const isOK = re.test(data.avatarUrl);
+        return isOK;
+    }
+
+    isImageLinkValid(data) {
+        const re = /^(ftp|http|https):\/\/[^ "]+$/;
+        const isOK = re.test(data.imageUrl);
+        return isOK;
+    }
+
+    isYoutubeLinkValid(data) {
+        const re = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/watch\?v=([^&]+)/m;
+        const isOK = re.test(data.videoUrl);
         return isOK;
     }
 

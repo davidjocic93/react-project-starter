@@ -184,3 +184,27 @@ input:hover {
     font-size: 1.7em;
     margin-left: 10%;
 }
+
+.initialNewPost {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.newTextPost {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+}
+
+.newImagePost {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+}
+
+.newVideoPost {
+    position: fixed;
+    bottom: 110px;
+    right: 20px;
+}
