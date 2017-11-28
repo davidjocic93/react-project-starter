@@ -102,14 +102,17 @@ class NewPostComponent extends React.Component {
 
         validationService.isTextPostValid(text,
             (text) => {
-                dataService.newPost("Text", text);
-                this.closeModal();
-                this.setState({
-                    text: "",
-                    imageUrl: "",
-                    videoUrl: ""
-                });
-                this.props.reloadFeed();
+                dataService.newPost("Text", text,
+                    (serverResponseData) => {
+                        this.closeModal();
+                        this.setState({
+                            text: "",
+                            imageUrl: "",
+                            videoUrl: ""
+                        });
+                        this.props.reloadFeed();
+                    });
+                console.log("reload");
             },
             (error) => {
                 this.setState({
@@ -129,14 +132,16 @@ class NewPostComponent extends React.Component {
 
         validationService.isImagePostValid(imageUrl,
             (imageUrl) => {
-                dataService.newPost("Image", imageUrl);
-                this.closeModal();
-                this.setState({
-                    text: "",
-                    imageUrl: "",
-                    videoUrl: ""
-                });
-                this.props.reloadFeed();
+                dataService.newPost("Image", imageUrl,
+                    (serverResponseData) => {
+                        this.closeModal();
+                        this.setState({
+                            text: "",
+                            imageUrl: "",
+                            videoUrl: ""
+                        });
+                        this.props.reloadFeed();
+                    });
             },
             (errors) => {
                 this.setState({
@@ -151,17 +156,20 @@ class NewPostComponent extends React.Component {
         let videoUrl = {
             videoUrl: this.state.videoUrl
         };
+        console.log(videoUrl);
 
         validationService.isVideoPostValid(videoUrl,
             (videoUrl) => {
-                dataService.newPost("Video", videoUrl);
-                this.closeModal();
-                this.setState({
-                    text: "",
-                    imageUrl: "",
-                    videoUrl: ""
-                });
-                this.props.reloadFeed();
+                dataService.newPost("Video", videoUrl,
+                    (serverResponseData) => {
+                        this.closeModal();
+                        this.setState({
+                            text: "",
+                            imageUrl: "",
+                            videoUrl: ""
+                        });
+                        this.props.reloadFeed();
+                    });
             },
             (errors) => {
                 this.setState({

@@ -1,7 +1,10 @@
 import { communicationService } from "./communicationService";
 import ProfileDTO from "../dto/profileDTO";
 import UserDTO from "../dto/userDTO";
-import PostDTO from "../dto/postDTO";
+import TextPostDTO from "../dto/textPostDTO";
+import ImagePostDTO from "../dto/imagePostDTO";
+import VideoPostDTO from "../dto/videoPostDTO";
+import CommentDTO from "../dto/commentDTO";
 
 class DataService {
     constructor() { }
@@ -92,19 +95,54 @@ class DataService {
         let posts = [];
         communicationService.getRequest("/api/Posts",
             (serverResponseData) => {
-                console.table(serverResponseData.data);
+                console.table(serverResponseData);
 
                 serverResponseData.data.forEach(element => {
-                    const id = element.id;
-                    const dateCreated = element.dateCreated;
-                    const userId = element.userId;
-                    const userDisplayName = element.userDisplayName;
-                    const type = element.type;
-                    const text = element.text;
+                    
+                    if (element.type == "text") {
+                        const id = element.id;
+                        const dateCreated = element.dateCreated;
+                        const userId = element.userId;
+                        const userDisplayName = element.userDisplayName;
+                        const type = element.type;
+                        const text = element.text;
+                        const commentsNum = element.commentsNum;
 
-                    const post = new PostDTO(id, dateCreated, userId, userDisplayName, type, text);
 
-                    posts.push(post);
+                        const textPost = new TextPostDTO(id, dateCreated, userId, userDisplayName, type, text, commentsNum);
+
+                        posts.push(textPost);
+
+                    } else if (element.type == "image") {
+
+                        const id = element.id;
+                        const dateCreated = element.dateCreated;
+                        const userId = element.userId;
+                        const userDisplayName = element.userDisplayName;
+                        const type = element.type;
+                        const text = element.text;
+                        const commentsNum = element.commentsNum;
+                        const imageUrl = element.imageUrl;
+
+                        const imagePost = new ImagePostDTO(id, dateCreated, userId, userDisplayName, type, text, commentsNum, imageUrl);
+
+                        posts.push(imagePost);
+
+                    } else if (element.type == "video") {
+
+                        const id = element.id;
+                        const dateCreated = element.dateCreated;
+                        const userId = element.userId;
+                        const userDisplayName = element.userDisplayName;
+                        const type = element.type;
+                        const text = element.text;
+                        const commentsNum = element.commentsNum;
+                        const videoUrl = element.videoUrl;
+
+                        const videoPost = new VideoPostDTO(id, dateCreated, userId, userDisplayName, type, text, commentsNum, videoUrl);
+
+                        posts.push(videoPost);
+                    }
                 });
 
                 postsHandler(posts);
@@ -114,21 +152,55 @@ class DataService {
             });
     }
 
-    newPost(type, postData) {
+    newPost(type, postData, successHandler) {
         communicationService.postRequest(`/api/${type}Posts`, postData,
             (serverResponseData) => {
-                console.log(serverResponseData);
+                successHandler(serverResponseData);
             }, (serverErrorObject) => {
                 console.log(serverErrorObject);
             });
     }
 
-    getSinglePost (type, postId, successHandler) {
+    getSinglePost(type, postId, successHandler) {
         communicationService.getRequest(`/api/${type}Posts/${postId}`, (serverResponseData) => {
             successHandler(serverResponseData);
         }, (serverErrorObject) => {
             console.log(serverErrorObject);
         });
+    }
+
+    getComments(commentsHandler) {
+        const comments = [];
+        communicationService.getRequest("/api/Comments",
+            (serverResponseData) => {
+
+                serverResponseData.data.forEach(element => {
+                    const id = element.id;
+                    const dateCreated = element.dateCreated;
+                    const text = element.text;
+                    const postId = element.postId;
+                    const authorId = element.authorId;
+
+                    const comment = new CommentDTO(id, dateCreated, text, postId, authorId);
+
+                    comments.push(comment);
+                });
+
+                commentsHandler(serverResponseData);
+
+            }, (serverErrorObject) => {
+                console.log(serverErrorObject);
+            });
+    }
+
+    newComment(data, successHandler) {
+        communicationService.postRequest("/api/Comments", data,
+            (serverResponseData) => {
+                successHandler(serverResponseData);
+            },
+            (serverErrorObject) => {
+                console.log(serverErrorObject);
+            });
     }
 
 

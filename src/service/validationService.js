@@ -5,6 +5,7 @@ class ValidationService {
         if (!this.hasAllRequiredFields(data)) {
             const error = "All fields must be filled out!";
             failureCallback(error);
+            return false;
         }
         successCallback(data);
     }

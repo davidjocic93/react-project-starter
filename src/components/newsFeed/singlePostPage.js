@@ -12,7 +12,7 @@ class SinglePostPage extends React.Component {
         };
     }
 
-    componentDidMount () {
+    componentDidMount() {
         dataService.getSinglePost(`${this.props.match.params.type}`, `${this.props.match.params.postId}`, (singlePost) => {
             console.log(singlePost);
             this.setState({
@@ -25,7 +25,11 @@ class SinglePostPage extends React.Component {
 
     render() {
         return (
-            <p>{this.state.post.text}</p>
+            <div>
+                <p>{this.state.post.text}</p>
+                <p>{this.state.post.imageUrl}</p>
+                <p>{this.state.post.text}</p>
+            </div>
         );
     }
 

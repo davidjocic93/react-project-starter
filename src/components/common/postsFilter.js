@@ -1,0 +1,48 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+class Filter extends React.Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            searchTerm: ""
+        };
+
+        this.handleSelection = this.handleSelection.bind(this);
+    }
+
+
+    handleSelection(event) {
+        const searchString = event.target.value;
+        this.setState({
+            searchTerm: searchString
+        });
+
+        this.props.filterPosts(searchString);
+    }
+
+
+
+    render() {
+        return (
+            <div>
+                <span className="selectSpan">Show on feed</span>
+                <select onChange={this.handleSelection} className="selectpicker">
+                    <option  value="">All Posts</option>
+                    <option  value="text">Text Posts</option>
+                    <option  value="image">Image Posts</option>
+                    <option  value="video">Video Posts</option>
+                </select>
+
+            </div>
+        );
+    }
+}
+
+Filter.propTypes = {
+    filterPosts: PropTypes.function
+};
+
+export default Filter;
+

@@ -38,13 +38,17 @@
 .initialNewPost {
     position: fixed;
     bottom: 20px;
-    right: 20px;
-    width: 80px;
-    height: 80px;
+    right: 80px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
     background-color: #ff9c00;
     border: none;
     box-shadow: 0px 5px 10px rgb(128, 127, 127);
+}
+
+.initialNewPost:hover {
+    background-color: #e48500;
 }
 
 .initialNewPost img {
@@ -54,14 +58,18 @@
 
 .newTextPost {
     position: fixed;
-    bottom: 120px;
-    right: 20px;
-    width: 80px;
-    height: 80px;
+    bottom: 110px;
+    right: 85px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: rgb(238, 29, 29);
     border: none;
     box-shadow: 0px 5px 10px rgb(128, 127, 127);
+}
+
+.newTextPost:hover {
+    background-color: rgb(207, 3, 3);
 }
 
 .newTextPost img {
@@ -71,14 +79,18 @@
 
 .newImagePost {
     position: fixed;
-    bottom: 220px;
-    right: 20px;
-    width: 80px;
-    height: 80px;
+    bottom: 190px;
+    right: 85px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: rgb(71, 184, 71);
     border: none;
     box-shadow: 0px 5px 10px rgb(128, 127, 127);
+}
+
+.newImagePost:hover {
+    background-color: rgb(33, 161, 33);
 }
 
 .newImagePost img {
@@ -88,14 +100,18 @@
 
 .newVideoPost {
     position: fixed;
-    bottom: 320px;
-    right: 20px;
-    width: 80px;
-    height: 80px;
+    bottom: 270px;
+    right: 85px;
+    width: 60px;
+    height: 60px;
     border-radius: 50%;
     background-color: rgb(36, 177, 177);
     border: none;
     box-shadow: 0px 5px 10px rgb(128, 127, 127);
+}
+
+.newVideoPost:hover {
+    background-color: rgb(0, 158, 158);
 }
 
 .newVideoPost img {
@@ -114,3 +130,17 @@
 }
 
 /*****************/
+
+/*FILTER POSTS*/
+
+.selectpicker {
+    position: fixed;
+    top: 100px;
+    right: 85px;
+}
+
+.selectSpan {
+    
+}
+
+/***************/

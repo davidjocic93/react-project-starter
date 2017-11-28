@@ -1,5 +1,5 @@
-class PostDTO {
-    constructor(id, dateCreated, userId, userDisplayName, type, text, commentsNum, videoUrl) {
+class TextPostDTO {
+    constructor(id, dateCreated, userId, userDisplayName, type, text, commentsNum) {
         this._id = id;
         this._dateCreated = dateCreated;
         this._userId = userId;
@@ -7,7 +7,6 @@ class PostDTO {
         this._type = type;
         this._text = text;
         this._commentsNum = commentsNum;
-        this._videoUrl = videoUrl;
     }
 
     get id() {
@@ -36,16 +35,7 @@ class PostDTO {
     get commentsNum() {
         return this._commentsNum;
     }
-    
-    get imageUrl() {
-        return this._imageUrl;
-    }
-
-    get videoUrl() {
-        return this._videoUrl;
-    }
-
 
 }
 
-export default PostDTO;
+export default TextPostDTO;
