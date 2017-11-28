@@ -68,6 +68,11 @@ html body {
     background-color: #006483;
 }
 
+.loginButtons button:active {
+    background-color: #227d99;
+    border: none;
+}
+
 .loginButtons button a {
     text-decoration: none;
     color: white;
@@ -185,10 +190,14 @@ input:hover {
 }
 
 .navbar a:hover {
-    color: #6edaf7;
+    color: #ffb833;
 }
 
 #logo {
     font-size: 1.7em;
     margin-left: 10%;
+}
+
+.profileRow {
+    margin-top: 60px;
 }

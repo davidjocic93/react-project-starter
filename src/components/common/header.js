@@ -19,7 +19,7 @@ const Header = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse" id="navbarSupportedContent navbarColor01">
+                <div className="collapse navbar-collapse justify-content-end pull-right" id="navbarSupportedContent navbarColor01">
                     <Link className="nav-link  my-2 my-sm-0" to="/">Home</Link>
                     <Link className="nav-link my-2 my-sm-0" to="/profile">Profile</Link>
                     <Link className="nav-link  my-2 my-sm-0" to="/people">People</Link>

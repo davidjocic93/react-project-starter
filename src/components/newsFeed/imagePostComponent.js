@@ -15,7 +15,7 @@ const ImagePostComponent = (props) => {
     let showDeleteButton = "";
     
     if (ownId !== userId) {
-        showDeleteButton = "hidden";
+        showDeleteButton = "none";
     }
 
     const onDeletion = () => {
@@ -30,7 +30,9 @@ const ImagePostComponent = (props) => {
     return (
 
         <div className="container feed">
-            <button onClick={onDeletion} style={{ visibility: showDeleteButton }}>Delete Post</button>
+            <button className="deleteBtn" onClick={onDeletion} style={{ display: showDeleteButton }}>
+                <img src="http://www.pvhc.net/img5/kvqqrcmmwflsdfarwewp.png" />
+            </button>
             <div className="row postContainer">
 
                 <div className="col-12 text">
@@ -44,7 +46,8 @@ const ImagePostComponent = (props) => {
                 </div>
 
                 <div className="col-4 commentsNum">
-                    <p>CommentsNum: {commentsNum}</p>
+                    <p>{commentsNum} comments</p>
+                    <h5>Read more</h5>
                 </div>
 
                 <div className="col-4 type">

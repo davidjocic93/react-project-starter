@@ -1,5 +1,6 @@
 .feed {
     text-align: center;
+    position: relative;
 }
 
 .feedContainer {
@@ -133,13 +134,32 @@
     outline-color: none;
 }
 
+.deleteBtn {
+    position: relative;
+    top: 30px;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background-color: rgb(247, 31, 31);
+    border: none;
+}
+
+.deleteBtn:hover {
+    background-color: rgb(223, 17, 17);
+    cursor: pointer;
+}
+
+.deleteBtn img {
+    width: 25px;
+}
+
 /*****************/
 
 /*FILTER POSTS*/
 
 .selectpicker {
     position: fixed;
-    bottom: 80px;
+    bottom: 30px;
     left: 85px;
     border: none;
     background-color: rgb(54, 154, 248);
@@ -150,18 +170,16 @@
     text-align: center;
 }
 
+.selectpicker:hover {
+    background-color: rgb(9, 129, 241);
+    cursor: pointer;
+}
+
 .selectpicker option {
     text-align: center;
     padding: 10px;
     border-bottom: 1px solid rgb(14, 65, 109);
 }
 
-.selectSpan {
-    position: fixed;
-    bottom: 40px;
-    left: 80px;
-    color: rgb(63, 63, 63);
-    font-weight: bolder;
-}
 
 /***************/

@@ -7,7 +7,7 @@ const CommentsComponent = (props) => {
 
     return (
         
-        <div>
+        <div className="comment">
             <p>{body}</p>
         </div>
     );

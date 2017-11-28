@@ -113,33 +113,30 @@ class SinglePostPage extends React.Component {
                     </div>
 
                     <div className="row">
-              
+
                         <div className="col-md-9 offset-md-1">
                             <input className="commentInput" type="text" placeholder="Add your comment" name="comment" onChange={this.handleChange} value={this.state.comment} />
                         </div>
-              
+
                         <div className="col-1 sendComment">
                             <button onClick={this.postComment}>
                                 <img src="https://cdn.pixabay.com/photo/2016/04/07/18/57/arrow-1314461_960_720.png" />
                             </button>
                         </div>
-              
+
                     </div>
-              
-                    <div className="row">
-              
-                        <div className="col-10 offset-1 commentContainer">
+
+                    <div className="row commentContainer">
+
+                        <div className="col-8 offset-2">
 
                             {comments.map((comment) => {
                                 return <CommentsComponent comment={comment} key={comment.id} />;
-                            })}      
-      
+                            })}
+
+
                         </div>
                     </div>
-
-                    {comments.map((comment) => {
-                        return <CommentsComponent comment={comment} key={comment.id} />;
-                    })}
 
                 </div>
             );
@@ -157,22 +154,30 @@ class SinglePostPage extends React.Component {
                     </div>
 
                     <div className="row">
-              
+
                         <div className="col-md-9 offset-md-1">
                             <input className="commentInput" type="text" placeholder="Add your comment" name="comment" onChange={this.handleChange} value={this.state.comment} />
                         </div>
-              
+
                         <div className="col-1 sendComment">
                             <button onClick={this.postComment}>
                                 <img src="https://cdn.pixabay.com/photo/2016/04/07/18/57/arrow-1314461_960_720.png" />
                             </button>
                         </div>
-              
+
                     </div>
 
-                    {comments.map((comment) => {
-                        return <CommentsComponent comment={comment} key={comment.id} />;
-                    })}
+                    <div className="row commentContainer">
+
+                        <div className="col-8 offset-2">
+
+                            {comments.map((comment) => {
+                                return <CommentsComponent comment={comment} key={comment.id} />;
+                            })}
+
+
+                        </div>
+                    </div>
 
                 </div>
             );
@@ -189,22 +194,29 @@ class SinglePostPage extends React.Component {
                 </div>
 
                 <div className="row">
-          
+
                     <div className="col-md-9 offset-md-1">
                         <input className="commentInput" type="text" placeholder="Add your comment" name="comment" onChange={this.handleChange} value={this.state.comment} />
                     </div>
-          
+
                     <div className="col-1 sendComment">
                         <button onClick={this.postComment}>
                             <img src="https://cdn.pixabay.com/photo/2016/04/07/18/57/arrow-1314461_960_720.png" />
                         </button>
                     </div>
-          
+
                 </div>
 
-                {comments.map((comment) => {
-                    return <CommentsComponent comment={comment} key={comment.id} />;
-                })}
+                <div className="row commentContainer">
+
+                    <div className="col-8 offset-2">
+
+                        {comments.map((comment) => {
+                            return <CommentsComponent comment={comment} key={comment.id} />;
+                        })}
+
+                    </div>
+                </div>
 
             </div>
         );
