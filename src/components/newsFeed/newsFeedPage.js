@@ -4,7 +4,7 @@ import PostComponent from "./postComponent";
 import NewPostComponent from "./newPostComponent";
 
 class NewsFeedPage extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
 
         this.state = {
@@ -20,7 +20,7 @@ class NewsFeedPage extends React.Component {
             this.setState({
                 posts: posts
             });
-        });   
+        });
     }
 
     componentDidMount() {
@@ -31,12 +31,16 @@ class NewsFeedPage extends React.Component {
 
         const posts = this.state.posts;
 
-        return(
+        return (
             <div className="container">
-                {posts.map(post => {
-                    return <PostComponent post = {post} key={post.id} />;
-                })}
-                <NewPostComponent reloadFeed={this.loadData}/>
+                <div className="row">
+                    <div className="col-12 col-md-8 offset-md-2">
+                        {posts.map(post => {
+                            return <PostComponent post={post} key={post.id} />;
+                        })}
+                    </div>
+                </div>
+                <NewPostComponent reloadFeed={this.loadData} />
             </div>
         );
     }

@@ -2,8 +2,12 @@
     box-sizing: border-box;
 }
 
-body {
+/*body {
     background: url("http://t4america.org/wp-content/uploads/2013/11/sky.png") repeat-x;
+}*/
+
+html body {
+    background-color: #eefbff;
 }
 
 
@@ -90,10 +94,8 @@ input:hover {
 .avatarPicture {
     width: 100%;
     border-radius: 50%;
+    box-shadow: 0px 0px 15px rgba(116, 115, 115, 0.7);
 }
-
-
-
 
 
 /*SINGLE USER*/
@@ -157,7 +159,7 @@ input:hover {
 
 .navbar {
     background-color: #013a4d;
-    box-shadow: 0px 2px 10px rgb(53, 53, 53);
+    box-shadow: 0px 3px 5px rgba(102, 102, 102, 0.9);
 }
 
 .navbar button {
@@ -183,28 +185,4 @@ input:hover {
 #logo {
     font-size: 1.7em;
     margin-left: 10%;
-}
-
-.initialNewPost {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-}
-
-.newTextPost {
-    position: fixed;
-    bottom: 50px;
-    right: 20px;
-}
-
-.newImagePost {
-    position: fixed;
-    bottom: 80px;
-    right: 20px;
-}
-
-.newVideoPost {
-    position: fixed;
-    bottom: 110px;
-    right: 20px;
 }
