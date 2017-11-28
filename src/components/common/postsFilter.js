@@ -41,7 +41,7 @@ class Filter extends React.Component {
 }
 
 Filter.propTypes = {
-    filterPosts: PropTypes.function
+    filterPosts: PropTypes.func
 };
 
 export default Filter;

@@ -8,8 +8,8 @@ const UsersComponent = (props) => {
     // console.log(props.user);
 
     const date = new Date(lastPostDate);
-    const dateString = date.toLocaleTimeString();
-
+    const time = date.toLocaleTimeString();
+    const dateString = date.toLocaleDateString();
 
 
     if (!avatarUrl) {
@@ -24,7 +24,7 @@ const UsersComponent = (props) => {
                         <p>{aboutShort}</p>
                     </div>
                     <div className="col-4 time">
-                        <p>Last post at: <br /> {dateString}</p>
+                        <p>Last post at: <br /> {time} <br/> {dateString} </p>
                     </div>
 
                 </div>
@@ -43,7 +43,7 @@ const UsersComponent = (props) => {
                     <p>{aboutShort}</p>
                 </div>
                 <div className="col-4 time">
-                    <p>Last post at: <br /> {dateString}</p>
+                    <p>Last post at: <br /> {time} <br/> {dateString} </p>
                 </div>
 
             </div>

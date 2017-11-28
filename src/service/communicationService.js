@@ -55,6 +55,18 @@ class CommunicationService {
 
     }
 
+    deleteRequest(url, deleteHandler, errorHandler) {
+
+        const requestUrl = `${BASE_URL}${url}`;
+
+        axios.delete(requestUrl,  {
+            headers: this.createHeaders()
+        })
+            .then(response => deleteHandler(response))
+            .catch(error => errorHandler(error));
+
+    }
+
 
 }
 

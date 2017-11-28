@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import ProfileComponent from "../profile/profileComponent";
 import EditProfile from "../profile/editprofile";
 
-class SingleUserComponent extends React.Component {
+class SingleUserPage extends React.Component {
     constructor(props) {
         super(props);
 
@@ -93,9 +93,9 @@ class SingleUserComponent extends React.Component {
 }
 
 
-SingleUserComponent.propTypes = {
+SingleUserPage.propTypes = {
     match: PropTypes.object,
 
 };
 
-export default SingleUserComponent;
+export default SingleUserPage;

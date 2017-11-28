@@ -2,6 +2,9 @@
     text-align: center;
 }
 
+.feedContainer {
+    margin-top: 80px;
+}
 
 .feed a:hover {
     text-decoration: none;
@@ -26,6 +29,7 @@
 }
 
 .postContainer {
+    margin-top: 100px;
     background-color: white;
     margin: 20px;
     border-radius: 3px;
@@ -135,12 +139,29 @@
 
 .selectpicker {
     position: fixed;
-    top: 100px;
-    right: 85px;
+    bottom: 80px;
+    left: 85px;
+    border: none;
+    background-color: rgb(54, 154, 248);
+    color: white;
+    padding: 10px;
+    width: 150px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.selectpicker option {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(14, 65, 109);
 }
 
 .selectSpan {
-    
+    position: fixed;
+    bottom: 40px;
+    left: 80px;
+    color: rgb(63, 63, 63);
+    font-weight: bolder;
 }
 
 /***************/

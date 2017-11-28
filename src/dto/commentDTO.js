@@ -1,8 +1,8 @@
 class CommentDTO {
-    constructor(id, dateCreated, text, postId, authorId) {
+    constructor(id, dateCreated, body, postId, authorId) {
         this._id = id;
         this._dateCreated = dateCreated;
-        this._text = text;
+        this._body = body;
         this._postId = postId;
         this._authorId = authorId;
     }
@@ -14,8 +14,8 @@ class CommentDTO {
         return this._dateCreated;
     }
 
-    get text() {
-        return this._text;
+    get body() {
+        return this._body;
     }
 
     get postId() {

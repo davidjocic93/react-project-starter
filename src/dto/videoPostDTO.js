@@ -1,11 +1,10 @@
 class VideoPostDTO {
-    constructor(id, dateCreated, userId, userDisplayName, type, text, commentsNum, videoUrl) {
+    constructor(id, dateCreated, userId, userDisplayName, type, commentsNum, videoUrl) {
         this._id = id;
         this._dateCreated = dateCreated;
         this._userId = userId;
         this._userDisplayName = userDisplayName;
         this._type = type;
-        this._text = text;
         this._commentsNum = commentsNum;
         this._videoUrl = videoUrl;
     }
@@ -27,10 +26,6 @@ class VideoPostDTO {
 
     get type() {
         return this._type;
-    }
-
-    get text() {
-        return this._text;
     }
 
     get commentsNum() {

@@ -98,7 +98,7 @@ class DataService {
                 console.table(serverResponseData);
 
                 serverResponseData.data.forEach(element => {
-                    
+
                     if (element.type == "text") {
                         const id = element.id;
                         const dateCreated = element.dateCreated;
@@ -120,11 +120,10 @@ class DataService {
                         const userId = element.userId;
                         const userDisplayName = element.userDisplayName;
                         const type = element.type;
-                        const text = element.text;
                         const commentsNum = element.commentsNum;
                         const imageUrl = element.imageUrl;
 
-                        const imagePost = new ImagePostDTO(id, dateCreated, userId, userDisplayName, type, text, commentsNum, imageUrl);
+                        const imagePost = new ImagePostDTO(id, dateCreated, userId, userDisplayName, type, commentsNum, imageUrl);
 
                         posts.push(imagePost);
 
@@ -135,11 +134,10 @@ class DataService {
                         const userId = element.userId;
                         const userDisplayName = element.userDisplayName;
                         const type = element.type;
-                        const text = element.text;
                         const commentsNum = element.commentsNum;
                         const videoUrl = element.videoUrl;
 
-                        const videoPost = new VideoPostDTO(id, dateCreated, userId, userDisplayName, type, text, commentsNum, videoUrl);
+                        const videoPost = new VideoPostDTO(id, dateCreated, userId, userDisplayName, type, commentsNum, videoUrl);
 
                         posts.push(videoPost);
                     }
@@ -169,31 +167,35 @@ class DataService {
         });
     }
 
-    getComments(commentsHandler) {
+    getComments(postId, commentsHandler) {
         const comments = [];
-        communicationService.getRequest("/api/Comments",
+        communicationService.getRequest(`/api/Comments?postId=${postId}`,
             (serverResponseData) => {
 
                 serverResponseData.data.forEach(element => {
                     const id = element.id;
                     const dateCreated = element.dateCreated;
-                    const text = element.text;
+                    const body = element.body;
                     const postId = element.postId;
                     const authorId = element.authorId;
 
-                    const comment = new CommentDTO(id, dateCreated, text, postId, authorId);
+                    const comment = new CommentDTO(id, dateCreated, body, postId, authorId);
 
                     comments.push(comment);
                 });
 
-                commentsHandler(serverResponseData);
+                commentsHandler(comments);
 
             }, (serverErrorObject) => {
                 console.log(serverErrorObject);
             });
     }
 
-    newComment(data, successHandler) {
+    newComment(comment, postId, successHandler) {
+        const data = {
+            body: comment,
+            postId: postId
+        };
         communicationService.postRequest("/api/Comments", data,
             (serverResponseData) => {
                 successHandler(serverResponseData);
@@ -203,6 +205,14 @@ class DataService {
             });
     }
 
+
+    deletePost(id, successHandler) {
+        communicationService.deleteRequest(`/api/Posts/${id}`, (serverResponseData) => {
+            successHandler(serverResponseData);
+        }, (serverErrorObject) => {
+            console.log(serverErrorObject);
+        });
+    }
 
 
 }

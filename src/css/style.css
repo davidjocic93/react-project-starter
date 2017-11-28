@@ -156,10 +156,16 @@ input:hover {
     background-color: #6edaf7;
 }
 
+.header {
+    position: fixed;
+    top: 0;
+}
 
 .navbar {
     background-color: #013a4d;
     box-shadow: 0px 3px 5px rgba(102, 102, 102, 0.9);
+    position: fixed;
+    top: 0;
 }
 
 .navbar button {

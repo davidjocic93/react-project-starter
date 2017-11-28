@@ -7,16 +7,18 @@ const ImagePostComponent = (props) => {
     const { id, dateCreated, userId, userDisplayName, type, text, commentsNum, imageUrl } = props.post;
 
     const date = new Date(dateCreated);
-    const dateString = date.toLocaleTimeString();
+    const time = date.toLocaleTimeString();
+    const dateString = date.toLocaleDateString();
 
     return (
         <div className="container feed">
             <div className="row postContainer">
                 <div className="col-12 text">
-                    <Link to={`/feed/${type.slice(0, 1).toUpperCase()}${type.slice(1)}/${id}`}><img src={imageUrl} style={{width: "100%"}}/></Link>
+                    <img src={imageUrl} style={{ width: "100%" }} />
                     <hr />
                 </div>
                 <div className="col-4 date">
+                    <p>{time}</p>
                     <p>{dateString}</p>
                 </div>
                 <div className="col-4 commentsNum">
@@ -32,7 +34,6 @@ const ImagePostComponent = (props) => {
 
 ImagePostComponent.propTypes = {
     post: PropTypes.object,
-
 };
 
 export default ImagePostComponent;

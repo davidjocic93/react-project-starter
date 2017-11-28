@@ -5,9 +5,9 @@ import {dataService} from "../../service/dataService";
 import {Route, Switch} from "react-router-dom";
 import Profile from "../profile/profile";
 import UsersPage from "../users/usersPage";
-import SingleUserComponent from "../users/singleUserComponent";
+import SingleUserPage from "../users/singleUserPage";
 import NewsFeedPage from "../newsFeed/newsFeedPage";
-import SinglePostPage from "../newsFeed/singlePostPage";
+import SinglePostPage from "../singlePost/singlePostPage";
 
 
 class HomePage extends React.Component {
@@ -24,7 +24,7 @@ class HomePage extends React.Component {
                     <Route path="/feed/:type/:postId" component={SinglePostPage}/>
                     <Route path="/profile" component={Profile}/>
                     <Route exact path="/people" component={UsersPage}/>
-                    <Route path="/people/:id" component={SingleUserComponent}/>
+                    <Route path="/people/:id" component={SingleUserPage}/>
                 </Switch>
             </div>
         );

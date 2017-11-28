@@ -269,7 +269,7 @@ class NewPostComponent extends React.Component {
 }
 
 NewPostComponent.propTypes = {
-    reloadFeed: PropTypes.function,
+    reloadFeed: PropTypes.func
 };
 
 export default NewPostComponent;
