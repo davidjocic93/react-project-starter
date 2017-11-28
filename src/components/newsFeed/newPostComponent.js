@@ -174,19 +174,19 @@ class NewPostComponent extends React.Component {
     render() {
 
         return (
-            <div>
+            <div className="modalButtons">
                 <button type="button" className="initialNewPost" onClick={this.hideShowButtons}>
-                    New Post
+                    <img src="https://image.flaticon.com/icons/png/128/61/61112.png" />
                 </button>
                 <div style={{ visibility: this.state.visibility }}>
                     <button type="button" className="newTextPost" onClick={this.activateTextModal}>
-                        New Text Post
+                        <img src="http://download.seaicons.com/icons/icons8/windows-8/128/Editing-Text-icon.png" />
                     </button>
                     <button type="button" className="newImagePost" onClick={this.activateImageModal}>
-                        New Image Post
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-image-128.png" />
                     </button>
                     <button type="button" className="newVideoPost" onClick={this.activateVideoModal}>
-                        New Video Post
+                        <img src="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-play-128.png" />
                     </button>
                 </div>
 

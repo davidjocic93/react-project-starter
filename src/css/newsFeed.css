@@ -1,0 +1,116 @@
+.feed {
+    text-align: center;
+}
+
+
+.feed a:hover {
+    text-decoration: none;
+}
+
+.feed a h3:hover {
+    color: #ff9c00;
+}
+
+.text {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+
+.type {
+    text-align: right;
+}
+
+.date {
+    text-align: left;
+}
+
+.postContainer {
+    background-color: white;
+    margin: 20px;
+    border-radius: 3px;
+    padding: 20px 20px 5px 20px;
+    box-shadow: 1px 1px 4px rgb(121, 121, 121);
+}
+
+/*NEW POST BUTTONS*/
+
+.initialNewPost {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: #ff9c00;
+    border: none;
+    box-shadow: 0px 5px 10px rgb(128, 127, 127);
+}
+
+.initialNewPost img {
+    width: 40px;
+    filter: invert(100%);
+}
+
+.newTextPost {
+    position: fixed;
+    bottom: 120px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgb(238, 29, 29);
+    border: none;
+    box-shadow: 0px 5px 10px rgb(128, 127, 127);
+}
+
+.newTextPost img {
+    width: 30px;
+    filter: invert(100%);
+}
+
+.newImagePost {
+    position: fixed;
+    bottom: 220px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgb(71, 184, 71);
+    border: none;
+    box-shadow: 0px 5px 10px rgb(128, 127, 127);
+}
+
+.newImagePost img {
+    width: 30px;
+    filter: invert(100%);
+}
+
+.newVideoPost {
+    position: fixed;
+    bottom: 320px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background-color: rgb(36, 177, 177);
+    border: none;
+    box-shadow: 0px 5px 10px rgb(128, 127, 127);
+}
+
+.newVideoPost img {
+    width: 35px;
+    filter: invert(100%);
+}
+
+.modalButtons button:focus { 
+    outline: none;
+    outline-color: none;
+}
+
+.modalButtons button:active {
+    outline: none;
+    outline-color: none;
+}
+
+/*****************/
