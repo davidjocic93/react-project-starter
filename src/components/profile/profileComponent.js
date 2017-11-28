@@ -9,7 +9,7 @@ const ProfileComponent = (props) => {
 
         <div >
 
-            <div className="row">
+            <div className="row profileRow">
 
                 <div className="col-12">
                     <div className="avatarContainer">

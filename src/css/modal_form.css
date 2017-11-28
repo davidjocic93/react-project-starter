@@ -71,3 +71,7 @@
 .modal-footer button:last-child:hover {
     background-color: #025875;
 }
+
+.modal-content {
+    margin-top: 100px;
+}

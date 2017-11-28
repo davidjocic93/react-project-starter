@@ -127,42 +127,6 @@ class EditProfile extends React.Component {
 
     render() {
 
-        const Modal =
-            <Modal className="Modal__Bootstrap modal-dialog" isOpen={this.state.isOpen}>
-
-                <div className="modal-content">
-
-                    <div className="modal-header">
-                        <h4 className="modal-title">Edit Profile</h4>
-                    </div>
-
-                    <div className="modal-body">
-
-                        Name: <input className="col-12" type="text" name="name" onChange={this.handleChange} value={this.state.name} /><br />
-                        <div className="nameError text-danger">{this.state.errors.name}</div>
-
-                        Email: <input className="col-12" type="email" name="email" onChange={this.handleChange} value={this.state.email} /><br />
-                        <div className="emailError text-danger">{this.state.errors.email}</div>
-
-                        Short about: <textarea rows="2" cols="40" className="col-12" type="text" name="aboutShort" onChange={this.handleChange} value={this.state.aboutShort} /><br />
-
-                        About: <textarea rows="4" cols="40" className="col-12" type="text" name="about" onChange={this.handleChange} value={this.state.about} /><br />
-
-                        AvatarURL: <textarea rows="2" cols="40" className="col-12" type="text" name="avatarUrl" onChange={this.handleChange} value={this.state.avatarUrl} /><br />
-                        <div className="avatarError text-danger">{this.state.errors.link}</div>
-
-                        <div className="fieldsError text-danger">{this.state.errors.allFieldsError}</div>
-
-                    </div>
-
-                    <div className="modal-footer">
-                        <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Close</button>
-                        <button type="button" className="btn btn-primary" onClick={this.saveChanges}>Save changes</button>
-                    </div>
-
-                </div>
-            </Modal>;
-
         return (
 
             <div>
@@ -171,7 +135,40 @@ class EditProfile extends React.Component {
                     <img src="https://image.flaticon.com/icons/png/128/149/149307.png" width="50px" />
                 </button>
 
-                {Modal}
+                <Modal className="Modal__Bootstrap modal-dialog" isOpen={this.state.isOpen}>
+
+                    <div className="modal-content">
+
+                        <div className="modal-header">
+                            <h4 className="modal-title">Edit Profile</h4>
+                        </div>
+
+                        <div className="modal-body">
+
+                            Name: <input className="col-12" type="text" name="name" onChange={this.handleChange} value={this.state.name} /><br />
+                            <div className="nameError text-danger">{this.state.errors.name}</div>
+
+                            Email: <input className="col-12" type="email" name="email" onChange={this.handleChange} value={this.state.email} /><br />
+                            <div className="emailError text-danger">{this.state.errors.email}</div>
+
+                            Short about: <textarea rows="2" cols="40" className="col-12" type="text" name="aboutShort" onChange={this.handleChange} value={this.state.aboutShort} /><br />
+
+                            About: <textarea rows="4" cols="40" className="col-12" type="text" name="about" onChange={this.handleChange} value={this.state.about} /><br />
+
+                            AvatarURL: <textarea rows="2" cols="40" className="col-12" type="text" name="avatarUrl" onChange={this.handleChange} value={this.state.avatarUrl} /><br />
+                            <div className="avatarError text-danger">{this.state.errors.link}</div>
+
+                            <div className="fieldsError text-danger">{this.state.errors.allFieldsError}</div>
+
+                        </div>
+
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Close</button>
+                            <button type="button" className="btn btn-primary" onClick={this.saveChanges}>Save changes</button>
+                        </div>
+
+                    </div>
+                </Modal>;
 
             </div >
         );

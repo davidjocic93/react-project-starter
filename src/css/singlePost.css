@@ -33,3 +33,21 @@
     width: 25px;
     filter: invert(100%);
 }
+
+.commentContainer {
+    margin-top: 20px;
+}
+
+.comment {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    height: 80px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 4px rgb(121, 121, 121);
+}
+
+.comment p {
+    margin-bottom: 2px;
+}

@@ -39,8 +39,6 @@ class Filter extends React.Component {
 
             <div>
 
-                <span className="selectSpan">Show on feed</span>
-
                 <select onChange={this.handleSelection} className="selectpicker">
                     <option  value="">All Posts</option>
                     <option  value="text">Text Posts</option>
