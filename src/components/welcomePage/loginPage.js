@@ -35,9 +35,6 @@ class LoginPage extends React.Component {
         this.setState({
             [name]: value
         });
-
-
-        console.log(event.target.value);
     }
 
     handleLogin(event) {
@@ -46,13 +43,11 @@ class LoginPage extends React.Component {
             username: this.state.username,
             password: this.state.password
         };
-        console.log(data);
 
         validationService.isLoginFormValid(data,
             (data) => {
                 authenticationService.login(data,
                     (serverErrorObject) => {
-                        console.table(serverErrorObject);
                         if (serverErrorObject.response == undefined) {
                             alert("SERVER UNREACHABLE!");
                         } else if (this.state.username != "" && this.state.password != "") {

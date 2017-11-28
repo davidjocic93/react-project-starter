@@ -2,9 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 
 const CommentsComponent = (props) => {
+
     const {id, dateCreated, body, postId, authorId} = props.comment;
 
     return (
+        
         <div>
             <p>{body}</p>
         </div>

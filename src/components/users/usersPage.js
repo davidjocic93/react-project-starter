@@ -24,9 +24,6 @@ class UsersPage extends React.Component {
                 users: users
             });
         });
-
-        // console.log(this.state.users);
-
     }
 
 

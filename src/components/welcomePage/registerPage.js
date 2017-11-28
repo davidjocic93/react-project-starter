@@ -39,7 +39,6 @@ class RegisterPage extends React.Component {
         const value = event.target.value;
         const name = event.target.name;
         this.setState({ [name]: value });
-        console.log(event.target.value);
     }
 
 
@@ -52,7 +51,6 @@ class RegisterPage extends React.Component {
             repeat: this.state.repeat,
             email: this.state.email,
         };
-        console.log(data);
 
         validationService.isRegisterFormValid(data,
             (data) => {

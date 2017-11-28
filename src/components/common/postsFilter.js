@@ -3,18 +3,27 @@ import PropTypes from "prop-types";
 
 class Filter extends React.Component {
     constructor(props) {
+
         super(props);
 
         this.state = {
             searchTerm: ""
         };
 
+        this.bindEventHandlers();
+    }
+
+    bindEventHandlers () {
+
         this.handleSelection = this.handleSelection.bind(this);
+
     }
 
 
     handleSelection(event) {
+
         const searchString = event.target.value;
+
         this.setState({
             searchTerm: searchString
         });
@@ -25,9 +34,13 @@ class Filter extends React.Component {
 
 
     render() {
+
         return (
+
             <div>
+
                 <span className="selectSpan">Show on feed</span>
+
                 <select onChange={this.handleSelection} className="selectpicker">
                     <option  value="">All Posts</option>
                     <option  value="text">Text Posts</option>
