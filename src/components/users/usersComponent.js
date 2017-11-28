@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 const UsersComponent = (props) => {
     const { id, name, aboutShort, lastPostDate, avatarUrl } = props.user;
-    // console.log(props.user);
 
     const date = new Date(lastPostDate);
     const time = date.toLocaleTimeString();

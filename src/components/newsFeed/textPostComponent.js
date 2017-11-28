@@ -6,44 +6,56 @@ import { redirectionService } from "../../service/redirectionService";
 
 
 const TextPostComponent = (props) => {
+
     const { id, dateCreated, userId, userDisplayName, type, text, commentsNum } = props.post;
+    const ownId = props.ownId;
 
     const date = new Date(dateCreated);
     const time = date.toLocaleTimeString();
     const dateString = date.toLocaleDateString();
 
+    let showDeleteButton = "";
+
+    if (ownId !== userId) {
+        showDeleteButton = "hidden";
+    }
+
     const onDeletion = () => {
-        dataService.deletePost(id, (serverResponseData) => {
-            redirectionService.goTo("/");
-        });
+
+        dataService.deletePost(id,
+            (serverResponseData) => {
+                redirectionService.goTo("/");
+            });
     };
 
-    const getOwnId = () => {
-        dataService.getProfile((profile) => {
-            console.log(profile.userId);
-        });
-    };
 
 
     return (
+
         <div className="container feed">
-            <button onClick={onDeletion}>Delete Post</button>
-            <button onClick={getOwnId}> Post</button>
+
+            <button onClick={onDeletion} style={{ visibility: showDeleteButton }}>Delete Post</button>
+
             <div className="row postContainer">
+
                 <div className="col-12 text">
                     <h3>{text}</h3>
                     <hr />
                 </div>
+
                 <div className="col-4 date">
                     <p>{time}</p>
                     <p>{dateString}</p>
                 </div>
+
                 <div className="col-4 commentsNum">
                     <p>CommentsNum: {commentsNum}</p>
                 </div>
+
                 <div className="col-4 type">
                     <p>{type}</p>
                 </div>
+
             </div>
         </div>
     );
@@ -51,7 +63,7 @@ const TextPostComponent = (props) => {
 
 TextPostComponent.propTypes = {
     post: PropTypes.object,
-    deletePost: PropTypes.func
+    ownId: PropTypes.number
 };
 
 

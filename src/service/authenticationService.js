@@ -1,10 +1,10 @@
 import { SESSION_ID } from "../constants";
-import {communicationService} from "./communicationService";
-import {redirectionService} from "./redirectionService";
-import {sessionService} from "./sessionService";
+import { communicationService } from "./communicationService";
+import { redirectionService } from "./redirectionService";
+import { sessionService } from "./sessionService";
 
 class AuthenticationService {
-    constructor() {}
+    constructor() { }
 
     isAuthenticated() {
         const sessionId = sessionService.getItem(SESSION_ID);
@@ -14,11 +14,10 @@ class AuthenticationService {
     login(userData, errorHandler) {
         communicationService.postRequest("/api/login", userData,
             (serverResponseData) => {
-                if (serverResponseData.status == "200") {
-                    console.log(serverResponseData);
-                    sessionService.setItem(SESSION_ID, serverResponseData.data.sessionId);
-                    redirectionService.goTo("/");
-                }
+
+                sessionService.setItem(SESSION_ID, serverResponseData.data.sessionId);
+                redirectionService.goTo("/");
+
             }, (serverErrorObject) => {
                 errorHandler(serverErrorObject);
             });
@@ -33,7 +32,6 @@ class AuthenticationService {
         communicationService.postRequest("/api/register", registerData,
             (serverResponseData) => {
 
-                console.log(serverResponseData);
                 redirectionService.goTo("/loginPage");
 
             }, (serverErrorObject) => {

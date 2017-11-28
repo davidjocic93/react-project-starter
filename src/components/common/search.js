@@ -9,12 +9,21 @@ class Search extends React.Component {
             searchTerm: ""
         };
 
+        this.bindEventHandlers();
+
+    }
+
+    bindEventHandlers() {
+
         this.handleChange = this.handleChange.bind(this);
+
     }
 
 
     handleChange(event) {
+
         const searchString = event.target.value;
+
         this.setState({
             searchTerm: searchString
         });
@@ -25,10 +34,14 @@ class Search extends React.Component {
 
 
     render() {
+
         return (
+
             <div>
-                <img src="http://icons.iconarchive.com/icons/icons8/windows-8/512/Very-Basic-Search-icon.png"/><input type="text" onChange={this.handleChange} value={this.state.searchTerm} />
+                <img src="http://icons.iconarchive.com/icons/icons8/windows-8/512/Very-Basic-Search-icon.png" />
+                <input type="text" onChange={this.handleChange} value={this.state.searchTerm} />
             </div>
+
         );
     }
 }

@@ -12,7 +12,6 @@ class DataService {
     getProfile(profileHandler) {
         communicationService.getRequest("/api/profile",
             (serverResponseData) => {
-                console.table(serverResponseData.data);
 
                 const name = serverResponseData.data.name;
                 const email = serverResponseData.data.email;
@@ -36,7 +35,6 @@ class DataService {
     getUserProfile(id, profileHandler) {
         communicationService.getRequest(`/api/users/${id}`,
             (serverResponseData) => {
-                console.table(serverResponseData.data);
 
                 const name = serverResponseData.data.name;
                 const email = serverResponseData.data.email;
@@ -70,7 +68,6 @@ class DataService {
         let users = [];
         communicationService.getRequest("/api/users",
             (serverResponseData) => {
-                console.table(serverResponseData.data);
 
                 serverResponseData.data.forEach(element => {
                     const id = element.id;
@@ -95,7 +92,6 @@ class DataService {
         let posts = [];
         communicationService.getRequest("/api/Posts",
             (serverResponseData) => {
-                console.table(serverResponseData);
 
                 serverResponseData.data.forEach(element => {
 

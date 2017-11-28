@@ -5,7 +5,9 @@ import EditProfile from "./editprofile";
 import ProfileComponent from "./profileComponent";
 
 class Profile extends React.Component {
+
     constructor(props) {
+
         super(props);
 
         this.state = {
@@ -22,41 +24,46 @@ class Profile extends React.Component {
     }
 
     loadData() {
-        dataService.getProfile((profile) => {
 
-            this.setState({
-                name: profile.name,
-                email: profile.email,
-                avatarUrl: profile.avatarUrl,
-                postsCount: profile.postsCount,
-                commentsCount: profile.commentsCount,
-                about: profile.about,
-                aboutShort: profile.aboutShort
-            });
-
-            if (!this.state.avatarUrl) {
+        dataService.getProfile(
+            (profile) => {
                 this.setState({
-                    avatarUrl: "https://via.placeholder.com/200x200"
+                    name: profile.name,
+                    email: profile.email,
+                    avatarUrl: profile.avatarUrl,
+                    postsCount: profile.postsCount,
+                    commentsCount: profile.commentsCount,
+                    about: profile.about,
+                    aboutShort: profile.aboutShort
                 });
-            }
-        });
+
+                if (!this.state.avatarUrl) {
+                    this.setState({
+                        avatarUrl: "https://via.placeholder.com/200x200"
+                    });
+                }
+            });
     }
 
+
     componentDidMount() {
+
         this.loadData();
     }
 
-    
 
     bindEventHandlers() {
+
         this.loadData = this.loadData.bind(this);
     }
 
     render() {
+
         return (
+
             <div className="container profile">
                 <ProfileComponent profile={this.state} />
-                <EditProfile reloadProfile={this.loadData}/>
+                <EditProfile reloadProfile={this.loadData} />
             </div>
         );
     }

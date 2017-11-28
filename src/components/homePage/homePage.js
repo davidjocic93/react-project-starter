@@ -11,14 +11,21 @@ import SinglePostPage from "../singlePost/singlePostPage";
 
 
 class HomePage extends React.Component {
+
     constructor(props) {
+
         super(props);
+
     }
 
     render() {
+
         return (
+
             <div>
+
                 <Header />
+                
                 <Switch>
                     <Route exact path="/" component={NewsFeedPage}/>
                     <Route path="/feed/:type/:postId" component={SinglePostPage}/>
@@ -26,7 +33,9 @@ class HomePage extends React.Component {
                     <Route exact path="/people" component={UsersPage}/>
                     <Route path="/people/:id" component={SingleUserPage}/>
                 </Switch>
+
             </div>
+
         );
     }
 };
