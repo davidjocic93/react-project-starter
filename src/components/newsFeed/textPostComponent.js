@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { communicationService } from "../../service/communicationService";
 import { dataService } from "../../service/dataService";
 import { redirectionService } from "../../service/redirectionService";
+import {Link} from "react-router-dom";
 
 
 const TextPostComponent = (props) => {
@@ -13,6 +14,8 @@ const TextPostComponent = (props) => {
     const date = new Date(dateCreated);
     const time = date.toLocaleTimeString();
     const dateString = date.toLocaleDateString();
+    const pathToSinglePost = `/feed/${type.slice(0, 1).toUpperCase()}${type.slice(1)}/${id}`;
+
 
     let showDeleteButton = "";
 
@@ -51,7 +54,9 @@ const TextPostComponent = (props) => {
 
                 <div className="col-4 commentsNum">
                     <p>{commentsNum} comments</p>
-                    <h5>Read more</h5>
+                    <Link to={pathToSinglePost}>
+                        <h5>Read more</h5>
+                    </Link>
                 </div>
 
                 <div className="col-4 type">

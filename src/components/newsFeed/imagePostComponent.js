@@ -11,9 +11,10 @@ const ImagePostComponent = (props) => {
     const date = new Date(dateCreated);
     const time = date.toLocaleTimeString();
     const dateString = date.toLocaleDateString();
+    const pathToSinglePost = `/feed/${type.slice(0, 1).toUpperCase()}${type.slice(1)}/${id}`;
 
     let showDeleteButton = "";
-    
+
     if (ownId !== userId) {
         showDeleteButton = "none";
     }
@@ -28,6 +29,7 @@ const ImagePostComponent = (props) => {
 
 
     return (
+
 
         <div className="container feed">
             <button className="deleteBtn" onClick={onDeletion} style={{ display: showDeleteButton }}>
@@ -47,7 +49,9 @@ const ImagePostComponent = (props) => {
 
                 <div className="col-4 commentsNum">
                     <p>{commentsNum} comments</p>
-                    <h5>Read more</h5>
+                    <Link to={pathToSinglePost}>
+                        <h5>Read more</h5>
+                    </Link>
                 </div>
 
                 <div className="col-4 type">

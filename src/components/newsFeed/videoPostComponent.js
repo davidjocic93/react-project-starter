@@ -14,6 +14,8 @@ const VideoPostComponent = (props) => {
     const time = date.toLocaleTimeString();
     const dateString = date.toLocaleDateString();
     const youtubeVideoId = videoUrl.slice(videoUrl.indexOf("=") + 1);
+    const pathToSinglePost = `/feed/${type.slice(0, 1).toUpperCase()}${type.slice(1)}/${id}`;
+
 
     let showDeleteButton = "";
 
@@ -59,7 +61,9 @@ const VideoPostComponent = (props) => {
 
                 <div className="col-4 commentsNum">
                     <p>{commentsNum} comments</p>
-                    <h5>Read more</h5>
+                    <Link to={pathToSinglePost}>
+                        <h5>Read more</h5>
+                    </Link>
                 </div>
 
                 <div className="col-4 type">

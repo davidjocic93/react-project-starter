@@ -17,7 +17,7 @@ class NewsFeedPage extends React.Component {
         this.state = {
             posts: [],
             allPosts: [],
-            ownId: ""
+            ownId: null
         };
 
         this.bindEventHandlers();
@@ -97,30 +97,30 @@ class NewsFeedPage extends React.Component {
 
                         {posts.map(post => {
 
-                            const pathToSinglePost = `/feed/${post.type.slice(0, 1).toUpperCase()}${post.type.slice(1)}/${post.id}`;
+                            // const pathToSinglePost = `/feed/${post.type.slice(0, 1).toUpperCase()}${post.type.slice(1)}/${post.id}`;
 
                             if (post.type == "text") {
 
                                 return (
-                                    <Link to={pathToSinglePost} key={post.id}>
-                                        <TextPostComponent ownId={this.state.ownId} post={post} />
-                                    </Link>
+                                    // <Link to={pathToSinglePost} key={post.id}>
+                                    <TextPostComponent ownId={this.state.ownId} post={post} key={post.id}/>
+                                    // </Link>
                                 );
 
                             } else if (post.type == "image") {
 
                                 return (
-                                    <Link to={pathToSinglePost} key={post.id}>
-                                        <ImagePostComponent ownId={this.state.ownId} post={post} key={post.id} />
-                                    </Link>
+                                    // <Link to={pathToSinglePost} key={post.id}>
+                                    <ImagePostComponent ownId={this.state.ownId} post={post} key={post.id} />
+                                    // </Link>
                                 );
 
                             } else if (post.type == "video") {
 
                                 return (
-                                    <Link to={pathToSinglePost} key={post.id}>
-                                        <VideoPostComponent ownId={this.state.ownId} post={post} key={post.id} />
-                                    </Link>
+                                    // <Link to={pathToSinglePost} key={post.id}>
+                                    <VideoPostComponent ownId={this.state.ownId} post={post} key={post.id} />
+                                    // </Link>
                                 );
                             }
                         })}
