@@ -8,6 +8,7 @@ import UsersPage from "../users/usersPage";
 import SingleUserPage from "../users/singleUserPage";
 import NewsFeedPage from "../newsFeed/newsFeedPage";
 import SinglePostPage from "../singlePost/singlePostPage";
+import { Redirect } from "react-router-dom";
 
 
 class HomePage extends React.Component {

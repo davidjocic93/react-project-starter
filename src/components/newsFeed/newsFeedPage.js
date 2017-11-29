@@ -46,6 +46,9 @@ class NewsFeedPage extends React.Component {
                     ownId: profile.userId
                 });
             });
+
+
+            
     }
 
     componentDidMount() {
@@ -82,7 +85,7 @@ class NewsFeedPage extends React.Component {
     }
 
     render() {
-
+       
         const posts = this.state.posts;
 
         return (
@@ -97,30 +100,23 @@ class NewsFeedPage extends React.Component {
 
                         {posts.map(post => {
 
-                            // const pathToSinglePost = `/feed/${post.type.slice(0, 1).toUpperCase()}${post.type.slice(1)}/${post.id}`;
 
                             if (post.type == "text") {
 
                                 return (
-                                    // <Link to={pathToSinglePost} key={post.id}>
-                                    <TextPostComponent ownId={this.state.ownId} post={post} key={post.id}/>
-                                    // </Link>
+                                    <TextPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id}/>
                                 );
 
                             } else if (post.type == "image") {
 
                                 return (
-                                    // <Link to={pathToSinglePost} key={post.id}>
-                                    <ImagePostComponent ownId={this.state.ownId} post={post} key={post.id} />
-                                    // </Link>
+                                    <ImagePostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
                                 );
 
                             } else if (post.type == "video") {
 
                                 return (
-                                    // <Link to={pathToSinglePost} key={post.id}>
-                                    <VideoPostComponent ownId={this.state.ownId} post={post} key={post.id} />
-                                    // </Link>
+                                    <VideoPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
                                 );
                             }
                         })}

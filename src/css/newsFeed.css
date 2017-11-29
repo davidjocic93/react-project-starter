@@ -38,6 +38,15 @@
     box-shadow: 1px 1px 4px rgb(121, 121, 121);
 }
 
+.postContainer h5 {
+    margin-bottom: 20px;
+    color: rgb(0, 163, 238);
+}
+
+.postContainer h5:hover {
+    color: rgb(255, 154, 40);
+}
+
 /*NEW POST BUTTONS*/
 
 .initialNewPost {
@@ -135,13 +144,15 @@
 }
 
 .deleteBtn {
-    position: relative;
-    top: 30px;
+    position: absolute;
+    bottom: 10px;
+    right: 25px;
     width: 45px;
     height: 45px;
     border-radius: 50%;
-    background-color: rgb(247, 31, 31);
+    background-color: rgb(236, 75, 75);
     border: none;
+    z-index: 15;
 }
 
 .deleteBtn:hover {
@@ -183,3 +194,28 @@
 
 
 /***************/
+
+.commentsNum h5 {
+    color: rgb(9, 129, 241);
+}
+
+.commentsNum p {
+    text-align: left;
+}
+
+.date p {
+    text-align: right;
+}
+
+.content p {
+    text-align: left;
+}
+
+.readMore h5:hover {
+    color: rgb(255, 154, 40);
+}
+
+.readMore {
+    text-align: center;
+}
+

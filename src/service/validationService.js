@@ -144,11 +144,29 @@ class ValidationService {
         successCallback(data);
     }
 
+    isCommentValid(data, successCallback, failureCallback) {
+
+        if (!this.isInputEmpty(data)) {
+            const error = "Post can't be empty!";
+            failureCallback(error);
+            return false;
+        }
+        successCallback(data);
+    }
+
+
     hasAllRequiredFields(data) {
         for (let key in data) {
             if (data[key] === "") {
                 return false;
             }
+        }
+        return true;
+    }
+
+    isInputEmpty(data) {
+        if (data.length == 0) {
+            return false;
         }
         return true;
     }
@@ -205,7 +223,7 @@ class ValidationService {
     }
 
     isYoutubeLinkValid(data) {
-        const re = /^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com|youtu\.be)\/watch\?v=([^&]+)/m;
+        const re = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
         const isOK = re.test(data.videoUrl);
         return isOK;
     }

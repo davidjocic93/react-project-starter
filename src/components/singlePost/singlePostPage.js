@@ -5,6 +5,7 @@ import TextPostComponent from "../newsFeed/textPostComponent";
 import ImagePostComponent from "../newsFeed/imagePostComponent";
 import VideoPostComponent from "../newsFeed/videoPostComponent";
 import CommentsComponent from "./commentsComponent";
+import { validationService } from "../../service/validationService";
 
 
 class SinglePostPage extends React.Component {
@@ -17,7 +18,8 @@ class SinglePostPage extends React.Component {
             postData: null,
             comments: [],
             comment: "",
-            ownId: ""
+            ownId: "",
+            commentRequiredError: ""
         };
 
         this.bindEventHandlers();
@@ -44,10 +46,25 @@ class SinglePostPage extends React.Component {
         const comment = this.state.comment;
         const postId = this.props.match.params.postId;
 
-        dataService.newComment(comment, postId,
-            (serverResponseData) => {
-                this.loadData();
+        console.log(comment);
+
+        validationService.isCommentValid(comment,
+            (comment) => {
+                dataService.newComment(comment, postId,
+                    (serverResponseData) => {
+                        this.setState({
+                            comment: ""
+                        });
+                        this.loadData();
+                    });
+            }, (error) => {
+                console.log(comment);
+
+                this.setState({
+                    commentRequiredError: error
+                });
             });
+
 
     }
 
@@ -116,11 +133,12 @@ class SinglePostPage extends React.Component {
 
                         <div className="col-md-9 offset-md-1">
                             <input className="commentInput" type="text" placeholder="Add your comment" name="comment" onChange={this.handleChange} value={this.state.comment} />
+                            <p className="commentRequiredError text-danger">{this.state.commentRequiredError}</p>
                         </div>
 
                         <div className="col-1 sendComment">
-                            <button onClick={this.postComment}>
-                                <img src="https://cdn.pixabay.com/photo/2016/04/07/18/57/arrow-1314461_960_720.png" />
+                            <button type="button" onClick={this.postComment}>
+                                <img src="https://image.flaticon.com/icons/png/512/60/60525.png" />
                             </button>
                         </div>
 
@@ -149,7 +167,7 @@ class SinglePostPage extends React.Component {
 
                     <div className="row">
                         <div className="col-md-10 offset-md-1 col-12">
-                            <ImagePostComponent ownId={this.state.ownId} post={post} />;
+                            <ImagePostComponent ownId={this.state.ownId} post={post} />
                         </div>
                     </div>
 
@@ -157,11 +175,12 @@ class SinglePostPage extends React.Component {
 
                         <div className="col-md-9 offset-md-1">
                             <input className="commentInput" type="text" placeholder="Add your comment" name="comment" onChange={this.handleChange} value={this.state.comment} />
+                            <p className="commentRequiredError text-danger">{this.state.commentRequiredError}</p>
                         </div>
 
                         <div className="col-1 sendComment">
-                            <button onClick={this.postComment}>
-                                <img src="https://cdn.pixabay.com/photo/2016/04/07/18/57/arrow-1314461_960_720.png" />
+                            <button type="button" onClick={this.postComment}>
+                                <img src="https://image.flaticon.com/icons/png/512/60/60525.png" />
                             </button>
                         </div>
 
@@ -197,11 +216,12 @@ class SinglePostPage extends React.Component {
 
                     <div className="col-md-9 offset-md-1">
                         <input className="commentInput" type="text" placeholder="Add your comment" name="comment" onChange={this.handleChange} value={this.state.comment} />
+                        <p className="commentRequiredError text-danger">{this.state.commentRequiredError}</p>
                     </div>
 
                     <div className="col-1 sendComment">
-                        <button onClick={this.postComment}>
-                            <img src="https://cdn.pixabay.com/photo/2016/04/07/18/57/arrow-1314461_960_720.png" />
+                        <button type="button" onClick={this.postComment}>
+                            <img src="https://image.flaticon.com/icons/png/512/60/60525.png" />
                         </button>
                     </div>
 

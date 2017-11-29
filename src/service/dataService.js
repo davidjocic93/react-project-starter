@@ -173,9 +173,10 @@ class DataService {
                     const dateCreated = element.dateCreated;
                     const body = element.body;
                     const postId = element.postId;
+                    const authorName = element.authorName;
                     const authorId = element.authorId;
 
-                    const comment = new CommentDTO(id, dateCreated, body, postId, authorId);
+                    const comment = new CommentDTO(id, dateCreated, body, postId, authorName, authorId);
 
                     comments.push(comment);
                 });

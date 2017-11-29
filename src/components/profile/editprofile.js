@@ -168,7 +168,7 @@ class EditProfile extends React.Component {
                         </div>
 
                     </div>
-                </Modal>;
+                </Modal>
 
             </div >
         );

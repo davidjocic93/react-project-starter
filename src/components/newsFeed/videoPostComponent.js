@@ -2,19 +2,35 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import Iframe from "react-iframe";
-
+import { dataService } from "../../service/dataService";
+import { redirectionService } from "../../service/redirectionService";
 
 
 const VideoPostComponent = (props) => {
 
     const { id, dateCreated, userId, userDisplayName, type, text, commentsNum, videoUrl } = props.post;
     const ownId = props.ownId;
+    const reloadFeed = props.reloadFeed;
+
 
     const date = new Date(dateCreated);
     const time = date.toLocaleTimeString();
     const dateString = date.toLocaleDateString();
-    const youtubeVideoId = videoUrl.slice(videoUrl.indexOf("=") + 1);
     const pathToSinglePost = `/feed/${type.slice(0, 1).toUpperCase()}${type.slice(1)}/${id}`;
+
+    let youtubeVideoId = videoUrl.slice(videoUrl.indexOf("=") + 1);
+
+    if (videoUrl.includes("youtu.be")) {
+        youtubeVideoId = videoUrl.slice(videoUrl.length - 11);
+    } else if (videoUrl.includes("list=")) {
+        youtubeVideoId = videoUrl.slice((videoUrl.indexOf("=") + 1), videoUrl.indexOf("&"));
+    }
+
+    let showReadMoreButton = "";
+
+    if (window.location.hash !== "#/") {
+        showReadMoreButton = "hidden";
+    }
 
 
     let showDeleteButton = "";
@@ -27,7 +43,13 @@ const VideoPostComponent = (props) => {
 
         dataService.deletePost(id,
             (serverResponseData) => {
+
                 redirectionService.goTo("/");
+
+                if (window.location.hash === "#/") {
+                    reloadFeed();
+                }
+
             });
     };
 
@@ -42,7 +64,15 @@ const VideoPostComponent = (props) => {
 
             <div className="row postContainer">
 
-                <div className="col-12 text">
+                <div className="col-8 text">
+                    <Link to={`/people/${userId}`}><h5>{userDisplayName}</h5></Link>
+                </div>
+
+                <div className="col-4 date">
+                    <p>{time} {dateString}</p>
+                </div>
+
+                <div className="col-12">
                     <Iframe url={`https://www.youtube.com/embed/${youtubeVideoId}`}
                         width="100%"
                         height="500px"
@@ -54,20 +84,14 @@ const VideoPostComponent = (props) => {
                     <hr />
                 </div>
 
-                <div className="col-4 date">
-                    <p>{time}</p>
-                    <p>{dateString}</p>
-                </div>
-
                 <div className="col-4 commentsNum">
                     <p>{commentsNum} comments</p>
-                    <Link to={pathToSinglePost}>
-                        <h5>Read more</h5>
-                    </Link>
                 </div>
 
-                <div className="col-4 type">
-                    <p>{type}</p>
+                <div className="col-4 type readMore">
+                    <Link to={pathToSinglePost} style={{ visibility: showReadMoreButton }}>
+                        <h5>Read more  &#62;&#62;&#62;</h5>
+                    </Link>
                 </div>
 
             </div>
@@ -77,7 +101,8 @@ const VideoPostComponent = (props) => {
 
 VideoPostComponent.propTypes = {
     post: PropTypes.object,
-    ownId: PropTypes.number
+    ownId: PropTypes.number,
+    reloadFeed: PropTypes.func    
 };
 
 export default VideoPostComponent;

@@ -41,7 +41,6 @@
 .comment {
     margin-top: 10px;
     margin-bottom: 20px;
-    height: 80px;
     background-color: white;
     padding: 20px;
     border-radius: 3px;
@@ -50,4 +49,16 @@
 
 .comment p {
     margin-bottom: 2px;
+}
+
+.comment h6 {
+    color: rgb(9, 129, 241);
+}
+
+.comment h6:hover {
+    color: rgb(255, 154, 40);
+}
+
+.comment a:hover {
+    text-decoration: none;
 }
