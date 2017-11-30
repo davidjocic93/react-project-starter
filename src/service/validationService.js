@@ -83,13 +83,6 @@ class ValidationService {
             return false;
         }
 
-        if (!this.isLinkValid(data)) {
-            const error = "Link is not in valid format!";
-            errors.link = error;
-            failureCallback(errors);
-            return false;
-        }
-
         successCallback(data);
     }
 
@@ -104,19 +97,9 @@ class ValidationService {
 
     isImagePostValid(data, successCallback, failureCallback) {
 
-        const errors = {};
-
-        if (!this.hasAllRequiredFields(data)) {
-            const error = "All fields must be filled out!";
-            errors.allFields = error;
-            failureCallback(errors);
-            return false;
-        }
-
-        if (!this.isImageLinkValid(data)) {
-            const error = "Link is not in valid format!";
-            errors.link = error;
-            failureCallback(errors);
+        if (!this.isFileChosen(data)) {
+            const error = "Please chose picture!";
+            failureCallback(error);
             return false;
         }
 
@@ -166,6 +149,13 @@ class ValidationService {
 
     isInputEmpty(data) {
         if (data.length == 0) {
+            return false;
+        }
+        return true;
+    }
+
+    isFileChosen(data) {
+        if (data === null) {
             return false;
         }
         return true;

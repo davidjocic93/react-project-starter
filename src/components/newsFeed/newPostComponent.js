@@ -18,7 +18,7 @@ class NewPostComponent extends React.Component {
             textModalOpen: false,
             imageModalOpen: false,
             videoModalOpen: false,
-            files: {},
+            files: null,
             text: "",
             imageUrl: "",
             videoUrl: "",
@@ -60,7 +60,10 @@ class NewPostComponent extends React.Component {
         reader.onloadend = () => {
             this.setState({
                 files: file,
-                imagePreviewUrl: reader.result
+                imagePreviewUrl: reader.result,
+                errors: {
+                    allFields: ""
+                }
             });
         };
 
@@ -163,27 +166,40 @@ class NewPostComponent extends React.Component {
         event.preventDefault();
 
         const file = this.state.files;
-        dataService.uploadImage(file,
-            (serverResponseData) => {
+        console.log("file" + file);
+        validationService.isImagePostValid(file,
+            (file) => {
 
-                const data = {
-                    imageUrl: serverResponseData.data
-                };
-
-                dataService.newPost("Image", data,
+                dataService.uploadImage(file,
                     (serverResponseData) => {
 
-                        this.closeModal();
-                        
-                        this.setState({
-                            text: "",
-                            imageUrl: "",
-                            videoUrl: ""
-                        });
+                        const data = {
+                            imageUrl: serverResponseData.data
+                        };
 
-                        this.props.reloadFeed();
+                        dataService.newPost("Image", data,
+                            (serverResponseData) => {
+
+                                this.closeModal();
+
+                                this.setState({
+                                    text: "",
+                                    imageUrl: "",
+                                    videoUrl: ""
+                                });
+
+                                this.props.reloadFeed();
+                            });
                     });
+            },
+            (error) => {
+                this.setState({
+                    errors: {
+                        allFields: error
+                    }
+                });
             });
+
 
     }
 
@@ -259,10 +275,10 @@ class NewPostComponent extends React.Component {
 
 
                         Image: <input className="col-12" type="file" name="imageUrl" onChange={this.handleFileInputChange} value={this.state.uploadImage} /><br />
-                        {/* <button onClick={this.handleUpload}>Upload</button> */}
-                        {/* <div className="nameError text-danger">{this.state.errors.allFields}</div>
-                        <div className="fieldsError text-danger">{this.state.errors.link}</div> */}
-                        <img className="col-12" src={this.state.imagePreviewUrl} style={{ width: "100px" }} />
+                        <div className="fieldsError text-danger">{this.state.errors.allFields}</div>
+                        <div className="imagePostPreviewContainer">
+                            <img className="col-12 imagePostPreview" src={this.state.imagePreviewUrl} />
+                        </div>
                     </div>
 
                     <div className="modal-footer">

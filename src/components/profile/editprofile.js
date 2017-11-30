@@ -19,7 +19,7 @@ class EditProfile extends React.Component {
             avatarUrl: "",
             email: "",
             name: "",
-            files: null,
+            file: null,
             imagePreviewUrl: "",
             errors: {
                 name: "",
@@ -82,7 +82,7 @@ class EditProfile extends React.Component {
         let file = event.target.files[0];
         reader.onloadend = () => {
             this.setState({
-                files: file,
+                file: file,
                 imagePreviewUrl: reader.result
             });
         };
@@ -104,19 +104,24 @@ class EditProfile extends React.Component {
     closeModal() {
         this.setState({
             isOpen: false,
-            imagePreviewUrl: ""
+            imagePreviewUrl: "",
+            errors: {
+                name: "",
+                email: "",
+                allFieldsError: "",
+                link: ""
+            }
         });
     }
 
 
-    saveChanges(function1, function2) {
+    saveChanges() {
 
         event.preventDefault();
 
-        const file = this.state.files;
-        console.log(file);
+        const file = this.state.file;
 
-        if (this.state.files == null) {
+        if (this.state.file == null) {
 
             console.log("if");
 
@@ -128,40 +133,60 @@ class EditProfile extends React.Component {
                 name: this.state.name,
             };
 
-            dataService.updateProfile(data,
-                (serverResponseData) => {
-                    this.closeModal();
-                    this.props.reloadProfile();
+            validationService.isEditFormValid(data,
+                (data) => {
+                    dataService.updateProfile(data,
+                        (serverResponseData) => {
+                            this.closeModal();
+                            this.props.reloadProfile();
+                        },
+                        (serverErrorObject) => {
+                            console.log(serverErrorObject);
+                        });
                 },
-                (serverErrorObject) => {
-                    console.log(serverErrorObject);
+                (errors) => {
+                    this.setState({
+                        errors: errors
+                    });
                 });
             return;
         }
 
-        dataService.uploadImage(file,
-            (serverResponseData) => {
+        let data = {
+            about: this.state.about,
+            aboutShort: this.state.aboutShort,
+            email: this.state.email,
+            name: this.state.name,
+        };
 
-                let data = {
-                    about: this.state.about,
-                    aboutShort: this.state.aboutShort,
-                    email: this.state.email,
-                    name: this.state.name,
-                };
-                data.avatarUrl = serverResponseData.data;
+        validationService.isEditFormValid(data,
+            (data) => {
 
-                dataService.updateProfile(data,
+                dataService.uploadImage(file,
                     (serverResponseData) => {
-                        this.closeModal();
-                        this.props.reloadProfile();
-                    },
-                    (serverErrorObject) => {
-                        console.log(serverErrorObject);
+
+                        data.avatarUrl = serverResponseData.data;
+                        const onlyForPreview = serverResponseData.data;
+
+                        dataService.updateProfile(data,
+                            (serverResponseData) => {
+                                console.table("on update" + serverResponseData.data);
+                                this.setState({
+                                    avatarUrl: onlyForPreview
+                                });
+                                this.closeModal();
+                                this.props.reloadProfile();
+                            },
+                            (serverErrorObject) => {
+                                console.log(serverErrorObject);
+                            });
                     });
+            },
+            (errors) => {
+                this.setState({
+                    errors: errors
+                });
             });
-
-
-
 
     }
 
@@ -188,19 +213,16 @@ class EditProfile extends React.Component {
 
                             Name: <input className="col-12" type="text" name="name" onChange={this.handleChange} value={this.state.name} /><br />
                             <div className="nameError text-danger">{this.state.errors.name}</div>
-
                             Email: <input className="col-12" type="email" name="email" onChange={this.handleChange} value={this.state.email} /><br />
                             <div className="emailError text-danger">{this.state.errors.email}</div>
-
                             Short about: <textarea rows="2" cols="40" className="col-12" type="text" name="aboutShort" onChange={this.handleChange} value={this.state.aboutShort} /><br />
-
                             About: <textarea rows="4" cols="40" className="col-12" type="text" name="about" onChange={this.handleChange} value={this.state.about} /><br />
 
-                            {/* AvatarURL: <textarea rows="2" cols="40" className="col-12" type="text" name="avatarUrl" onChange={this.handleChange} value={this.state.avatarUrl} /><br />
-                            <div className="avatarError text-danger">{this.state.errors.link}</div> */}
+                            <input className="col-12 uploadProfileImage" type="file" name="uploadImage" onChange={this.handleFileInputChange} value={this.state.uploadImage} />
 
-                            <input type="file" name="uploadImage" onChange={this.handleFileInputChange} value={this.state.uploadImage} />
-                            <img className="col-12" src={this.state.imagePreviewUrl ? this.state.imagePreviewUrl : this.state.avatarUrl} style={{ width: "100px" }} />
+                            <div className="profileImagePreviewContainer">
+                                <img className="profileImagePreview" src={this.state.imagePreviewUrl ? this.state.imagePreviewUrl : this.state.avatarUrl} />
+                            </div>
 
                             <div className="fieldsError text-danger">{this.state.errors.allFieldsError}</div>
 

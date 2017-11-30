@@ -32,7 +32,9 @@ class WelcomePage extends React.Component {
                 <div className="row">
                     <Switch>
                         <Redirect from="/" exact to="/loginPage" />
-                        <Redirect from="feed" exact to="/loginPage" />
+                        <Redirect from="/feed" exact to="/loginPage" />
+                        <Redirect from="/profile" exact to="/loginPage" />
+                        <Redirect from="/people" exact to="/loginPage" />
                         <Route path="/loginPage" component={LoginPage} />
                         <Route path="/registerPage" component={RegisterPage} />
                     </Switch>
