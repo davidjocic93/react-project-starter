@@ -1,4 +1,5 @@
 import React from "react";
+import { POSTS_PER_PAGE } from "../../constants";
 import { dataService } from "../../service/dataService";
 import TextPostComponent from "./textPostComponent";
 import ImagePostComponent from "./imagePostComponent";
@@ -6,6 +7,7 @@ import VideoPostComponent from "./videoPostComponent";
 import NewPostComponent from "./newPostComponent";
 import Filter from "../common/postsFilter";
 import { Link } from "react-router-dom";
+import Pagination from "react-js-pagination";
 
 
 class NewsFeedPage extends React.Component {
@@ -17,8 +19,11 @@ class NewsFeedPage extends React.Component {
         this.state = {
             posts: [],
             allPosts: [],
-            ownId: null
+            ownId: null,
+            numberOfPosts: 0,
+            activePage: 1
         };
+
 
         this.bindEventHandlers();
     }
@@ -28,15 +33,33 @@ class NewsFeedPage extends React.Component {
         this.loadData = this.loadData.bind(this);
         this.filtering = this.filtering.bind(this);
         this.deletePost = this.deletePost.bind(this);
+        this.handlePageChange = this.handlePageChange.bind(this);
+    }
+
+    handlePageChange(pageNumber) {
+
+        let top = 5;
+        let skip = ((pageNumber - 1) * POSTS_PER_PAGE);
+
+        dataService.getPostsForPagination(top, skip,
+            (posts) => {
+                this.setState({
+                    posts: posts,
+                    allPosts: posts,
+                    activePage: pageNumber
+                });
+            });
+
+
     }
 
     loadData() {
 
-        dataService.getPosts(
+        dataService.getPostsForPagination(5, 0,
             (posts) => {
                 this.setState({
                     posts: posts,
-                    allPosts: posts
+                    allPosts: posts,
                 });
             });
 
@@ -47,8 +70,16 @@ class NewsFeedPage extends React.Component {
                 });
             });
 
+        dataService.getPostsCount(
+            (numberOfPosts) => {
+                this.setState({
+                    numberOfPosts: numberOfPosts.data
+                });
+            }
+        );
 
-            
+
+
     }
 
     componentDidMount() {
@@ -85,7 +116,7 @@ class NewsFeedPage extends React.Component {
     }
 
     render() {
-       
+
         const posts = this.state.posts;
 
         return (
@@ -104,7 +135,7 @@ class NewsFeedPage extends React.Component {
                             if (post.type == "text") {
 
                                 return (
-                                    <TextPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id}/>
+                                    <TextPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
                                 );
 
                             } else if (post.type == "image") {
@@ -120,10 +151,23 @@ class NewsFeedPage extends React.Component {
                                 );
                             }
                         })}
+
+                        <div className="paginationContainer col-8 offset-2">
+                            <Pagination
+                                className="pagination"
+                                LinkClass="link"
+                                itemClass="listItem"
+                                activeLinkClass="activePageLink"
+                                activePage={this.state.activePage}
+                                itemsCountPerPage={POSTS_PER_PAGE}
+                                totalItemsCount={this.state.numberOfPosts}
+                                onChange={this.handlePageChange}
+                            />
+                        </div>
                     </div>
                 </div>
-
                 <NewPostComponent reloadFeed={this.loadData} />
+
 
             </div>
         );

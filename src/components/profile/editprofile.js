@@ -4,6 +4,7 @@ import { dataService } from "../../service/dataService";
 import { validationService } from "../../service/validationService";
 import { redirectionService } from "../../service/redirectionService";
 import PropTypes from "prop-types";
+import ReactFileReader from "react-file-reader";
 
 class EditProfile extends React.Component {
 
@@ -18,6 +19,8 @@ class EditProfile extends React.Component {
             avatarUrl: "",
             email: "",
             name: "",
+            files: null,
+            imagePreviewUrl: "",
             errors: {
                 name: "",
                 email: "",
@@ -37,6 +40,7 @@ class EditProfile extends React.Component {
         this.closeModal = this.closeModal.bind(this);
         this.saveChanges = this.saveChanges.bind(this);
         this.handleChange = this.handleChange.bind(this);
+        this.handleFileInputChange = this.handleFileInputChange.bind(this);
     }
 
 
@@ -72,6 +76,22 @@ class EditProfile extends React.Component {
         });
     }
 
+    handleFileInputChange(event) {
+        event.preventDefault();
+        let reader = new FileReader();
+        let file = event.target.files[0];
+        reader.onloadend = () => {
+            this.setState({
+                files: file,
+                imagePreviewUrl: reader.result
+            });
+        };
+
+        reader.readAsDataURL(file);
+    }
+
+
+
 
     activateModal() {
 
@@ -83,45 +103,66 @@ class EditProfile extends React.Component {
 
     closeModal() {
         this.setState({
-            isOpen: false
+            isOpen: false,
+            imagePreviewUrl: ""
         });
     }
 
 
-    saveChanges() {
+    saveChanges(function1, function2) {
 
         event.preventDefault();
 
-        let data = {
-            about: this.state.about,
-            aboutShort: this.state.aboutShort,
-            avatarUrl: this.state.avatarUrl,
-            email: this.state.email,
-            name: this.state.name
-        };
+        const file = this.state.files;
+        console.log(file);
 
-        validationService.isEditFormValid(data,
-            (data) => {
-                this.makeRequest(data);
-            },
-            (errors) => {
-                this.setState({
-                    errors: errors
+        if (this.state.files == null) {
+
+            console.log("if");
+
+            let data = {
+                about: this.state.about,
+                aboutShort: this.state.aboutShort,
+                avatarUrl: this.state.avatarUrl,
+                email: this.state.email,
+                name: this.state.name,
+            };
+
+            dataService.updateProfile(data,
+                (serverResponseData) => {
+                    this.closeModal();
+                    this.props.reloadProfile();
+                },
+                (serverErrorObject) => {
+                    console.log(serverErrorObject);
                 });
-            });
-    }
+            return;
+        }
 
-
-    makeRequest(data) {
-
-        dataService.updateProfile(data,
+        dataService.uploadImage(file,
             (serverResponseData) => {
-                this.closeModal();
-                this.props.reloadProfile();
-            },
-            (serverErrorObject) => {
-                console.log(serverErrorObject);
+
+                let data = {
+                    about: this.state.about,
+                    aboutShort: this.state.aboutShort,
+                    email: this.state.email,
+                    name: this.state.name,
+                };
+                data.avatarUrl = serverResponseData.data;
+
+                dataService.updateProfile(data,
+                    (serverResponseData) => {
+                        this.closeModal();
+                        this.props.reloadProfile();
+                    },
+                    (serverErrorObject) => {
+                        console.log(serverErrorObject);
+                    });
             });
+
+
+
+
     }
 
 
@@ -155,8 +196,11 @@ class EditProfile extends React.Component {
 
                             About: <textarea rows="4" cols="40" className="col-12" type="text" name="about" onChange={this.handleChange} value={this.state.about} /><br />
 
-                            AvatarURL: <textarea rows="2" cols="40" className="col-12" type="text" name="avatarUrl" onChange={this.handleChange} value={this.state.avatarUrl} /><br />
-                            <div className="avatarError text-danger">{this.state.errors.link}</div>
+                            {/* AvatarURL: <textarea rows="2" cols="40" className="col-12" type="text" name="avatarUrl" onChange={this.handleChange} value={this.state.avatarUrl} /><br />
+                            <div className="avatarError text-danger">{this.state.errors.link}</div> */}
+
+                            <input type="file" name="uploadImage" onChange={this.handleFileInputChange} value={this.state.uploadImage} />
+                            <img className="col-12" src={this.state.imagePreviewUrl ? this.state.imagePreviewUrl : this.state.avatarUrl} style={{ width: "100px" }} />
 
                             <div className="fieldsError text-danger">{this.state.errors.allFieldsError}</div>
 

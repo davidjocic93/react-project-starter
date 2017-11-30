@@ -152,7 +152,6 @@
     border-radius: 50%;
     background-color: rgb(236, 75, 75);
     border: none;
-    z-index: 15;
 }
 
 .deleteBtn:hover {

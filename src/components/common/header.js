@@ -8,6 +8,25 @@ const Header = () => {
         authenticationService.logOut();
     };
 
+    let homeLinkColor = "";
+    let profileLinkColor = "";
+    let peopleLinkColor = "";
+    
+    if (window.location.hash == "#/") {
+        homeLinkColor = "#ffb833";
+    };
+
+    
+    if (window.location.hash == "#/profile") {
+        profileLinkColor = "#ffb833";
+    };
+
+    
+    if (window.location.hash == "#/people") {
+        peopleLinkColor = "#ffb833";
+    };
+
+
     return (
 
         <div>
@@ -20,9 +39,9 @@ const Header = () => {
                 </button>
 
                 <div className="collapse navbar-collapse justify-content-end pull-right" id="navbarSupportedContent navbarColor01">
-                    <Link className="nav-link  my-2 my-sm-0" to="/">Home</Link>
-                    <Link className="nav-link my-2 my-sm-0" to="/profile">Profile</Link>
-                    <Link className="nav-link  my-2 my-sm-0" to="/people">People</Link>
+                    <Link className="nav-link  my-2 my-sm-0" to="/" style={{color: homeLinkColor}}>Home</Link>
+                    <Link className="nav-link my-2 my-sm-0" to="/profile" style={{color: profileLinkColor}}>Profile</Link>
+                    <Link className="nav-link  my-2 my-sm-0" to="/people" style={{color: peopleLinkColor}}>People</Link>
                     <button className="btn btn-outline-success my-2 my-sm-0" onClick={handleLogout}>Logout</button>
                 </div>
 

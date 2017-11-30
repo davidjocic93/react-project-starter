@@ -166,6 +166,16 @@ input:hover {
     top: 0;
 }
 
+.pagination:link {
+    color: "black" !important
+}
+
+.pagination {
+    color: "black" !important
+}
+
+
+
 .navbar {
     background-color: #013a4d;
     box-shadow: 0px 3px 5px rgba(102, 102, 102, 0.9);
@@ -201,3 +211,33 @@ input:hover {
 .profileRow {
     margin-top: 60px;
 }
+
+.pagination {
+    color: black;
+    font-size: 1.5em;
+}
+
+.listItem {
+    border: 1px solid rgb(228, 228, 228);
+    padding: 5px 15px;
+    border-radius: 2px;
+    background-color: rgb(255, 255, 255)
+}
+
+.activePageLink {
+    color: rgb(231, 238, 243);
+}
+
+.paginationContainer { 
+    text-align: center;
+    margin: 0 auto;
+}
+
+.active {
+    background-color: rgb(34, 96, 148);
+}
+
+.listItem:hover {
+    background-color: rgb(71, 175, 255);
+}
+

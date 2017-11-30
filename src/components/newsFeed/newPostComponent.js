@@ -4,7 +4,7 @@ import { dataService } from "../../service/dataService";
 import { validationService } from "../../service/validationService";
 import { redirectionService } from "../../service/redirectionService";
 import PropTypes from "prop-types";
-
+import ReactFileReader from "react-file-reader";
 
 
 
@@ -18,9 +18,11 @@ class NewPostComponent extends React.Component {
             textModalOpen: false,
             imageModalOpen: false,
             videoModalOpen: false,
+            files: {},
             text: "",
             imageUrl: "",
             videoUrl: "",
+            imagePreviewUrl: "",
             visibility: "hidden",
             errors: {
                 allFields: "",
@@ -43,9 +45,27 @@ class NewPostComponent extends React.Component {
         this.saveVideoPost = this.saveVideoPost.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.hideShowButtons = this.hideShowButtons.bind(this);
+        this.handleFileInputChange = this.handleFileInputChange.bind(this);
     }
 
     componentDidMount() { }
+
+    handleFileInputChange(event) {
+
+        event.preventDefault();
+
+        let reader = new FileReader();
+        let file = event.target.files[0];
+
+        reader.onloadend = () => {
+            this.setState({
+                files: file,
+                imagePreviewUrl: reader.result
+            });
+        };
+
+        reader.readAsDataURL(file);
+    }
 
 
     handleChange(event) {
@@ -88,6 +108,7 @@ class NewPostComponent extends React.Component {
             textModalOpen: false,
             imageModalOpen: false,
             videoModalOpen: false,
+            imagePreviewUrl: "",
             visibility: "hidden",
             errors: {}
         });
@@ -141,28 +162,29 @@ class NewPostComponent extends React.Component {
 
         event.preventDefault();
 
-        let imageUrl = {
-            imageUrl: this.state.imageUrl
-        };
+        const file = this.state.files;
+        dataService.uploadImage(file,
+            (serverResponseData) => {
 
-        validationService.isImagePostValid(imageUrl,
-            (imageUrl) => {
-                dataService.newPost("Image", imageUrl,
+                const data = {
+                    imageUrl: serverResponseData.data
+                };
+
+                dataService.newPost("Image", data,
                     (serverResponseData) => {
+
                         this.closeModal();
+                        
                         this.setState({
                             text: "",
                             imageUrl: "",
                             videoUrl: ""
                         });
+
                         this.props.reloadFeed();
                     });
-            },
-            (errors) => {
-                this.setState({
-                    errors: errors
-                });
             });
+
     }
 
     saveVideoPost() {
@@ -231,14 +253,22 @@ class NewPostComponent extends React.Component {
                     </div>
 
                     <div className="modal-body">
-                        Image URL: <textarea cols="10" rows="2" className="col-12" type="text" name="imageUrl" onChange={this.handleChange} value={this.state.imageUrl} /><br />
-                        <div className="nameError text-danger">{this.state.errors.allFields}</div>
-                        <div className="fieldsError text-danger">{this.state.errors.link}</div>
+
+                        {/* <input type="file" name="uploadImage" onChange={this.handleFileInputChange} value={this.state.uploadImage} />
+                        <button onClick={this.handleUpload}>Upload</button> */}
+
+
+                        Image: <input className="col-12" type="file" name="imageUrl" onChange={this.handleFileInputChange} value={this.state.uploadImage} /><br />
+                        {/* <button onClick={this.handleUpload}>Upload</button> */}
+                        {/* <div className="nameError text-danger">{this.state.errors.allFields}</div>
+                        <div className="fieldsError text-danger">{this.state.errors.link}</div> */}
+                        <img className="col-12" src={this.state.imagePreviewUrl} style={{ width: "100px" }} />
                     </div>
 
                     <div className="modal-footer">
                         <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Close</button>
                         <button type="button" className="btn btn-primary" onClick={this.saveImagePost}>Save post</button>
+
                     </div>
 
                 </div>
