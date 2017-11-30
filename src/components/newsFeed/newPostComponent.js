@@ -166,7 +166,6 @@ class NewPostComponent extends React.Component {
         event.preventDefault();
 
         const file = this.state.files;
-        console.log("file" + file);
         validationService.isImagePostValid(file,
             (file) => {
 

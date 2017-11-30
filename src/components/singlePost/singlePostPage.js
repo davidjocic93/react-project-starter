@@ -46,7 +46,6 @@ class SinglePostPage extends React.Component {
         const comment = this.state.comment;
         const postId = this.props.match.params.postId;
 
-        console.log(comment);
 
         validationService.isCommentValid(comment,
             (comment) => {
@@ -58,7 +57,6 @@ class SinglePostPage extends React.Component {
                         this.loadData();
                     });
             }, (error) => {
-                console.log(comment);
 
                 this.setState({
                     commentRequiredError: error
@@ -75,8 +73,6 @@ class SinglePostPage extends React.Component {
 
         dataService.getComments(postId,
             (comments) => {
-
-                console.log(comments);
 
                 this.setState({
                     comments: comments

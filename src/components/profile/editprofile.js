@@ -123,8 +123,6 @@ class EditProfile extends React.Component {
 
         if (this.state.file == null) {
 
-            console.log("if");
-
             let data = {
                 about: this.state.about,
                 aboutShort: this.state.aboutShort,
@@ -170,7 +168,6 @@ class EditProfile extends React.Component {
 
                         dataService.updateProfile(data,
                             (serverResponseData) => {
-                                console.table("on update" + serverResponseData.data);
                                 this.setState({
                                     avatarUrl: onlyForPreview
                                 });

@@ -14,7 +14,6 @@ class AuthenticationService {
     login(userData, errorHandler) {
         communicationService.postRequest("/api/login", userData,
             (serverResponseData) => {
-                console.log(serverResponseData);
                 sessionService.setItem(SESSION_ID, serverResponseData.data.sessionId);
                 redirectionService.goTo("/");
 

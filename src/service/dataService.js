@@ -12,7 +12,6 @@ class DataService {
     getProfile(profileHandler) {
         communicationService.getRequest("/api/profile",
             (serverResponseData) => {
-                console.table(serverResponseData);
 
                 const name = serverResponseData.data.name;
                 const email = serverResponseData.data.email;
