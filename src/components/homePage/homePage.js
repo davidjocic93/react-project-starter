@@ -9,6 +9,7 @@ import SingleUserPage from "../users/singleUserPage";
 import NewsFeedPage from "../newsFeed/newsFeedPage";
 import SinglePostPage from "../singlePost/singlePostPage";
 import { Redirect } from "react-router-dom";
+import ImageComponent from "../newsFeed/imageComponent";
 
 
 class HomePage extends React.Component {
@@ -33,6 +34,7 @@ class HomePage extends React.Component {
                     <Route path="/profile" component={Profile}/>
                     <Route exact path="/people" component={UsersPage}/>
                     <Route path="/people/:id" component={SingleUserPage}/>
+                    <Route path="/image/:id" component={ImageComponent}/>
                 </Switch>
 
             </div>

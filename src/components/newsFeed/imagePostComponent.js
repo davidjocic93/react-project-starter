@@ -3,6 +3,8 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { dataService } from "../../service/dataService";
 import { redirectionService } from "../../service/redirectionService";
+import Modal from "react-modal";
+// import ImageComponent from "./imageComponent";
 
 
 
@@ -45,8 +47,9 @@ const ImagePostComponent = (props) => {
     };
 
 
-    return (
 
+
+    return (
 
         <div className="container feed">
             <button className="deleteBtn" onClick={onDeletion} style={{ display: showDeleteButton }}>
@@ -63,7 +66,13 @@ const ImagePostComponent = (props) => {
                 </div>
 
                 <div className="col-12">
-                    <img src={imageUrl} style={{ width: "100%" }} />
+                    {/* <Link to={`/image/${id}`}> */}
+                    <img className="imagePostImage" src={imageUrl} style={{ width: "100%" }} />
+                    {/* </Link> */}
+
+
+                    {/* <ImageComponent  imageUrl={imageUrl} /> */}
+
                     <hr />
                 </div>
 
@@ -89,3 +98,4 @@ ImagePostComponent.propTypes = {
 };
 
 export default ImagePostComponent;
+

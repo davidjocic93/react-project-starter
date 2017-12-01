@@ -240,7 +240,7 @@ class EditProfile extends React.Component {
 }
 
 EditProfile.propTypes = {
-    reloadProfile: PropTypes.function,
+    reloadProfile: PropTypes.func,
 };
 
 export default EditProfile;

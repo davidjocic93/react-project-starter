@@ -212,6 +212,8 @@ input:hover {
     margin-top: 60px;
 }
 
+/*PAGINATIONs*/
+
 .pagination {
     color: black;
     font-size: 1.5em;
@@ -238,6 +240,11 @@ input:hover {
 }
 
 .listItem:hover {
-    background-color: rgb(71, 175, 255);
+    color: rgb(71, 175, 255);
+}
+
+.link:hover {
+    text-decoration: none;
+    color: rgb(71, 175, 255);
 }
 

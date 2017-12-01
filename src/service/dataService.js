@@ -214,6 +214,65 @@ class DataService {
             });
     }
 
+
+    getPostsForInfiniteScroll(top, postsHandler) {
+        let posts = [];
+        communicationService.getRequest(`/api/Posts?$top=${top}&$orderby=DateCreated desc`,
+            (serverResponseData) => {
+
+                serverResponseData.data.forEach(element => {
+
+                    if (element.type == "text") {
+                        const id = element.id;
+                        const dateCreated = element.dateCreated;
+                        const userId = element.userId;
+                        const userDisplayName = element.userDisplayName;
+                        const type = element.type;
+                        const text = element.text;
+                        const commentsNum = element.commentsNum;
+
+
+                        const textPost = new TextPostDTO(id, dateCreated, userId, userDisplayName, type, text, commentsNum);
+
+                        posts.push(textPost);
+
+                    } else if (element.type == "image") {
+
+                        const id = element.id;
+                        const dateCreated = element.dateCreated;
+                        const userId = element.userId;
+                        const userDisplayName = element.userDisplayName;
+                        const type = element.type;
+                        const commentsNum = element.commentsNum;
+                        const imageUrl = element.imageUrl;
+
+                        const imagePost = new ImagePostDTO(id, dateCreated, userId, userDisplayName, type, commentsNum, imageUrl);
+
+                        posts.push(imagePost);
+
+                    } else if (element.type == "video") {
+
+                        const id = element.id;
+                        const dateCreated = element.dateCreated;
+                        const userId = element.userId;
+                        const userDisplayName = element.userDisplayName;
+                        const type = element.type;
+                        const commentsNum = element.commentsNum;
+                        const videoUrl = element.videoUrl;
+
+                        const videoPost = new VideoPostDTO(id, dateCreated, userId, userDisplayName, type, commentsNum, videoUrl);
+
+                        posts.push(videoPost);
+                    }
+                });
+
+                postsHandler(posts);
+
+            }, (serverErrorObject) => {
+                console.log(serverErrorObject);
+            });
+    }
+
     newPost(type, postData, successHandler) {
         communicationService.postRequest(`/api/${type}Posts`, postData,
             (serverResponseData) => {

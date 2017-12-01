@@ -8,6 +8,7 @@ import NewPostComponent from "./newPostComponent";
 import Filter from "../common/postsFilter";
 import { Link } from "react-router-dom";
 import Pagination from "react-js-pagination";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 
 class NewsFeedPage extends React.Component {
@@ -21,7 +22,10 @@ class NewsFeedPage extends React.Component {
             allPosts: [],
             ownId: null,
             numberOfPosts: 0,
-            activePage: 1
+            activePage: 1,
+            newTop: 5,
+            hasMore: true,
+            visibility: "hidden"
         };
 
 
@@ -33,29 +37,50 @@ class NewsFeedPage extends React.Component {
         this.loadData = this.loadData.bind(this);
         this.filtering = this.filtering.bind(this);
         this.deletePost = this.deletePost.bind(this);
-        this.handlePageChange = this.handlePageChange.bind(this);
+        this.showHideBackToTopButton = this.showHideBackToTopButton.bind(this);
+        this.getPostsForInfiniteScroll = this.getPostsForInfiniteScroll.bind(this);
+        // this.handlePageChange = this.handlePageChange.bind(this);
     }
 
-    handlePageChange(pageNumber) {
+    // handlePageChange(pageNumber) {
 
-        let top = 5;
-        let skip = ((pageNumber - 1) * POSTS_PER_PAGE);
+    //     let top = 5;
+    //     let skip = ((pageNumber - 1) * POSTS_PER_PAGE);
 
-        dataService.getPostsForPagination(top, skip,
+    //     dataService.getPostsForPagination(top, skip,
+    //         (posts) => {
+    //             this.setState({
+    //                 posts: posts,
+    //                 allPosts: posts,
+    //                 activePage: pageNumber
+    //             });
+    //         });
+    // }
+
+    getPostsForInfiniteScroll() {
+
+
+
+        dataService.getPostsForInfiniteScroll(this.state.newTop + 5,
             (posts) => {
                 this.setState({
                     posts: posts,
                     allPosts: posts,
-                    activePage: pageNumber
+                    newTop: this.state.newTop + 5
                 });
+
+                if (this.state.posts.length == this.state.numberOfPosts) {
+                    this.setState({
+                        hasMore: false
+                    });
+                }
+
             });
-
-
     }
 
     loadData() {
 
-        dataService.getPostsForPagination(5, 0,
+        dataService.getPostsForInfiniteScroll(5,
             (posts) => {
                 this.setState({
                     posts: posts,
@@ -115,6 +140,21 @@ class NewsFeedPage extends React.Component {
             });
     }
 
+    showHideBackToTopButton() {
+
+
+        this.setState({
+            visibility: "hidden"
+        });
+
+
+        if (window.scrollY > 100) {
+            this.setState({
+                visibility: ""
+            });
+        }
+    }
+
     render() {
 
         const posts = this.state.posts;
@@ -150,10 +190,14 @@ class NewsFeedPage extends React.Component {
                                     <VideoPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
                                 );
                             }
+
                         })}
+                        <a className="backToTopButton" href="#" style={{ visibility: this.state.visibility }}>
+                            <img src="http://www.eightrock.com/images/back.png" />
+                        </a>
 
                         <div className="paginationContainer col-8 offset-2">
-                            <Pagination
+                            {/* <Pagination
                                 className="pagination"
                                 LinkClass="link"
                                 itemClass="listItem"
@@ -162,7 +206,22 @@ class NewsFeedPage extends React.Component {
                                 itemsCountPerPage={POSTS_PER_PAGE}
                                 totalItemsCount={this.state.numberOfPosts}
                                 onChange={this.handlePageChange}
-                            />
+                            /> */}
+
+                            <InfiniteScroll
+                                refreshFunction={this.refresh}
+                                next={this.getPostsForInfiniteScroll}
+                                onScroll={this.showHideBackToTopButton}
+                                hasMore={this.state.hasMore}
+                                loader={<h4>Loading...</h4>}
+                                endMessage={
+                                    <p style={{ textAlign: "center" }}>
+                                        <b>Yay! You have seen it all</b>
+                                    </p>
+                                }>
+                                {/* {items} */}
+                            </InfiniteScroll>
+
                         </div>
                     </div>
                 </div>

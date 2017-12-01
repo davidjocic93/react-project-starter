@@ -218,3 +218,13 @@
     text-align: center;
 }
 
+.backToTopButton {
+    position: fixed;
+    right: 80px;
+    top: 100px;
+}
+
+.backToTopButton img {
+    width: 50px;
+}
+
