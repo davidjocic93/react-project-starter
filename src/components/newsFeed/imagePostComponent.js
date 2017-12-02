@@ -13,6 +13,7 @@ const ImagePostComponent = (props) => {
     const { id, dateCreated, userId, userDisplayName, type, text, commentsNum, imageUrl } = props.post;
     const ownId = props.ownId;
     const reloadFeed = props.reloadFeed;
+    const imageToFullScreen = props.imageToFullScreen;
 
 
     const date = new Date(dateCreated);
@@ -31,6 +32,11 @@ const ImagePostComponent = (props) => {
     if (ownId !== userId) {
         showDeleteButton = "none";
     }
+
+    const handlerFunction = (event) => {
+        imageToFullScreen(event.target.src);
+        console.log(event.target.src);
+    };
 
     const onDeletion = () => {
 
@@ -66,9 +72,7 @@ const ImagePostComponent = (props) => {
                 </div>
 
                 <div className="col-12">
-                    {/* <Link to={`/image/${id}`}> */}
-                    <img className="imagePostImage" src={imageUrl} style={{ width: "100%" }} />
-                    {/* </Link> */}
+                    <img className="imagePostImage" src={imageUrl} onClick={handlerFunction} style={{ width: "100%" }} />
 
 
                     {/* <ImageComponent  imageUrl={imageUrl} /> */}
@@ -94,7 +98,8 @@ const ImagePostComponent = (props) => {
 ImagePostComponent.propTypes = {
     post: PropTypes.object,
     ownId: PropTypes.number,
-    reloadFeed: PropTypes.func
+    reloadFeed: PropTypes.func,
+    imageToFullScreen: PropTypes.func
 };
 
 export default ImagePostComponent;

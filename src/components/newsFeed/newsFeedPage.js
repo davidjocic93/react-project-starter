@@ -9,6 +9,7 @@ import Filter from "../common/postsFilter";
 import { Link } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import InfiniteScroll from "react-infinite-scroll-component";
+import ImageComponent from "./imageComponent";
 
 
 class NewsFeedPage extends React.Component {
@@ -25,7 +26,9 @@ class NewsFeedPage extends React.Component {
             activePage: 1,
             newTop: 5,
             hasMore: true,
-            visibility: "hidden"
+            visibility: "hidden",
+            fullScreenVisibility: "hidden",
+            imageUrl: ""
         };
 
 
@@ -39,6 +42,8 @@ class NewsFeedPage extends React.Component {
         this.deletePost = this.deletePost.bind(this);
         this.showHideBackToTopButton = this.showHideBackToTopButton.bind(this);
         this.getPostsForInfiniteScroll = this.getPostsForInfiniteScroll.bind(this);
+        this.imageToFullScreen = this.imageToFullScreen.bind(this);
+        this.closeFullScreen = this.closeFullScreen.bind(this);
         // this.handlePageChange = this.handlePageChange.bind(this);
     }
 
@@ -78,6 +83,21 @@ class NewsFeedPage extends React.Component {
             });
     }
 
+    imageToFullScreen(imageUrl) {
+        this.setState({
+            fullScreenVisibility: "",
+            imageUrl: imageUrl
+        });
+        console.log("to full");
+        console.log(this.state.imageUrl);
+    }
+
+    closeFullScreen() {
+        this.setState({
+            fullScreenVisibility: "hidden"            
+        });
+    }
+
     loadData() {
 
         dataService.getPostsForInfiniteScroll(5,
@@ -102,9 +122,6 @@ class NewsFeedPage extends React.Component {
                 });
             }
         );
-
-
-
     }
 
     componentDidMount() {
@@ -181,7 +198,7 @@ class NewsFeedPage extends React.Component {
                             } else if (post.type == "image") {
 
                                 return (
-                                    <ImagePostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
+                                    <ImagePostComponent imageToFullScreen={this.imageToFullScreen} reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
                                 );
 
                             } else if (post.type == "video") {
@@ -226,6 +243,9 @@ class NewsFeedPage extends React.Component {
                     </div>
                 </div>
                 <NewPostComponent reloadFeed={this.loadData} />
+                <div style={{ visibility: this.state.fullScreenVisibility }} onClick={this.closeFullScreen}>
+                    <ImageComponent imageUrl={this.state.imageUrl}/>
+                </div>
 
 
             </div>
