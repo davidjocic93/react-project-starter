@@ -10,8 +10,7 @@ class FullScreenImageComponent extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-        };
+        this.state = {};
     }
 
 
@@ -20,7 +19,7 @@ class FullScreenImageComponent extends React.Component {
             <div style={{ position: "fixed", top: 0, bottom: 0, right: 0, left: 0, backgroundColor: "rgba(0,0,0,0.5)" }}>
                 <div style={{ display: "table", width: "100%", height: "100%" }}>
                     <div style={{ display: "table-cell", verticalAlign: "middle", textAlign: "center" }}>
-                        <img src={this.props.imageUrl} style={{width: "70%"}} />
+                        <img src={this.props.imageUrl} style={{height: "70%", marginTop: "3%"}} />
                     </div>
                 </div>
             </div>

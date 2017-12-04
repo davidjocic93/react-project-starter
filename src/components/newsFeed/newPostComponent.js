@@ -239,7 +239,7 @@ class NewPostComponent extends React.Component {
 
                 <div className="modal-content">
 
-                    <div className="modal-header">
+                    <div className="modal-header"  id="modal-header" >
                         <h4 className="modal-title">New Text Post</h4>
                     </div>
 
@@ -263,7 +263,7 @@ class NewPostComponent extends React.Component {
 
                 <div className="modal-content">
 
-                    <div className="modal-header">
+                    <div className="modal-header" id="modal-header">
                         <h4 className="modal-title">New Image Post</h4>
                     </div>
 
@@ -295,7 +295,7 @@ class NewPostComponent extends React.Component {
 
                 <div className="modal-content">
 
-                    <div className="modal-header">
+                    <div className="modal-header" id="modal-header">
                         <h4 className="modal-title">New Video Post</h4>
                     </div>
 

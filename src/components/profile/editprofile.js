@@ -198,11 +198,11 @@ class EditProfile extends React.Component {
                     <img src="https://image.flaticon.com/icons/png/128/149/149307.png" width="50px" />
                 </button>
 
-                <Modal className="Modal__Bootstrap modal-dialog" isOpen={this.state.isOpen}>
+                <Modal className="Modal__Bootstrap edit-profile-modal modal-dialog" isOpen={this.state.isOpen}>
 
                     <div className="modal-content">
 
-                        <div className="modal-header">
+                        <div className="modal-header" id="modal-header">
                             <h4 className="modal-title">Edit Profile</h4>
                         </div>
 
@@ -225,7 +225,7 @@ class EditProfile extends React.Component {
 
                         </div>
 
-                        <div className="modal-footer">
+                        <div className="modal-footer" id="modal-footer">
                             <button type="button" className="btn btn-secondary" onClick={this.closeModal}>Close</button>
                             <button type="button" className="btn btn-primary" onClick={this.saveChanges}>Save changes</button>
                         </div>
