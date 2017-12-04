@@ -2,9 +2,9 @@
     box-sizing: border-box;
 }
 
-/*body {
-    background: url("http://t4america.org/wp-content/uploads/2013/11/sky.png") repeat-x;
-}*/
+html {
+    overflow-y: scroll;
+}
 
 html body {
     background-color: #eefbff;

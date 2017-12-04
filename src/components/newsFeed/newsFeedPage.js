@@ -20,7 +20,6 @@ class NewsFeedPage extends React.Component {
 
         this.state = {
             posts: [],
-            allPosts: [],
             ownId: null,
             numberOfPosts: 0,
             activePage: 1,
@@ -28,7 +27,9 @@ class NewsFeedPage extends React.Component {
             hasMore: true,
             visibility: "hidden",
             fullScreenVisibility: "hidden",
-            imageUrl: ""
+            imageUrl: "",
+            type: "",
+            divHeight: ""
         };
 
 
@@ -64,8 +65,6 @@ class NewsFeedPage extends React.Component {
 
     getPostsForInfiniteScroll() {
 
-
-
         dataService.getPostsForInfiniteScroll(this.state.newTop + 5,
             (posts) => {
                 this.setState({
@@ -92,7 +91,7 @@ class NewsFeedPage extends React.Component {
 
     closeFullScreen() {
         this.setState({
-            fullScreenVisibility: "hidden"            
+            fullScreenVisibility: "hidden"
         });
     }
 
@@ -102,7 +101,6 @@ class NewsFeedPage extends React.Component {
             (posts) => {
                 this.setState({
                     posts: posts,
-                    allPosts: posts,
                 });
             });
 
@@ -123,35 +121,52 @@ class NewsFeedPage extends React.Component {
     }
 
     componentDidMount() {
-
         this.loadData();
     }
 
     filtering(searchString) {
 
-        const currentPosts = this.state.allPosts;
-
-        if (searchString === "") {
-            this.setState({
-                posts: currentPosts
-            });
-        }
-
-        const filteredPosts = currentPosts.filter(
-            (item) => {
-                return item.type.includes(searchString);
-            });
-
         this.setState({
-            posts: filteredPosts
+            type: searchString
         });
+
+
+        // this.state.posts.forEach((post) => {
+        //     console.log(post.type);
+        //     if (post.type !== this.state.type && this.state.posts.length < this.state.numberOfPosts) {
+        //         console.log("razlicito");
+        //         this.loadData(this.state.numberOfPosts);
+        //         this.setState({
+        //             hasMore: false
+        //         });
+        //     }
+        // });
+
+        if (searchString) {
+            dataService.getPosts(
+                (posts) => {
+                    this.setState({
+                        posts: posts,
+                        hasMore: false
+                    });
+                }
+            );
+        } else {
+            dataService.getPostsForInfiniteScroll(5,
+                (posts) => {
+                    this.setState({
+                        posts: posts,
+                        hasMore: true
+                    });
+                });
+        }
     }
 
     deletePost(id) {
 
         dataService.deletePost(id,
             (serverResponseData) => {
-                this.loadData();
+                this.loadData(5);
             });
     }
 
@@ -186,29 +201,51 @@ class NewsFeedPage extends React.Component {
 
                         {posts.map(post => {
 
+                            if (this.state.type !== "") {
 
-                            if (post.type == "text") {
 
-                                return (
-                                    <TextPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
-                                );
+                                if (post.type == "text" && this.state.type == "text") {
 
-                            } else if (post.type == "image") {
+                                    return (
+                                        <TextPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
+                                    );
 
-                                return (
-                                    <ImagePostComponent imageToFullScreen={this.imageToFullScreen} reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
-                                );
+                                } else if (post.type == "image" && this.state.type == "image") {
 
-                            } else if (post.type == "video") {
+                                    return (
+                                        <ImagePostComponent imageToFullScreen={this.imageToFullScreen} reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
+                                    );
 
-                                return (
-                                    <VideoPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
-                                );
+                                } else if (post.type == "video" && this.state.type == "video") {
+
+                                    return (
+                                        <VideoPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
+                                    );
+                                }
+                            } else {
+                                if (post.type == "text") {
+
+                                    return (
+                                        <TextPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
+                                    );
+
+                                } else if (post.type == "image") {
+
+                                    return (
+                                        <ImagePostComponent imageToFullScreen={this.imageToFullScreen} reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
+                                    );
+
+                                } else if (post.type == "video") {
+
+                                    return (
+                                        <VideoPostComponent reloadFeed={this.loadData} ownId={this.state.ownId} post={post} key={post.id} />
+                                    );
+                                }
                             }
 
                         })}
                         <a className="backToTopButton" href="#" style={{ visibility: this.state.visibility }}>
-                            <img src="http://www.eightrock.com/images/back.png" />
+                            <img src="http://serenasu.htpwebdesign.ca/images/back-to-top-button.png" />
                         </a>
 
                         <div className="paginationContainer col-8 offset-2">
@@ -242,7 +279,7 @@ class NewsFeedPage extends React.Component {
                 </div>
                 <NewPostComponent reloadFeed={this.loadData} />
                 <div style={{ visibility: this.state.fullScreenVisibility }} onClick={this.closeFullScreen}>
-                    <FullScreenImageComponent imageUrl={this.state.imageUrl}/>
+                    <FullScreenImageComponent imageUrl={this.state.imageUrl} />
                 </div>
 
 

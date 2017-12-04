@@ -198,7 +198,7 @@ class EditProfile extends React.Component {
                     <img src="https://image.flaticon.com/icons/png/128/149/149307.png" width="50px" />
                 </button>
 
-                <Modal className="Modal__Bootstrap edit-profile-modal modal-dialog" isOpen={this.state.isOpen}>
+                <Modal className="Modal__Bootstrap edit-profile-modal modal-dialog" isOpen={this.state.isOpen} style={{ overlay: { zIndex: 2000 } }}>
 
                     <div className="modal-content">
 

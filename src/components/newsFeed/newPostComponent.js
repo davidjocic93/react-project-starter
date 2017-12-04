@@ -235,11 +235,11 @@ class NewPostComponent extends React.Component {
 
         const TextModal =
 
-            <Modal className="Modal__Bootstrap modal-dialog" isOpen={this.state.textModalOpen}>
+            <Modal className="Modal__Bootstrap new-text-post-modal modal-dialog" isOpen={this.state.textModalOpen} style={{ overlay: { zIndex: 2000 } }}>
 
                 <div className="modal-content">
 
-                    <div className="modal-header"  id="modal-header" >
+                    <div className="modal-header" id="modal-header" >
                         <h4 className="modal-title">New Text Post</h4>
                     </div>
 
@@ -259,11 +259,11 @@ class NewPostComponent extends React.Component {
         const ImageModal =
 
 
-            <Modal className="Modal__Bootstrap modal-dialog" isOpen={this.state.imageModalOpen}>
+            <Modal className="Modal__Bootstrap new-image-post-modal modal-dialog" isOpen={this.state.imageModalOpen} style={{ overlay: { zIndex: 2000 } }}>
 
                 <div className="modal-content">
 
-                    <div className="modal-header" id="modal-header">
+                    <div className="modal-header" id="text-modal-header">
                         <h4 className="modal-title">New Image Post</h4>
                     </div>
 
@@ -275,8 +275,8 @@ class NewPostComponent extends React.Component {
 
                         Image: <input className="col-12" type="file" name="imageUrl" onChange={this.handleFileInputChange} value={this.state.uploadImage} /><br />
                         <div className="fieldsError text-danger">{this.state.errors.allFields}</div>
-                        <div className="imagePostPreviewContainer">
-                            <img className="col-12 imagePostPreview" src={this.state.imagePreviewUrl} />
+                        <div className="imagePostPreviewContainer" style={{textAlign: "center"}}>
+                            <img className="col-12 imagePostPreview" src={this.state.imagePreviewUrl} style={{ maxHeight: "300px", maxWidth: "300px", padding: "20px" }} />
                         </div>
                     </div>
 
@@ -291,11 +291,11 @@ class NewPostComponent extends React.Component {
 
         const VideoModal =
 
-            <Modal className="Modal__Bootstrap modal-dialog" isOpen={this.state.videoModalOpen}>
+            <Modal className="Modal__Bootstrap new-video-post-modal modal-dialog" isOpen={this.state.videoModalOpen} style={{ overlay: { zIndex: 2000 } }}>
 
                 <div className="modal-content">
 
-                    <div className="modal-header" id="modal-header">
+                    <div className="modal-header" id="video-modal-header">
                         <h4 className="modal-title">New Video Post</h4>
                     </div>
 
