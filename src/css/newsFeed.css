@@ -167,6 +167,7 @@
 
 /*FILTER POSTS*/
 
+
 .selectpicker {
     position: fixed;
     bottom: 30px;
@@ -175,10 +176,13 @@
     background-color: rgb(54, 154, 248);
     color: white;
     padding: 10px;
+    height: 50px;
     width: 150px;
     border-radius: 5px;
     text-align: center;
+    z-index: 20;
 }
+
 
 .selectpicker:hover {
     background-color: rgb(9, 129, 241);

@@ -6,10 +6,21 @@ const CommentsComponent = (props) => {
 
     const { id, dateCreated, body, postId, authorName, authorId } = props.comment;
 
+    const date = new Date(dateCreated);
+    const time = date.toLocaleTimeString();
+    const dateString = date.toLocaleDateString();
+
     return (
 
         <div className="comment">
-            <Link to={`/people/${authorId}`}><h6>{authorName}</h6></Link>
+            <div className="row">
+                <div className="col-6">
+                    <Link to={`/people/${authorId}`}><h6>{authorName}</h6></Link>
+                </div>
+                <div className="col-6 date">
+                    <p>{time} {dateString}</p>
+                </div>
+            </div>
             <hr />
             <p style={{ wordWrap: "break-word" }}>{body}</p>
         </div>

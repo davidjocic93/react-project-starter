@@ -30,7 +30,7 @@ const Header = () => {
     return (
 
         <div>
-            <nav className="navbar navbar-expand-lg  fixed-top">
+            <nav className="navbar navbar-expand-lg navbar-light  fixed-top">
 
                 <Link className="navbar-brand" id="logo" to="/">BitBook</Link>
 
@@ -38,7 +38,7 @@ const Header = () => {
                     <span className="navbar-toggler-icon"></span>
                 </button>
 
-                <div className="collapse navbar-collapse justify-content-end pull-right" id="navbarSupportedContent navbarColor01">
+                <div className="collapse navbar-collapse justify-content-end pull-right" id="navbarSupportedContent">
                     <Link className="nav-link  my-2 my-sm-0" to="/" style={{color: homeLinkColor}}>Home</Link>
                     <Link className="nav-link my-2 my-sm-0" to="/profile" style={{color: profileLinkColor}}>Profile</Link>
                     <Link className="nav-link  my-2 my-sm-0" to="/people" style={{color: peopleLinkColor}}>People</Link>

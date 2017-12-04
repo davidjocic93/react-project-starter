@@ -9,7 +9,7 @@ import Filter from "../common/postsFilter";
 import { Link } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import InfiniteScroll from "react-infinite-scroll-component";
-import ImageComponent from "./imageComponent";
+import FullScreenImageComponent from "./imageComponent";
 
 
 class NewsFeedPage extends React.Component {
@@ -88,8 +88,6 @@ class NewsFeedPage extends React.Component {
             fullScreenVisibility: "",
             imageUrl: imageUrl
         });
-        console.log("to full");
-        console.log(this.state.imageUrl);
     }
 
     closeFullScreen() {
@@ -244,7 +242,7 @@ class NewsFeedPage extends React.Component {
                 </div>
                 <NewPostComponent reloadFeed={this.loadData} />
                 <div style={{ visibility: this.state.fullScreenVisibility }} onClick={this.closeFullScreen}>
-                    <ImageComponent imageUrl={this.state.imageUrl}/>
+                    <FullScreenImageComponent imageUrl={this.state.imageUrl}/>
                 </div>
 
 

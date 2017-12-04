@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const TextPostComponent = (props) => {
 
     const { id, dateCreated, userId, userDisplayName, type, text, commentsNum } = props.post;
-    const ownId = props.ownId;
+    const ownId = parseInt(props.ownId);
     const reloadFeed = props.reloadFeed;
 
     const date = new Date(dateCreated);

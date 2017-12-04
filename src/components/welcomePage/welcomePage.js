@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 
 import RegisterPage from "./registerPage";
 import LoginPage from "./loginPage";
-import {authenticationService} from "../../service/authenticationService";
+import { authenticationService } from "../../service/authenticationService";
 import HomePage from "../homePage/homePage";
 import Welcome from "./welcome";
 
@@ -28,15 +28,11 @@ class WelcomePage extends React.Component {
         }
         return (
             <div className="container">
-
                 <div className="row">
                     <Switch>
-                        <Redirect from="/" exact to="/loginPage" />
-                        <Redirect from="/feed" exact to="/loginPage" />
-                        <Redirect from="/profile" exact to="/loginPage" />
-                        <Redirect from="/people" exact to="/loginPage" />
                         <Route path="/loginPage" component={LoginPage} />
                         <Route path="/registerPage" component={RegisterPage} />
+                        <Redirect from="/" to="/loginPage" />
                     </Switch>
                 </div>
             </div>

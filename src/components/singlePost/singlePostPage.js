@@ -6,6 +6,7 @@ import ImagePostComponent from "../newsFeed/imagePostComponent";
 import VideoPostComponent from "../newsFeed/videoPostComponent";
 import CommentsComponent from "./commentsComponent";
 import { validationService } from "../../service/validationService";
+import FullScreenImageComponent from "../newsFeed/imageComponent";
 
 
 class SinglePostPage extends React.Component {
@@ -19,7 +20,9 @@ class SinglePostPage extends React.Component {
             comments: [],
             comment: "",
             ownId: "",
-            commentRequiredError: ""
+            commentRequiredError: "",
+            fullScreenVisibility: "hidden",
+            imageUrl: ""
         };
 
         this.bindEventHandlers();
@@ -30,6 +33,21 @@ class SinglePostPage extends React.Component {
         this.postComment = this.postComment.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.loadData = this.loadData.bind(this);
+        this.imageToFullScreen = this.imageToFullScreen.bind(this);
+        this.closeFullScreen = this.closeFullScreen.bind(this);
+    }
+
+    imageToFullScreen(imageUrl) {
+        this.setState({
+            fullScreenVisibility: "",
+            imageUrl: imageUrl
+        });
+    }
+
+    closeFullScreen() {
+        this.setState({
+            fullScreenVisibility: "hidden"            
+        });
     }
 
 
@@ -159,41 +177,47 @@ class SinglePostPage extends React.Component {
 
             return (
 
-                <div className="container feedContainer">
+                <div>
 
-                    <div className="row">
-                        <div className="col-md-10 offset-md-1 col-12">
-                            <ImagePostComponent ownId={this.state.ownId} post={post} />
+                    <div className="container feedContainer">
+
+                        <div className="row">
+                            <div className="col-md-10 offset-md-1 col-12">
+                                <ImagePostComponent imageToFullScreen={this.imageToFullScreen} ownId={this.state.ownId} post={post} />
+                            </div>
                         </div>
+
+                        <div className="row">
+
+                            <div className="col-md-9 offset-md-1">
+                                <input className="commentInput" type="text" placeholder="Add your comment" name="comment" onChange={this.handleChange} value={this.state.comment} />
+                                <p className="commentRequiredError text-danger">{this.state.commentRequiredError}</p>
+                            </div>
+
+                            <div className="col-1 sendComment">
+                                <button type="button" onClick={this.postComment}>
+                                    <img src="https://image.flaticon.com/icons/png/512/60/60525.png" />
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div className="row commentContainer">
+
+                            <div className="col-8 offset-2">
+
+                                {comments.map((comment) => {
+                                    return <CommentsComponent comment={comment} key={comment.id} />;
+                                })}
+
+
+                            </div>
+                        </div>
+
                     </div>
-
-                    <div className="row">
-
-                        <div className="col-md-9 offset-md-1">
-                            <input className="commentInput" type="text" placeholder="Add your comment" name="comment" onChange={this.handleChange} value={this.state.comment} />
-                            <p className="commentRequiredError text-danger">{this.state.commentRequiredError}</p>
-                        </div>
-
-                        <div className="col-1 sendComment">
-                            <button type="button" onClick={this.postComment}>
-                                <img src="https://image.flaticon.com/icons/png/512/60/60525.png" />
-                            </button>
-                        </div>
-
+                    <div style={{ visibility: this.state.fullScreenVisibility }} onClick={this.closeFullScreen}>
+                        <FullScreenImageComponent imageUrl={this.state.imageUrl} />
                     </div>
-
-                    <div className="row commentContainer">
-
-                        <div className="col-8 offset-2">
-
-                            {comments.map((comment) => {
-                                return <CommentsComponent comment={comment} key={comment.id} />;
-                            })}
-
-
-                        </div>
-                    </div>
-
                 </div>
             );
         }

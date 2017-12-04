@@ -4,14 +4,12 @@ import { Link } from "react-router-dom";
 import { dataService } from "../../service/dataService";
 import { redirectionService } from "../../service/redirectionService";
 import Modal from "react-modal";
-// import ImageComponent from "./imageComponent";
-
 
 
 const ImagePostComponent = (props) => {
 
     const { id, dateCreated, userId, userDisplayName, type, text, commentsNum, imageUrl } = props.post;
-    const ownId = props.ownId;
+    const ownId = parseInt(props.ownId);
     const reloadFeed = props.reloadFeed;
     const imageToFullScreen = props.imageToFullScreen;
 
@@ -35,7 +33,6 @@ const ImagePostComponent = (props) => {
 
     const handlerFunction = (event) => {
         imageToFullScreen(event.target.src);
-        console.log(event.target.src);
     };
 
     const onDeletion = () => {
@@ -73,9 +70,6 @@ const ImagePostComponent = (props) => {
 
                 <div className="col-12">
                     <img className="imagePostImage" src={imageUrl} onClick={handlerFunction} style={{ width: "100%" }} />
-
-
-                    {/* <ImageComponent  imageUrl={imageUrl} /> */}
 
                     <hr />
                 </div>

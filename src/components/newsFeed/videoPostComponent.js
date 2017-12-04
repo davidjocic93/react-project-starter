@@ -9,7 +9,7 @@ import { redirectionService } from "../../service/redirectionService";
 const VideoPostComponent = (props) => {
 
     const { id, dateCreated, userId, userDisplayName, type, text, commentsNum, videoUrl } = props.post;
-    const ownId = props.ownId;
+    const ownId = parseInt(props.ownId);
     const reloadFeed = props.reloadFeed;
 
 
